@@ -1,6 +1,6 @@
 {
   "name": "npm-boilerplate-package",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Boilerplate for Babel-Rollup-Jest NPM package.",
   "author": {
     "name": "Maksym Dudynskyi",
