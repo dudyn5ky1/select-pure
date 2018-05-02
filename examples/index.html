@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SelectPure example</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="select-wrapper"><h1>PureSelect</h1></div>
+    <script src="./../lib/select-pure.min.js"></script>
+    <script>
+      var form = new SelectPure(".select-wrapper", {
+        options: [
+          {
+            label: "New York",
+            value: "NY",
+            disabled: true,
+          },
+          {
+            label: "San Francisco",
+            value: "SF",
+          },
+          {
+            label: "Los Angeles",
+            value: "LA",
+          },
+        ],
+        multiple: true,
+      });
+    </script>
+    <style>
+      .select-wrapper {
+        margin: auto;
+        max-width: 600px;
+        width: calc(100% - 40px);
+      }
+    </style>
+  </body>
+</html>
