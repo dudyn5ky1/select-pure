@@ -1,7 +1,4 @@
-class Boilerplate {
-  add(x, y) {
-    return x + y;
-  }
+class SelectPure {
 }
 
-export default Boilerplate;
+export default SelectPure;
