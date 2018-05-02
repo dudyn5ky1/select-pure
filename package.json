@@ -1,6 +1,6 @@
 {
   "name": "npm-boilerplate-package",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Boilerplate for Babel-Rollup-Jest NPM package.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -81,6 +81,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-latest": "^6.24.1",
+    "eslint-config-hackerspot": "^1.0.0",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-eslint": "^4.0.0",
