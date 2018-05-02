@@ -27,6 +27,10 @@
     "lint:tests": "./node_modules/eslint/bin/eslint.js tests/",
     "lint:all": "npm run lint:js && npm run lint:tests"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/maksymddd/npm-boilerplate-package.git"
+  },
   "babel": {
     "presets": [
       [
