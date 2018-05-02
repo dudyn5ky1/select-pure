@@ -13,14 +13,21 @@
     "es6",
     "es7"
   ],
-  "main": "lib/package.min.js",
+  "main": "lib/bundle.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c"
   },
   "author": {
     "name": "Maksym Dudynskyi",
     "email": "maksymddd@gmail.com",
     "url": "https://github.com/maksymddd"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-uglify": "^3.0.0"
+  }
 }
