@@ -1,11 +1,26 @@
 {
   "name": "npm-boilerplate-package",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Boilerplate for Babel-Rollup-Jest NPM package.",
+  "keywords": [
+    "npm",
+    "boilerplate",
+    "package",
+    "module",
+    "babel",
+    "rollup",
+    "jest",
+    "es6",
+    "es7"
+  ],
+  "main": "lib/package.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": {
+    "name": "Maksym Dudynskyi",
+    "email": "maksymddd@gmail.com",
+    "url": "https://github.com/maksymddd"
+  },
+  "license": "MIT"
 }
