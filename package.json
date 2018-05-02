@@ -11,11 +11,51 @@
     "rollup",
     "jest",
     "es6",
-    "es7"
+    "es7",
+    "eslint"
   ],
   "main": "lib/bundle.min.js",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest --no-cache --coverage"
+  },
+  "babel": {
+    "presets": [
+      [
+        "latest",
+        {
+          "es2015": {
+            "modules": false
+          }
+        }
+      ],
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "env",
+            {
+              "modules": "commonjs"
+            }
+          ],
+          "jest"
+        ]
+      }
+    }
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "author": {
     "name": "Maksym Dudynskyi",
@@ -25,6 +65,10 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-eslint": "^4.0.0",

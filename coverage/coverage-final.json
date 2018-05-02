@@ -1,0 +1,2 @@
+{"/Users/md17/Desktop/open-source/npm-boilerplate-package/src/index.js": {"path":"/Users/md17/Desktop/open-source/npm-boilerplate-package/src/index.js","statementMap":{"0":{"start":{"line":3,"column":4},"end":{"line":3,"column":17}}},"fnMap":{"0":{"name":"(anonymous_0)","decl":{"start":{"line":2,"column":2},"end":{"line":2,"column":3}},"loc":{"start":{"line":2,"column":12},"end":{"line":4,"column":3}},"line":2}},"branchMap":{},"s":{"0":1},"f":{"0":1},"b":{},"_coverageSchema":"332fd63041d2c1bcb487cc26dd0d5f7d97098a6c","hash":"bda09e10647ea0579adc8795a540e651798410ed"}
+}
