@@ -2,6 +2,11 @@
   "name": "npm-boilerplate-package",
   "version": "1.0.0",
   "description": "Boilerplate for Babel-Rollup-Jest NPM package.",
+  "author": {
+    "name": "Maksym Dudynskyi",
+    "email": "maksymddd@gmail.com",
+    "url": "https://github.com/maksymddd"
+  },
   "keywords": [
     "npm",
     "boilerplate",
@@ -17,7 +22,10 @@
   "main": "lib/bundle.min.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest --no-cache --coverage"
+    "test": "jest --no-cache --coverage",
+    "lint:js": "./node_modules/eslint/bin/eslint.js src/",
+    "lint:tests": "./node_modules/eslint/bin/eslint.js tests/",
+    "lint:all": "npm run lint:js && npm run lint:tests"
   },
   "babel": {
     "presets": [
@@ -57,11 +65,11 @@
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   },
-  "author": {
-    "name": "Maksym Dudynskyi",
-    "email": "maksymddd@gmail.com",
-    "url": "https://github.com/maksymddd"
-  },
+  "pre-commit": [
+    "lint:all",
+    "test",
+    "build"
+  ],
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
