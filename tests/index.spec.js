@@ -94,14 +94,47 @@ describe("SelectPure component", () => {
 
     const selectNode = document.querySelector(".select-pure__select");
 
-    expect(selectNode.classList.contains("select_pure__select--opened")).toBe(false);
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
 
     selectNode.click();
 
-    expect(selectNode.classList.contains("select_pure__select--opened")).toBe(true);
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
 
     selectNode.click();
 
-    expect(selectNode.classList.contains("select_pure__select--opened")).toBe(false);
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+  });
+
+  test("closes on outside element click", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+    const targetSpan = document.createElement("span");
+    document.body.appendChild(targetSpan);
+
+    const select = new SelectPure(div, {
+      options: [
+        {
+          label: "Poland",
+          value: "PL",
+          disabled: true,
+        },
+        {
+          label: "Ukraine",
+          value: "UA",
+        },
+      ],
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+
+    selectNode.click();
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+
+    targetSpan.click();
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
   });
 });

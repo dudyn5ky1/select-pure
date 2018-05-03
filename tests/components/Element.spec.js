@@ -63,9 +63,27 @@ describe("Element component", () => {
 
     expect(span.get().classList.contains("new_class")).toBe(false);
 
+    const newElement = span.addClass("new_class");
+
+    expect(newElement).toBeInstanceOf(Element);
+
+    expect(span.get().classList.contains("new_class")).toBe(true);
+  });
+
+  test("removes class", () => {
+    const span = new Element("span");
+
+    expect(span.get().classList.contains("new_class")).toBe(false);
+
     span.addClass("new_class");
 
     expect(span.get().classList.contains("new_class")).toBe(true);
+
+    const newElement = span.removeClass("new_class");
+
+    expect(newElement).toBeInstanceOf(Element);
+
+    expect(span.get().classList.contains("new_class")).toBe(false);
   });
 
   test("toggles class", () => {
@@ -80,7 +98,7 @@ describe("Element component", () => {
     expect(span.get().classList.contains("new_class")).toBe(true);
 
     const toggled2 = span.toggleClass("new_class");
-    
+
     expect(toggled2).toBeInstanceOf(Element);
 
     expect(span.get().classList.contains("new_class")).toBe(false);
@@ -97,5 +115,26 @@ describe("Element component", () => {
     span.get().click();
 
     expect(callback.mock.calls.length).toBe(1);
+  });
+
+  test("removes event listener", () => {
+    const span = new Element("span");
+    const callback = jest.fn();
+
+    span.addEventListener("click", callback);
+
+    expect(callback.mock.calls.length).toBe(0);
+
+    span.get().click();
+
+    expect(callback.mock.calls.length).toBe(1);
+
+    span.removeEventListener("click", callback);
+
+    callback.mockClear();
+
+    span.get().click();
+
+    expect(callback.mock.calls.length).toBe(0);
   });
 });

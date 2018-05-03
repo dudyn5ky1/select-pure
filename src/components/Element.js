@@ -32,6 +32,11 @@ class Element {
     return this;
   }
 
+  removeClass(className) {
+    this._node.classList.remove(className);
+    return this;
+  }
+
   toggleClass(className) {
     this._node.classList.toggle(className);
     return this;
@@ -39,6 +44,11 @@ class Element {
 
   addEventListener(type, callback) {
     this._node.addEventListener(type, callback);
+    return this;
+  }
+
+  removeEventListener(type, callback) {
+    this._node.removeEventListener(type, callback);
     return this;
   }
 
