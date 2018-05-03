@@ -68,6 +68,24 @@ describe("Element component", () => {
     expect(span.get().classList.contains("new_class")).toBe(true);
   });
 
+  test("toggles class", () => {
+    const span = new Element("span");
+
+    expect(span.get().classList.contains("new_class")).toBe(false);
+
+    const toggled1 = span.toggleClass("new_class");
+
+    expect(toggled1).toBeInstanceOf(Element);
+
+    expect(span.get().classList.contains("new_class")).toBe(true);
+
+    const toggled2 = span.toggleClass("new_class");
+    
+    expect(toggled2).toBeInstanceOf(Element);
+
+    expect(span.get().classList.contains("new_class")).toBe(false);
+  });
+
   test("adds event listener", () => {
     const span = new Element("span");
     const callback = jest.fn();

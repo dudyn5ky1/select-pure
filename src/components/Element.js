@@ -32,6 +32,11 @@ class Element {
     return this;
   }
 
+  toggleClass(className) {
+    this._node.classList.toggle(className);
+    return this;
+  }
+
   addEventListener(type, callback) {
     this._node.addEventListener(type, callback);
     return this;

@@ -3,6 +3,7 @@
   <head>
     <title>SelectPure example</title>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
     <div class="select-wrapper"><h1>PureSelect</h1></div>
@@ -28,10 +29,61 @@
       });
     </script>
     <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+
       .select-wrapper {
         margin: auto;
         max-width: 600px;
         width: calc(100% - 40px);
+      }
+
+      .select-pure__select {
+        background: #f9f9f8;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        box-sizing: border-box;
+        color: #363b3e;
+        cursor: pointer;
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        min-height: 44px;
+        padding: 12px;
+        position: relative;
+        transition: 0.2s;
+        width: 100%;
+      }
+
+      .select-pure__options {
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        box-sizing: border-box;
+        color: #363b3e;
+        display: none;
+        left: 0;
+        max-height: 221px;
+        overflow-y: scroll;
+        position: absolute;
+        top: 50px;
+        width: 100%;
+        z-index: 5;
+      }
+
+      .select-pure__select--opened .select-pure__options {
+        display: block;
+      }
+
+      .select-pure__option {
+        background: #fff;
+        border-bottom: 1px solid #e4e4e4;
+        box-sizing: border-box;
+        height: 44px;
+        line-height: 25px;
+        padding: 10px;
       }
     </style>
   </body>
