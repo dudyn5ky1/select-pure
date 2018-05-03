@@ -137,4 +137,16 @@ describe("Element component", () => {
 
     expect(callback.mock.calls.length).toBe(0);
   });
+
+  test("sets text content", () => {
+    const span = new Element("span");
+
+    expect(span.get().textContent).toBe("");
+
+    const newSpan = span.setText("mock text");
+
+    expect(newSpan).toBeInstanceOf(Element);
+
+    expect(span.get().textContent).toBe("mock text");
+  });
 });

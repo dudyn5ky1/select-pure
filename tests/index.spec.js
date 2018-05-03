@@ -137,4 +137,27 @@ describe("SelectPure component", () => {
 
     expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
   });
+
+  test("sets first option as selected when value is not provided", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    const select = new SelectPure(div, {
+      options: [
+        {
+          label: "Poland",
+          value: "PL",
+          disabled: true,
+        },
+        {
+          label: "Ukraine",
+          value: "UA",
+        },
+      ],
+    });
+
+    const selectedOption = document.querySelectorAll(".select-pure__select .select-pure__label");
+    expect(selectedOption.length).toBe(1);
+    expect(selectedOption[0].textContent).toBe("Poland");
+  });
 });

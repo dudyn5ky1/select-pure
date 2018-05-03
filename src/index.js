@@ -8,8 +8,10 @@ class SelectPure {
     };
 
     this._boundToggleVisibility = this._toggleVisibility.bind(this);
+    this._body = new Element(document.body);
 
     this._create(element);
+    this._setValue();
   }
 
   _create(_element) {
@@ -17,10 +19,14 @@ class SelectPure {
 
     this._parent = new Element(element);
     this._select = new Element("div", { class: "select-pure__select" });
-    this._body = new Element(document.body);
-    this._select.addEventListener("click", this._boundToggleVisibility);
+    this._label = new Element("span", { class: "select-pure__label" });
     this._optionsWrapper = new Element("div", { class: "select-pure__options" });
+
     this._options = this._generateOptions();
+
+    this._select.addEventListener("click", this._boundToggleVisibility);
+
+    this._select.append(this._label.get());
     this._select.append(this._optionsWrapper.get());
     this._parent.append(this._select.get());
   }
@@ -50,11 +56,23 @@ class SelectPure {
       this._state.opened = false;
       return;
     }
-    
+
     this._select.addClass("select-pure__select--opened");
     this._body.addEventListener("click", this._boundToggleVisibility);
     this._select.removeEventListener("click", this._boundToggleVisibility);
     this._state.opened = true;
+  }
+
+  _setValue() {
+    if (!this._config.value) {
+      this._selectOption(this._config.options[0]);
+      return;
+    }
+  }
+
+  _selectOption(option) {
+    this._selectedOption = option;
+    this._label.setText(option.label);
   }
 }
 

@@ -52,6 +52,11 @@ class Element {
     return this;
   }
 
+  setText(text) {
+    this._setTextContent(text);
+    return this;
+  }
+
   _onChange() {
     if (this._onChangeCallback) {
       if (this._node.type === "file") {
