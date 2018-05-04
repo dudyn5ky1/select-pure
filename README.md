@@ -40,6 +40,13 @@ new SelectPure(element, config);
 
 | Property | Required | Type | Description |
 | --- | --- | --- | --- |
+| options | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`.  |
+| options[].value | true | String | Value of an option. |
+| options[].label | true | String | Label of an option. |
+| options[].disabled | false | Boolean | `true` if option is disabled. `false` by default. |
+| multiple | false | Boolean | `true` if multiple options can be selected. |
+| onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
+| value | false | String | Initially selected value. If not provided - first option will be selected. |
 
 ### Example
 
