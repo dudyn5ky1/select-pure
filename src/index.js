@@ -25,7 +25,6 @@ class SelectPure {
     this._options = this._generateOptions();
 
     this._select.addEventListener("click", this._boundHandleClick);
-
     this._select.append(this._label.get());
     this._select.append(this._optionsWrapper.get());
     this._parent.append(this._select.get());
@@ -53,12 +52,13 @@ class SelectPure {
       const option = this._options.find(_option => _option.get() === event.target);
 
       if (option) {
-        this._setValue(option.get().getAttribute("data-value"));
+        this._setValue(option.get().getAttribute("data-value"), true);
       }
 
       this._select.removeClass("select-pure__select--opened");
       this._body.removeEventListener("click", this._boundHandleClick);
       this._select.addEventListener("click", this._boundHandleClick);
+
       this._state.opened = false;
       return;
     }
@@ -66,10 +66,11 @@ class SelectPure {
     this._select.addClass("select-pure__select--opened");
     this._body.addEventListener("click", this._boundHandleClick);
     this._select.removeEventListener("click", this._boundHandleClick);
+
     this._state.opened = true;
   }
 
-  _setValue(value) {
+  _setValue(value, selected) {
     if (value) {
       this._config.value = value;
     }
@@ -85,12 +86,17 @@ class SelectPure {
 
     optionNode.addClass("select-pure__option--selected");
 
-    this._selectOption(option);
+    this._selectOption(option, selected);
   }
 
-  _selectOption(option) {
+  _selectOption(option, selected) {
     this._selectedOption = option;
+
     this._label.setText(option.label);
+
+    if (this._config.onChange && selected) {
+      this._config.onChange(option.value);
+    }
   }
 }
 

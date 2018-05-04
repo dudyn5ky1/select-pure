@@ -221,4 +221,40 @@ describe("SelectPure component", () => {
     expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
     expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
   });
+
+  test("calls onChange callback on click", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    const mockedOnChange = jest.fn();
+
+    const select = new SelectPure(div, {
+      options: [
+        {
+          label: "Poland",
+          value: "PL",
+        },
+        {
+          label: "Ukraine",
+          value: "UA",
+        },
+      ],
+      value: "UA",
+      onChange: mockedOnChange,
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+    const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+
+    expect(mockedOnChange.mock.calls.length).toBe(0);
+
+    selectNode.click();
+
+    expect(mockedOnChange.mock.calls.length).toBe(0);
+
+    options[0].click();
+
+    expect(mockedOnChange.mock.calls.length).toBe(1);
+    expect(mockedOnChange.mock.calls[0][0]).toBe("PL");
+  });
 });

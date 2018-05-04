@@ -27,6 +27,7 @@
         ],
         multiple: true,
         value: "LA",
+        onChange: value => { console.log(value); },
       });
     </script>
     <style>
@@ -88,7 +89,7 @@
       }
 
       .select-pure__option--selected {
-        opacity: 0.3;
+        color: #e4e4e4;
         pointer-events: none;
       }
     </style>
