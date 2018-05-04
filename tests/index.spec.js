@@ -257,4 +257,59 @@ describe("SelectPure component", () => {
     expect(mockedOnChange.mock.calls.length).toBe(1);
     expect(mockedOnChange.mock.calls[0][0]).toBe("PL");
   });
+
+  test("properly renderd multiselect", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    const select = new SelectPure(div, {
+      options: [
+        {
+          label: "New York",
+          value: "NY",
+        },
+        {
+          label: "Washington",
+          value: "WA",
+        },
+        {
+          label: "California",
+          value: "CA",
+        },
+        {
+          label: "New Jersey",
+          value: "NJ",
+        },
+        {
+          label: "North Carolina",
+          value: "NC",
+        },
+      ],
+      value: ["NY", "CA"],
+      multiple: true,
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+
+    expect(selectNode.classList.contains("select-pure__select--multiple")).toBe(true);
+
+    const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+
+    expect(options.length).toBe(5);
+
+    expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
+    expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
+    expect(options[2].classList.contains("select-pure__option--selected")).toBe(true);
+    expect(options[3].classList.contains("select-pure__option--selected")).toBe(false);
+    expect(options[4].classList.contains("select-pure__option--selected")).toBe(false);
+
+    const label = document.querySelector(".select-pure__select .select-pure__label");
+
+    const selectedLabels = label.querySelectorAll(".select-pure__selected-label");
+
+    expect(selectedLabels.length).toBe(2);
+
+    expect(selectedLabels[0].textContent).toBe("New York");
+    expect(selectedLabels[1].textContent).toBe("California");
+  });
 });

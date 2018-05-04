@@ -46,7 +46,7 @@ new SelectPure(element, config);
 | options[].disabled | false | Boolean | `true` if option is disabled. `false` by default. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
-| value | false | String | Initially selected value. If not provided - first option will be selected. |
+| value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
 
 ### Example
 

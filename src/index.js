@@ -22,6 +22,10 @@ class SelectPure {
     this._label = new Element("span", { class: "select-pure__label" });
     this._optionsWrapper = new Element("div", { class: "select-pure__options" });
 
+    if (this._config.multiple) {
+      this._select.addClass("select-pure__select--multiple");
+    }
+
     this._options = this._generateOptions();
 
     this._select.addEventListener("click", this._boundHandleClick);
@@ -75,17 +79,31 @@ class SelectPure {
       this._config.value = value;
     }
 
+    this._options.forEach(_option => {
+      _option.removeClass("select-pure__option--selected");
+    });
+
+    if (this._config.multiple) {
+      const options = this._config.value.map(_value => {
+        const option = this._config.options.find(_option => _option.value === _value)
+        const optionNode = this._options.find(_option => _option.get().getAttribute("data-value") === option.value);
+
+        optionNode.addClass("select-pure__option--selected");
+
+        return option;
+      });
+
+      this._selectOptions(options);
+
+      return;
+    }
+
     const option = this._config.value ?
       this._config.options.find(_option => _option.value === this._config.value) :
       this._config.options[0];
     const optionNode = this._options.find(_option => _option.get().getAttribute("data-value") === option.value);
 
-    this._options.forEach(_option => {
-      _option.removeClass("select-pure__option--selected");
-    });
-
     optionNode.addClass("select-pure__option--selected");
-
     this._selectOption(option, selected);
   }
 
@@ -97,6 +115,19 @@ class SelectPure {
     if (this._config.onChange && selected) {
       this._config.onChange(option.value);
     }
+  }
+
+  _selectOptions(options) {
+    this._label.innetHTML = "";
+
+    options.forEach(_option => {
+      const selectedLabel = new Element("span", {
+        class: "select-pure__selected-label",
+        textContent: _option.label,
+      });
+
+      this._label.append(selectedLabel.get());
+    });
   }
 }
 

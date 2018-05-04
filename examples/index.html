@@ -6,10 +6,18 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
-    <div class="select-wrapper"><h1>PureSelect</h1></div>
+    <div class="select-wrapper">
+      <h1>PureSelect</h1>
+
+      <h3>Single choise:</h3>
+      <span class="single-select"></span>
+
+      <h3>Multiselect:</h3>
+      <span class="multi-select"></span>
+    </div>
     <script src="./../lib/select-pure.min.js"></script>
     <script>
-      var form = new SelectPure(".select-wrapper", {
+      var single = new SelectPure(".single-select", {
         options: [
           {
             label: "New York",
@@ -25,8 +33,35 @@
             value: "LA",
           },
         ],
-        multiple: true,
         value: "LA",
+        onChange: value => { console.log(value); },
+      });
+
+      var multi = new SelectPure(".multi-select", {
+        options: [
+          {
+            label: "New York",
+            value: "NY",
+          },
+          {
+            label: "Washington",
+            value: "WA",
+          },
+          {
+            label: "California",
+            value: "CA",
+          },
+          {
+            label: "New Jersey",
+            value: "NJ",
+          },
+          {
+            label: "North Carolina",
+            value: "NC",
+          },
+        ],
+        value: ["NY", "CA"],
+        multiple: true,
         onChange: value => { console.log(value); },
       });
     </script>
@@ -90,7 +125,21 @@
 
       .select-pure__option--selected {
         color: #e4e4e4;
+        cursor: initial;
         pointer-events: none;
+      }
+
+      .select-pure__selected-label {
+        background: #5e6264;
+        border-radius: 4px;
+        color: #fff;
+        cursor: initial;
+        margin-right: 10px;
+        padding: 3px 7px;
+      }
+
+      .select-pure__selected-label:last-of-type {
+        margin-right: 0;
       }
     </style>
   </body>
