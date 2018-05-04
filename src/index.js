@@ -85,7 +85,7 @@ class SelectPure {
 
     if (this._config.multiple) {
       const options = this._config.value.map(_value => {
-        const option = this._config.options.find(_option => _option.value === _value)
+        const option = this._config.options.find(_option => _option.value === _value);
         const optionNode = this._options.find(_option => _option.get().getAttribute("data-value") === option.value);
 
         optionNode.addClass("select-pure__option--selected");
@@ -125,7 +125,9 @@ class SelectPure {
         class: "select-pure__selected-label",
         textContent: _option.label,
       });
+      const icon = new Element("i", { class: this._config.icon });
 
+      selectedLabel.append(icon.get());
       this._label.append(selectedLabel.get());
     });
   }

@@ -62,6 +62,7 @@
         ],
         value: ["NY", "CA"],
         multiple: true,
+        icon: "fa fa-times",
         onChange: value => { console.log(value); },
       });
     </script>
@@ -140,6 +141,16 @@
 
       .select-pure__selected-label:last-of-type {
         margin-right: 0;
+      }
+
+      .select-pure__selected-label i {
+        cursor: pointer;
+        display: inline-block;
+        margin-left: 7px;
+      }
+
+      .select-pure__selected-label i:hover {
+        color: #e4e4e4;
       }
     </style>
   </body>

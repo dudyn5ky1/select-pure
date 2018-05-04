@@ -287,6 +287,7 @@ describe("SelectPure component", () => {
       ],
       value: ["NY", "CA"],
       multiple: true,
+      icon: "mocked-icon",
     });
 
     const selectNode = document.querySelector(".select-pure__select");
@@ -309,7 +310,18 @@ describe("SelectPure component", () => {
 
     expect(selectedLabels.length).toBe(2);
 
-    expect(selectedLabels[0].textContent).toBe("New York");
-    expect(selectedLabels[1].textContent).toBe("California");
+    const label0 = selectedLabels[0];
+    expect(label0.textContent).toBe("New York");
+
+    const icon0 = label0.querySelectorAll("i");
+    expect(icon0.length).toBe(1);
+    expect(icon0[0].classList.contains("mocked-icon")).toBe(true);
+
+    const label1 = selectedLabels[1];
+    expect(label1.textContent).toBe("California");
+
+    const icon1 = label1.querySelectorAll("i");
+    expect(icon1.length).toBe(1);
+    expect(icon1[0].classList.contains("mocked-icon")).toBe(true);
   });
 });

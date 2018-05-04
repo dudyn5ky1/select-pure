@@ -45,6 +45,7 @@ new SelectPure(element, config);
 | options[].label | true | String | Label of an option. |
 | options[].disabled | false | Boolean | `true` if option is disabled. `false` by default. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
+| icon | false | String | If specified - `<i></i>` will be inserted inside `select-pure__selected-label`. Works only with `multiple` option set to `true`. |
 | onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
 
