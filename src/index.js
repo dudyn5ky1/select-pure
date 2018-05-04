@@ -7,7 +7,7 @@ class SelectPure {
       opened: false,
     };
 
-    this._boundToggleVisibility = this._toggleVisibility.bind(this);
+    this._boundHandleClick = this._handleClick.bind(this);
     this._body = new Element(document.body);
 
     this._create(element);
@@ -24,7 +24,7 @@ class SelectPure {
 
     this._options = this._generateOptions();
 
-    this._select.addEventListener("click", this._boundToggleVisibility);
+    this._select.addEventListener("click", this._boundHandleClick);
 
     this._select.append(this._label.get());
     this._select.append(this._optionsWrapper.get());
@@ -46,28 +46,46 @@ class SelectPure {
     });
   }
 
-  _toggleVisibility(event) {
+  _handleClick(event) {
     event.stopPropagation();
 
     if (this._state.opened) {
+      const option = this._options.find(_option => _option.get() === event.target);
+
+      if (option) {
+        this._setValue(option.get().getAttribute("data-value"));
+      }
+
       this._select.removeClass("select-pure__select--opened");
-      this._body.removeEventListener("click", this._boundToggleVisibility);
-      this._select.addEventListener("click", this._boundToggleVisibility);
+      this._body.removeEventListener("click", this._boundHandleClick);
+      this._select.addEventListener("click", this._boundHandleClick);
       this._state.opened = false;
       return;
     }
 
     this._select.addClass("select-pure__select--opened");
-    this._body.addEventListener("click", this._boundToggleVisibility);
-    this._select.removeEventListener("click", this._boundToggleVisibility);
+    this._body.addEventListener("click", this._boundHandleClick);
+    this._select.removeEventListener("click", this._boundHandleClick);
     this._state.opened = true;
   }
 
-  _setValue() {
-    if (!this._config.value) {
-      this._selectOption(this._config.options[0]);
-      return;
+  _setValue(value) {
+    if (value) {
+      this._config.value = value;
     }
+
+    const option = this._config.value ?
+      this._config.options.find(_option => _option.value === this._config.value) :
+      this._config.options[0];
+    const optionNode = this._options.find(_option => _option.get().getAttribute("data-value") === option.value);
+
+    this._options.forEach(_option => {
+      _option.removeClass("select-pure__option--selected");
+    });
+
+    optionNode.addClass("select-pure__option--selected");
+
+    this._selectOption(option);
   }
 
   _selectOption(option) {

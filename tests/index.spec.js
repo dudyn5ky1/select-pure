@@ -159,5 +159,66 @@ describe("SelectPure component", () => {
     const selectedOption = document.querySelectorAll(".select-pure__select .select-pure__label");
     expect(selectedOption.length).toBe(1);
     expect(selectedOption[0].textContent).toBe("Poland");
+
+    const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+    expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
+    expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
+  });
+
+  test("sets option when value is provided", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    const select = new SelectPure(div, {
+      options: [
+        {
+          label: "Poland",
+          value: "PL",
+        },
+        {
+          label: "Ukraine",
+          value: "UA",
+        },
+      ],
+      value: "UA",
+    });
+
+    const selectedOption = document.querySelectorAll(".select-pure__select .select-pure__label");
+    expect(selectedOption.length).toBe(1);
+    expect(selectedOption[0].textContent).toBe("Ukraine");
+
+    const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+    expect(options[0].classList.contains("select-pure__option--selected")).toBe(false);
+    expect(options[1].classList.contains("select-pure__option--selected")).toBe(true);
+  });
+
+  test("selects another value", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    const select = new SelectPure(div, {
+      options: [
+        {
+          label: "Poland",
+          value: "PL",
+        },
+        {
+          label: "Ukraine",
+          value: "UA",
+        },
+      ],
+      value: "UA",
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+    const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+
+    selectNode.click();
+
+    options[0].click();
+
+    expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
+    expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
   });
 });
