@@ -694,6 +694,7 @@ describe("SelectPure component", () => {
 
     let hiddenOptions = document.querySelectorAll(".select-pure__select--multiple .select-pure__option--hidden");
 
+    // eslint-disable-next-line no-magic-numbers
     expect(hiddenOptions.length).toEqual(3);
     expect(hiddenOptions[0].textContent).toBe("Washington");
     expect(hiddenOptions[1].textContent).toBe("California");
@@ -704,6 +705,7 @@ describe("SelectPure component", () => {
 
     hiddenOptions = document.querySelectorAll(".select-pure__select--multiple .select-pure__option--hidden");
 
+    // eslint-disable-next-line no-magic-numbers
     expect(hiddenOptions.length).toEqual(4);
     expect(hiddenOptions[0].textContent).toBe("New York");
     expect(hiddenOptions[1].textContent).toBe("Washington");
