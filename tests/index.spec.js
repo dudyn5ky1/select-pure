@@ -599,9 +599,6 @@ describe("SelectPure component", () => {
   test("focuses autocomplete input on dropdown opening", () => {
     const div = document.createElement("div");
     document.body.appendChild(div);
-    const mockedFocus = jest.fn();
-    const originalFocus = HTMLElement.prototype.focus;
-    window.HTMLElement.prototype.focus = mockedFocus;
 
     new SelectPure(div, {
       options: [
@@ -636,26 +633,81 @@ describe("SelectPure component", () => {
     const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
     const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
 
-    expect(mockedFocus.mock.calls.length).toBe(0);
     expect(document.activeElement).not.toEqual(autocomplete);
 
     selectNode.click();
 
-    expect(mockedFocus.mock.calls.length).toBe(1);
     expect(document.activeElement).toEqual(autocomplete);
-
-    mockedFocus.mockClear();
 
     options[1].click();
 
-    expect(mockedFocus.mock.calls.length).toBe(0);
-    expect(document.activeElement).not.toEqual(autocomplete);
+    selectNode.click();
+
+    expect(document.activeElement).toEqual(autocomplete);
+  });
+
+  test("hides not matching options on input change", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    new SelectPure(div, {
+      options: [
+        {
+          label: "New York",
+          value: "NY",
+        },
+        {
+          label: "Washington",
+          value: "WA",
+        },
+        {
+          label: "California",
+          value: "CA",
+        },
+        {
+          label: "New Jersey",
+          value: "NJ",
+        },
+        {
+          label: "North Carolina",
+          value: "NC",
+        },
+      ],
+      value: ["NY", "CA"],
+      multiple: true,
+      autocomplete: true,
+      icon: "mocked-icon",
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+    const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
 
     selectNode.click();
 
-    expect(mockedFocus.mock.calls.length).toBe(1);
-    expect(document.activeElement).toEqual(autocomplete);
+    const event = new MouseEvent("input", {
+      bubbles: true,
+      cancelable: true,
+    });
 
-    HTMLElement.prototype.focus = originalFocus;
+    autocomplete.value = "new";
+    autocomplete.dispatchEvent(event);
+
+    let hiddenOptions = document.querySelectorAll(".select-pure__select--multiple .select-pure__option--hidden");
+
+    expect(hiddenOptions.length).toEqual(3);
+    expect(hiddenOptions[0].textContent).toBe("Washington");
+    expect(hiddenOptions[1].textContent).toBe("California");
+    expect(hiddenOptions[2].textContent).toBe("North Carolina");
+
+    autocomplete.value = "North";
+    autocomplete.dispatchEvent(event);
+
+    hiddenOptions = document.querySelectorAll(".select-pure__select--multiple .select-pure__option--hidden");
+
+    expect(hiddenOptions.length).toEqual(4);
+    expect(hiddenOptions[0].textContent).toBe("New York");
+    expect(hiddenOptions[1].textContent).toBe("Washington");
+    expect(hiddenOptions[2].textContent).toBe("California");
+    expect(hiddenOptions[3].textContent).toBe("New Jersey");
   });
 });

@@ -10,6 +10,7 @@ class SelectPure {
 
     this._boundHandleClick = this._handleClick.bind(this);
     this._boundUnselectOption = this._unselectOption.bind(this);
+    this._boundSortOptions = this._sortOptions.bind(this);
 
     this._body = new Element(document.body);
 
@@ -40,6 +41,7 @@ class SelectPure {
   _generateOptions() {
     if (this._config.autocomplete) {
       this._autocomplete = new Element("input", { class: "select-pure__autocomplete", type: "text" });
+      this._autocomplete.addEventListener("input", this._boundSortOptions);
 
       this._optionsWrapper.append(this._autocomplete.get());
     }
@@ -178,6 +180,16 @@ class SelectPure {
     }
 
     this._setValue(newValue, true, true);
+  }
+
+  _sortOptions(event) {
+    this._options.forEach(_option => {
+      if (!_option.get().textContent.toLowerCase().startsWith(event.target.value.toLowerCase())) {
+        _option.addClass("select-pure__option--hidden");
+        return;
+      }
+      _option.removeClass("select-pure__option--hidden");
+    });
   }
 }
 
