@@ -1,4 +1,4 @@
-# FormPure JavaScript component
+# SelectPure JavaScript component
 
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/select-pure.svg)](https://www.npmjs.com/package/select-pure)
