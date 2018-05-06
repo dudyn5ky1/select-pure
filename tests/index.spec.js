@@ -502,4 +502,97 @@ describe("SelectPure component", () => {
 
     expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
   });
+
+  test("properly renderd autocomplete select", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    new SelectPure(div, {
+      options: [
+        {
+          label: "New York",
+          value: "NY",
+        },
+        {
+          label: "Washington",
+          value: "WA",
+        },
+        {
+          label: "California",
+          value: "CA",
+        },
+        {
+          label: "New Jersey",
+          value: "NJ",
+        },
+        {
+          label: "North Carolina",
+          value: "NC",
+        },
+      ],
+      value: ["NY", "CA"],
+      multiple: true,
+      autocomplete: true,
+      icon: "mocked-icon",
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+
+    expect(selectNode.classList.contains("select-pure__select--multiple")).toBe(true);
+
+    const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+
+    // eslint-disable-next-line no-magic-numbers
+    expect(options.length).toBe(5);
+
+    const autocomplete = document.querySelectorAll(".select-pure__select--multiple .select-pure__options input");
+
+    expect(autocomplete.length).toBe(1);
+    expect(autocomplete[0].classList.contains("select-pure__autocomplete")).toBe(true);
+  });
+
+  test("doesn't close dropdown on input click", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    new SelectPure(div, {
+      options: [
+        {
+          label: "New York",
+          value: "NY",
+        },
+        {
+          label: "Washington",
+          value: "WA",
+        },
+        {
+          label: "California",
+          value: "CA",
+        },
+        {
+          label: "New Jersey",
+          value: "NJ",
+        },
+        {
+          label: "North Carolina",
+          value: "NC",
+        },
+      ],
+      value: ["NY", "CA"],
+      multiple: true,
+      autocomplete: true,
+      icon: "mocked-icon",
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+    const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
+
+    selectNode.click();
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+
+    autocomplete.click();
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+  });
 });

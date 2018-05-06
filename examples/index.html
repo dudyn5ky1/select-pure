@@ -14,6 +14,9 @@
 
       <h3>Multiselect:</h3>
       <span class="multi-select"></span>
+
+      <h3>Autocomplete:</h3>
+      <span class="autocomplete-select"></span>
     </div>
     <script src="./../lib/select-pure.min.js"></script>
     <script>
@@ -62,6 +65,48 @@
         ],
         value: ["NY", "CA"],
         multiple: true,
+        icon: "fa fa-times",
+        onChange: value => { console.log(value); },
+      });
+
+      var autocomplete = new SelectPure(".autocomplete-select", {
+        options: [
+          {
+            label: "Barbina",
+            value: "ba",
+          },
+          {
+            label: "Bigoli",
+            value: "bg",
+          },
+          {
+            label: "Bucatini",
+            value: "bu",
+          },
+          {
+            label: "Busiate",
+            value: "bus",
+          },
+          {
+            label: "Capellini",
+            value: "cp",
+          },
+          {
+            label: "Fedelini",
+            value: "fe",
+          },
+          {
+            label: "Maccheroni",
+            value: "ma",
+          },
+          {
+            label: "Spaghetti",
+            value: "sp",
+          },
+        ],
+        value: ["sp"],
+        multiple: true,
+        autocomplete: true,
         icon: "fa fa-times",
         onChange: value => { console.log(value); },
       });
@@ -154,6 +199,19 @@
 
       .select-pure__selected-label i:hover {
         color: #e4e4e4;
+      }
+
+      .select-pure__autocomplete {
+        background: #f9f9f8;
+        border-bottom: 1px solid #e4e4e4;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        box-sizing: border-box;
+        font-size: 16px;
+        outline: none;
+        padding: 10px;
+        width: 100%;
       }
     </style>
   </body>

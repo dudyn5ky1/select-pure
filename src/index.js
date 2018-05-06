@@ -38,6 +38,12 @@ class SelectPure {
   }
 
   _generateOptions() {
+    if (this._config.autocomplete) {
+      const autocomplete = new Element("input", { class: "select-pure__autocomplete" });
+
+      this._optionsWrapper.append(autocomplete.get());
+    }
+
     return this._config.options.map(_option => {
       const option = new Element("div", {
         class: "select-pure__option",
@@ -54,6 +60,10 @@ class SelectPure {
 
   _handleClick(event) {
     event.stopPropagation();
+
+    if (event.target.className === "select-pure__autocomplete") {
+      return;
+    }
 
     if (this._state.opened) {
       const option = this._options.find(_option => _option.get() === event.target);
