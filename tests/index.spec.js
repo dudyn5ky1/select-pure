@@ -437,4 +437,69 @@ describe("SelectPure component", () => {
 
     expect(window.getComputedStyle(dropdown).top).toBe("29px");
   });
+
+  test("unselects new option on icon click (multiselect)", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    new SelectPure(div, {
+      options: [
+        {
+          label: "New York",
+          value: "NY",
+        },
+        {
+          label: "Washington",
+          value: "WA",
+        },
+        {
+          label: "California",
+          value: "CA",
+        },
+        {
+          label: "New Jersey",
+          value: "NJ",
+        },
+        {
+          label: "North Carolina",
+          value: "NC",
+        },
+      ],
+      value: ["NY"],
+      multiple: true,
+      icon: "mocked-icon",
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+
+    const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+
+    selectNode.click();
+
+    options[4].click();
+
+    const label = document.querySelector(".select-pure__select .select-pure__label");
+
+    let selectedLabels = label.querySelectorAll(".select-pure__selected-label");
+
+    // eslint-disable-next-line no-magic-numbers
+    expect(selectedLabels.length).toBe(2);
+
+    selectedLabels[0].querySelector("i").click();
+
+    selectedLabels = label.querySelectorAll(".select-pure__selected-label");
+
+    expect(selectedLabels.length).toBe(1);
+    expect(selectedLabels[0].textContent).toBe("North Carolina");
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+
+    selectedLabels[0].querySelector("i").click();
+
+    selectedLabels = label.querySelectorAll(".select-pure__selected-label");
+
+    expect(selectedLabels.length).toBe(0);
+
+    expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+  });
 });
