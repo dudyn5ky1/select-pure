@@ -1,25 +1,18 @@
 {
-  "name": "npm-boilerplate-package",
-  "version": "1.0.3",
-  "description": "Boilerplate for Babel-Rollup-Jest NPM package.",
+  "name": "select-pure",
+  "version": "0.1.0",
+  "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
     "email": "maksymddd@gmail.com",
     "url": "https://github.com/maksymddd"
   },
   "keywords": [
-    "npm",
-    "boilerplate",
-    "package",
-    "module",
-    "babel",
-    "rollup",
-    "jest",
-    "es6",
-    "es7",
-    "eslint"
+    "javascript",
+    "select",
+    "js"
   ],
-  "main": "lib/bundle.min.js",
+  "main": "lib/select-pure.min.js",
   "scripts": {
     "build": "rollup -c",
     "test": "jest --no-cache --coverage",
@@ -29,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/maksymddd/npm-boilerplate-package.git"
+    "url": "git://github.com/maksymddd/select-pure.git"
   },
   "babel": {
     "presets": [
