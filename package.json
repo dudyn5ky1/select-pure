@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -11,6 +11,11 @@
     "javascript",
     "select",
     "js"
+  ],
+  "files": [
+    "es/",
+    "LICENSE",
+    "README.md"
   ],
   "main": "es/select-pure.min.js",
   "scripts": {
