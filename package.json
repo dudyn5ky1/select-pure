@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -75,6 +75,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-latest": "^6.24.1",
     "eslint-config-hackerspot": "^1.0.0",
+    "pre-commit": "^1.2.2",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-eslint": "^4.0.0",
