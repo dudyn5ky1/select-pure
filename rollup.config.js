@@ -5,9 +5,9 @@ import uglify from "rollup-plugin-uglify";
 export default {
   input: "src/index.js",
   output: {
-    file: "lib/bundle.min.js",
+    file: "lib/select-pure.min.js",
     format: "umd",
-    name: "Boilerplate",
+    name: "SelectPure",
   },
   plugins: [
     eslint({
