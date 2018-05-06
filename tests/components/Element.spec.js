@@ -172,4 +172,16 @@ describe("Element component", () => {
 
     expect(span.get().style.top).toBe("100px");
   });
+
+  test("focuses", () => {
+    const input = new Element("input");
+
+    expect(document.activeElement).not.toEqual(input.get());
+
+    const focusedInput = input.focus();
+
+    expect(focusedInput).toBeInstanceOf(Element);
+
+    expect(document.activeElement).toEqual(input.get());
+  });
 });

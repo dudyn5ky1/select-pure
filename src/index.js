@@ -39,9 +39,9 @@ class SelectPure {
 
   _generateOptions() {
     if (this._config.autocomplete) {
-      const autocomplete = new Element("input", { class: "select-pure__autocomplete" });
+      this._autocomplete = new Element("input", { class: "select-pure__autocomplete", type: "text" });
 
-      this._optionsWrapper.append(autocomplete.get());
+      this._optionsWrapper.append(this._autocomplete.get());
     }
 
     return this._config.options.map(_option => {
@@ -89,6 +89,10 @@ class SelectPure {
     this._select.removeEventListener("click", this._boundHandleClick);
 
     this._state.opened = true;
+
+    if (this._autocomplete) {
+      this._autocomplete.focus();
+    }
   }
 
   _setValue(value, manual, unselected) {
@@ -168,6 +172,7 @@ class SelectPure {
     const newValue = [...this._config.value];
     const index = newValue.indexOf(event.target.getAttribute("data-value"));
 
+    // eslint-disable-next-line no-magic-numbers
     if (index !== -1) {
       newValue.splice(index, 1);
     }

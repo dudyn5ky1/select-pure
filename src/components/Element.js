@@ -2,6 +2,7 @@ const allowedAttributes = {
   value: "data-value",
   disabled: "data-disabled",
   class: "class",
+  type: "type",
 };
 
 class Element {
@@ -66,14 +67,8 @@ class Element {
     return this;
   }
 
-  _onChange() {
-    if (this._onChangeCallback) {
-      if (this._node.type === "file") {
-        this._onChangeCallback(this._node.files);
-        return;
-      }
-      this._onChangeCallback(this._node.value);
-    }
+  focus() {
+    this._node.focus();
     return this;
   }
 

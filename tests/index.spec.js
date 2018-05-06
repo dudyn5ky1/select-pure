@@ -595,4 +595,67 @@ describe("SelectPure component", () => {
 
     expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
   });
+
+  test("focuses autocomplete input on dropdown opening", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+    const mockedFocus = jest.fn();
+    const originalFocus = HTMLElement.prototype.focus;
+    window.HTMLElement.prototype.focus = mockedFocus;
+
+    new SelectPure(div, {
+      options: [
+        {
+          label: "New York",
+          value: "NY",
+        },
+        {
+          label: "Washington",
+          value: "WA",
+        },
+        {
+          label: "California",
+          value: "CA",
+        },
+        {
+          label: "New Jersey",
+          value: "NJ",
+        },
+        {
+          label: "North Carolina",
+          value: "NC",
+        },
+      ],
+      value: ["NY", "CA"],
+      multiple: true,
+      autocomplete: true,
+      icon: "mocked-icon",
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+    const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
+    const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+
+    expect(mockedFocus.mock.calls.length).toBe(0);
+    expect(document.activeElement).not.toEqual(autocomplete);
+
+    selectNode.click();
+
+    expect(mockedFocus.mock.calls.length).toBe(1);
+    expect(document.activeElement).toEqual(autocomplete);
+
+    mockedFocus.mockClear();
+
+    options[1].click();
+
+    expect(mockedFocus.mock.calls.length).toBe(0);
+    expect(document.activeElement).not.toEqual(autocomplete);
+
+    selectNode.click();
+
+    expect(mockedFocus.mock.calls.length).toBe(1);
+    expect(document.activeElement).toEqual(autocomplete);
+
+    HTMLElement.prototype.focus = originalFocus;
+  });
 });
