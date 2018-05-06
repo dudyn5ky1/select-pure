@@ -4,11 +4,18 @@ import uglify from "rollup-plugin-uglify";
 
 export default {
   input: "src/index.js",
-  output: {
-    file: "lib/select-pure.min.js",
-    format: "umd",
-    name: "SelectPure",
-  },
+  output: [
+    {
+      file: "es/select-pure.min.js",
+      format: "es",
+      name: "SelectPure",
+    },
+    {
+      file: "lib/bundle.min.js",
+      format: "umd",
+      name: "SelectPure",
+    },
+  ],
   plugins: [
     eslint({
       include: "src/**",
