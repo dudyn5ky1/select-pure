@@ -76,7 +76,7 @@ class SelectPure {
 
   _setValue(value, selected) {
     if (value) {
-      this._config.value = value;
+      this._config.value = this._config.multiple ? this._config.value.concat(value) : value;
     }
 
     this._options.forEach(_option => {
@@ -93,7 +93,7 @@ class SelectPure {
         return option;
       });
 
-      this._selectOptions(options);
+      this._selectOptions(options, selected);
 
       return;
     }
@@ -117,8 +117,8 @@ class SelectPure {
     }
   }
 
-  _selectOptions(options) {
-    this._label.innetHTML = "";
+  _selectOptions(options, selected) {
+    this._label.setText("");
 
     options.forEach(_option => {
       const selectedLabel = new Element("span", {
@@ -130,6 +130,11 @@ class SelectPure {
       selectedLabel.append(icon.get());
       this._label.append(selectedLabel.get());
     });
+
+    if (selected) {
+      // eslint-disable-next-line no-magic-numbers
+      this._optionsWrapper.setTop(Number(this._select.getHeight().split("px")[0]) + 5);
+    }
   }
 }
 

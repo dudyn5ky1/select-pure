@@ -57,6 +57,15 @@ class Element {
     return this;
   }
 
+  getHeight() {
+    return window.getComputedStyle(this._node).height;
+  }
+
+  setTop(top) {
+    this._node.style.top = `${top}px`;
+    return this;
+  }
+
   _onChange() {
     if (this._onChangeCallback) {
       if (this._node.type === "file") {

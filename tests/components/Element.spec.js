@@ -149,4 +149,27 @@ describe("Element component", () => {
 
     expect(span.get().textContent).toBe("mock text");
   });
+
+  test("returns height", () => {
+    const span = new Element("span");
+
+    span.get().style.height = "29px";
+    span.get().style.padding = "5px";
+
+    const height = span.getHeight();
+
+    expect(height).toBe("29px");
+  });
+
+  test("sets top", () => {
+    const span = new Element("span");
+
+    expect(span.get().style.top).toBe("");
+    // eslint-disable-next-line no-magic-numbers
+    const newSpan = span.setTop(100);
+
+    expect(newSpan).toBeInstanceOf(Element);
+
+    expect(span.get().style.top).toBe("100px");
+  });
 });
