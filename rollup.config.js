@@ -6,13 +6,8 @@ export default {
   input: "src/index.js",
   output: [
     {
-      file: "es/select-pure.min.js",
+      file: "dist/bundle.min.js",
       format: "iife",
-      name: "SelectPure",
-    },
-    {
-      file: "lib/bundle.min.js",
-      format: "umd",
       name: "SelectPure",
     },
   ],
