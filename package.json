@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -34,18 +34,8 @@
   },
   "babel": {
     "presets": [
-      [
-        "latest",
-        {
-          "modules": false
-        }
-      ],
-      [
-        "env",
-        {
-          "modules": false
-        }
-      ]
+      "latest",
+      "env"
     ],
     "plugins": [
       "transform-object-rest-spread"
@@ -85,7 +75,9 @@
     "pre-commit": "^1.2.2",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^3.0.0"
   }
 }
