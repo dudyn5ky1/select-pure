@@ -7,7 +7,7 @@ export default {
   output: [
     {
       file: "es/select-pure.min.js",
-      format: "es",
+      format: "iife",
       name: "SelectPure",
     },
     {
