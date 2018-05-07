@@ -15,7 +15,12 @@ export default {
     eslint({
       include: "src/**",
     }),
-    babel(),
+    babel({
+      plugins: [
+        "transform-object-rest-spread",
+      ],
+      babelrc: false,
+    }),
     uglify(),
   ],
 };
