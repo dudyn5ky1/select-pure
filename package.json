@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -19,7 +19,9 @@
   ],
   "main": "es/select-pure.min.js",
   "scripts": {
-    "build": "rollup -c",
+    "build:min": "rollup -c",
+    "build:lib": "babel -d es src",
+    "build": "npm run build:min && npm run build:lib",
     "test": "jest --no-cache --coverage",
     "lint:js": "./node_modules/eslint/bin/eslint.js src/",
     "lint:tests": "./node_modules/eslint/bin/eslint.js tests/",
