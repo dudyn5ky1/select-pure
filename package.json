@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -17,7 +17,7 @@
     "LICENSE",
     "README.md"
   ],
-  "main": "es/select-pure.min.js",
+  "main": "es/index.js",
   "scripts": {
     "build:min": "rollup -c",
     "build:lib": "babel -d es src",
