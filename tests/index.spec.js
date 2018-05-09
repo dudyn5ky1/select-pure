@@ -260,6 +260,43 @@ describe("SelectPure component", () => {
     expect(mockedOnChange.mock.calls[0][0]).toBe("PL");
   });
 
+  test("calls onChange callback on click when multiple is true", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    const mockedOnChange = jest.fn();
+
+    new SelectPure(div, {
+      options: [
+        {
+          label: "Poland",
+          value: "PL",
+        },
+        {
+          label: "Ukraine",
+          value: "UA",
+        },
+      ],
+      value: ["UA"],
+      multiple: true,
+      onChange: mockedOnChange,
+    });
+
+    const selectNode = document.querySelector(".select-pure__select");
+    const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+
+    expect(mockedOnChange.mock.calls.length).toBe(0);
+
+    selectNode.click();
+
+    expect(mockedOnChange.mock.calls.length).toBe(0);
+
+    options[0].click();
+
+    expect(mockedOnChange.mock.calls.length).toBe(1);
+    expect(mockedOnChange.mock.calls[0][0]).toEqual(["UA", "PL"]);
+  });
+
   test("properly renderd multiselect", () => {
     const div = document.createElement("div");
     document.body.appendChild(div);
