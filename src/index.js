@@ -168,6 +168,10 @@ class SelectPure {
       // eslint-disable-next-line no-magic-numbers
       this._optionsWrapper.setTop(Number(this._select.getHeight().split("px")[0]) + 5);
     }
+
+    if (this._config.onChange && manual) {
+      this._config.onChange(this._config.value);
+    }
   }
 
   _unselectOption(event) {
