@@ -23,7 +23,7 @@ yarn add select-pure
 #### CDN
 
 ```
-<script src="https://unpkg.com/select-pure@latest/lib/bundle.min.js"></script>
+<script src="https://unpkg.com/select-pure@latest/dist/bundle.min.js"></script>
 ```
 ## Usage
 
