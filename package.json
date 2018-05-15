@@ -27,7 +27,8 @@
     "lint:js": "./node_modules/eslint/bin/eslint.js src/",
     "lint:tests": "./node_modules/eslint/bin/eslint.js tests/",
     "lint:all": "npm run lint:js && npm run lint:tests",
-    "prepublish": "npm run lint:all && npm run test && npm run build"
+    "prepublish": "npm run lint:all && npm run test && npm run build",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -47,7 +48,7 @@
           [
             "env",
             {
-              "modules": "commonjs"
+              "modules": false
             }
           ],
           "jest"
@@ -73,6 +74,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-latest": "^6.24.1",
     "codecov": "^3.0.1",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint-config-hackerspot": "^1.0.0",
     "jest": "^22.4.3",
     "pre-commit": "^1.2.2",
@@ -82,5 +85,10 @@
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^3.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
