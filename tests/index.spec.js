@@ -768,5 +768,15 @@ describe("SelectPure component", () => {
         ],
       });
     }).not.toThrow();
+
+    const selectNode = document.querySelector(".select-pure__select");
+
+    selectNode.click();
+
+    const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+
+    expect(() => {
+      options[0].click();
+    }).not.toThrow();
   });
 });
