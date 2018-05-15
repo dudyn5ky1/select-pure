@@ -127,8 +127,9 @@ class SelectPure {
     }
 
     const option = this._config.value ?
-      this._config.options.find(_option => _option.value === this._config.value.toString()) :
+      this._config.options.find(_option => _option.value.toString() === this._config.value) :
       this._config.options[0];
+
     const optionNode = this._options.find(
       _option => _option.get().getAttribute("data-value") === option.value.toString()
     );
