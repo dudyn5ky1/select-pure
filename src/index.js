@@ -112,7 +112,9 @@ class SelectPure {
     if (this._config.multiple) {
       const options = this._config.value.map(_value => {
         const option = this._config.options.find(_option => _option.value === _value);
-        const optionNode = this._options.find(_option => _option.get().getAttribute("data-value") === option.value);
+        const optionNode = this._options.find(
+          _option => _option.get().getAttribute("data-value") === option.value.toString()
+        );
 
         optionNode.addClass("select-pure__option--selected");
 
@@ -125,9 +127,11 @@ class SelectPure {
     }
 
     const option = this._config.value ?
-      this._config.options.find(_option => _option.value === this._config.value) :
+      this._config.options.find(_option => _option.value === this._config.value.toString()) :
       this._config.options[0];
-    const optionNode = this._options.find(_option => _option.get().getAttribute("data-value") === option.value);
+    const optionNode = this._options.find(
+      _option => _option.get().getAttribute("data-value") === option.value.toString()
+    );
 
     optionNode.addClass("select-pure__option--selected");
     this._selectOption(option, manual);

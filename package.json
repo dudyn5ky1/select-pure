@@ -48,7 +48,7 @@
           [
             "env",
             {
-              "modules": "commonjs"
+              "modules": false
             }
           ],
           "jest"

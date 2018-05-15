@@ -749,4 +749,24 @@ describe("SelectPure component", () => {
     expect(hiddenOptions[2].textContent).toBe("California");
     expect(hiddenOptions[3].textContent).toBe("New Jersey");
   });
+
+  test("properly handles values as numbers", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    expect(() => {
+      new SelectPure(div, {
+        options: [
+          {
+            label: "New York",
+            value: 1,
+          },
+          {
+            label: "Washington",
+            value: 2,
+          },
+        ],
+      });
+    }).not.toThrow();
+  });
 });
