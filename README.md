@@ -70,8 +70,6 @@ select-pure/
 - [ ] React wrapper
 - [ ] Angular wrapper
 
-```MIT```
-
 ## License
 
 ```MIT```
