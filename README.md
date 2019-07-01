@@ -64,6 +64,14 @@ select-pure/
     └── select-pure.min.js
 ```
 
+## TODO
+
+- [ ] Callback for updating select
+- [ ] React wrapper
+- [ ] Angular wrapper
+
+```MIT```
+
 ## License
 
 ```MIT```

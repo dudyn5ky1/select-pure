@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.1.16",
+  "version": "0.2.0",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -22,12 +22,13 @@
   "scripts": {
     "build:dist": "rollup -c",
     "build:lib": "babel -d lib src",
-    "build": "npm run build:dist && npm run build:lib",
+    "build": "yarn build:dist && yarn build:lib",
     "test": "jest --no-cache --coverage",
+    "test:update-coverage": "./scripts/update-coverage.sh",
     "lint:js": "./node_modules/eslint/bin/eslint.js src/",
     "lint:tests": "./node_modules/eslint/bin/eslint.js tests/",
-    "lint:all": "npm run lint:js && npm run lint:tests",
-    "prepublish": "npm run lint:all && npm run test && npm run build",
+    "lint:all": "yarn lint:js && yarn lint:tests",
+    "prepublish": "yarn lint:all && yarn test && yarn build && yarn test:update-coverage",
     "commit": "git-cz"
   },
   "repository": {
