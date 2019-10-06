@@ -779,4 +779,15 @@ describe("SelectPure component", () => {
       options[0].click();
     }).not.toThrow();
   });
+
+  test("doesn't throw an error when options are empty", () => {
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+
+    expect(() => {
+      new SelectPure(div, {
+        options: [],
+      });
+    }).not.toThrow();
+  });
 });

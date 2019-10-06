@@ -126,6 +126,10 @@ class SelectPure {
       return;
     }
 
+    if (!this._config.options.length) {
+      return;
+    }
+
     const option = this._config.value ?
       this._config.options.find(_option => _option.value.toString() === this._config.value) :
       this._config.options[0];
