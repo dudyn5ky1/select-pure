@@ -3,8 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![npm](https://img.shields.io/npm/dt/select-pure.svg)](https://www.npmjs.com/package/select-pure)
-[![Build Status](https://travis-ci.org/maksymddd/select-pure.svg?branch=master)](https://travis-ci.org/maksymddd/select-pure)
-[![codecov](https://codecov.io/gh/maksymddd/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/maksymddd/select-pure)
+[![Build Status](https://travis-ci.org/dudyn5ky1/select-pure.svg?branch=master)](https://travis-ci.org/dudyn5ky1/select-pure)
+[![codecov](https://codecov.io/gh/dudyn5ky1/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/dudyn5ky1/select-pure)
 
 ## Installation
 
@@ -63,6 +63,12 @@ select-pure/
 └── lib/
     └── select-pure.min.js
 ```
+
+## TODO
+
+- [ ] Callback for updating select
+- [ ] React wrapper
+- [ ] Angular wrapper
 
 ## License
 

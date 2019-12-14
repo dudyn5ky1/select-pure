@@ -1,11 +1,11 @@
 {
   "name": "select-pure",
-  "version": "0.1.15",
+  "version": "0.2.1",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
-    "email": "maksymddd@gmail.com",
-    "url": "https://github.com/maksymddd"
+    "email": "hello@dudynskyi.com",
+    "url": "https://github.com/dudyn5ky1"
   },
   "keywords": [
     "javascript",
@@ -22,17 +22,18 @@
   "scripts": {
     "build:dist": "rollup -c",
     "build:lib": "babel -d lib src",
-    "build": "npm run build:dist && npm run build:lib",
+    "build": "yarn build:dist && yarn build:lib",
     "test": "jest --no-cache --coverage",
+    "test:update-coverage": "./scripts/update-coverage.sh",
     "lint:js": "./node_modules/eslint/bin/eslint.js src/",
     "lint:tests": "./node_modules/eslint/bin/eslint.js tests/",
-    "lint:all": "npm run lint:js && npm run lint:tests",
-    "prepublish": "npm run lint:all && npm run test && npm run build",
+    "lint:all": "yarn lint:js && yarn lint:tests",
+    "prepublish": "yarn lint:all && yarn test && yarn build && yarn test:update-coverage",
     "commit": "git-cz"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/maksymddd/select-pure.git"
+    "url": "git://github.com/dudyn5ky1/select-pure.git"
   },
   "babel": {
     "presets": [
@@ -58,7 +59,8 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "testURL": "http://localhost"
   },
   "pre-commit": [
     "lint:all",
@@ -74,7 +76,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-latest": "^6.24.1",
     "codecov": "^3.0.1",
-    "commitizen": "^2.9.6",
+    "commitizen": "^3.1.1",
     "cz-conventional-changelog": "^2.1.0",
     "eslint-config-hackerspot": "^1.0.0",
     "jest": "^22.4.3",
