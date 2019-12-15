@@ -1,4 +1,4 @@
-import Element from "./../../src/components/Element.js";
+import Element from "./../Element.js";
 
 describe("Element component", () => {
   const defaultAttributes = {

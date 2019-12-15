@@ -160,7 +160,8 @@ class SelectPure {
         class: "select-pure__selected-label",
         textContent: _option.label,
       });
-      const icon = new Element("i", {
+      const icon = new Element(this._config.inlineIcon ?
+        this._config.inlineIcon.cloneNode(true) : "i", {
         class: this._config.icon,
         value: _option.value,
       });
