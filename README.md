@@ -47,6 +47,7 @@ new SelectPure(element, config);
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
 | icon | false | String | If specified - `<i></i>` will be inserted inside `select-pure__selected-label`. Works only with `multiple` option set to `true`. |
+| inlineIcon | false | HMTLElement | Custom cross icon for multiple select. |
 | onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
 

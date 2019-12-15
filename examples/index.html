@@ -15,6 +15,9 @@
       <h3>Multiselect:</h3>
       <span class="multi-select"></span>
 
+      <h3>Multiselect with custom icon:</h3>
+      <span class="multi-select-custom"></span>
+
       <h3>Autocomplete:</h3>
       <span class="autocomplete-select"></span>
     </div>
@@ -65,6 +68,38 @@
         value: ["NY", "CA"],
         multiple: true,
         icon: "fa fa-times",
+        onChange: value => { console.log(value); },
+      });
+
+
+      var customIcon = document.createElement('img');
+      customIcon.src = './icon.svg';
+      var customIconMulti = new SelectPure(".multi-select-custom", {
+        options: [
+          {
+            label: "New York",
+            value: "NY",
+          },
+          {
+            label: "Washington",
+            value: "WA",
+          },
+          {
+            label: "California",
+            value: "CA",
+          },
+          {
+            label: "New Jersey",
+            value: "NJ",
+          },
+          {
+            label: "North Carolina",
+            value: "NC",
+          },
+        ],
+        value: ["NY", "CA"],
+        multiple: true,
+        inlineIcon: customIcon,
         onChange: value => { console.log(value); },
       });
 
@@ -181,11 +216,13 @@
       }
 
       .select-pure__selected-label {
+        align-items: 'center';
         background: #5e6264;
         border-radius: 4px;
         color: #fff;
         cursor: initial;
-        display: inline-block;
+        display: inline-flex;
+        justify-content: 'center';
         margin: 5px 10px 5px 0;
         padding: 3px 7px;
       }
@@ -198,6 +235,14 @@
         cursor: pointer;
         display: inline-block;
         margin-left: 7px;
+      }
+
+      .select-pure__selected-label img {
+        cursor: pointer;
+        display: inline-block;
+        height: 18px;
+        margin-left: 7px;
+        width: 14px;
       }
 
       .select-pure__selected-label i:hover {
