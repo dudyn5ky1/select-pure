@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -79,8 +79,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-latest": "^6.24.1",
     "codecov": "^3.0.1",
-    "commitizen": "^3.1.1",
-    "cz-conventional-changelog": "^2.1.0",
+    "commitizen": "4.0.3",
+    "cz-conventional-changelog": "3.0.2",
     "eslint-config-hackerspot": "^1.0.0",
     "jest": "23.6.0",
     "pre-commit": "^1.2.2",
@@ -93,7 +93,8 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-conventional-changelog",
+      "defaultScope": "general"
     }
   }
 }
