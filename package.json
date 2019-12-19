@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -60,7 +60,10 @@
   "jest": {
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
-    "testURL": "http://localhost"
+    "testURL": "http://localhost",
+    "testPathIgnorePatterns": [
+      "lib/"
+    ]
   },
   "pre-commit": [
     "lint:all",

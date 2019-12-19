@@ -39,6 +39,7 @@
             value: 3,
           },
         ],
+        placeholder: "-Please select-",
         onChange: value => { console.log(value); },
       });
 
@@ -65,12 +66,11 @@
             value: "NC",
           },
         ],
-        value: ["NY", "CA"],
         multiple: true,
         icon: "fa fa-times",
+        placeholder: "-Please select-",
         onChange: value => { console.log(value); },
       });
-
 
       var customIcon = document.createElement('img');
       customIcon.src = './icon.svg';
@@ -260,6 +260,10 @@
         outline: none;
         padding: 10px;
         width: 100%;
+      }
+
+      .select-pure__placeholder--hidden {
+        display: none;
       }
     </style>
   </body>

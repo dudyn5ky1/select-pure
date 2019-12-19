@@ -141,7 +141,7 @@ describe("SelectPure component", () => {
       expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
     });
 
-    it("sets first option as selected when value is not provided", () => {
+    it("displays placeholder when value is not provided", () => {
       const div = document.createElement("div");
       document.body.appendChild(div);
 
@@ -157,14 +157,15 @@ describe("SelectPure component", () => {
             value: "UA",
           },
         ],
+        placeholder: "placeholder text",
       });
 
-      const selectedOption = document.querySelectorAll(".select-pure__select .select-pure__label");
-      expect(selectedOption.length).toBe(1);
-      expect(selectedOption[0].textContent).toBe("Poland");
+      const placeholder = document.querySelectorAll(".select-pure__select .select-pure__placeholder");
+      expect(placeholder.length).toBe(1);
+      expect(placeholder[0].textContent).toBe("placeholder text");
 
       const options = document.querySelectorAll(".select-pure__select .select-pure__option");
-      expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
+      expect(options[0].classList.contains("select-pure__option--selected")).toBe(false);
       expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
     });
 
@@ -172,7 +173,7 @@ describe("SelectPure component", () => {
       const div = document.createElement("div");
       document.body.appendChild(div);
 
-      new SelectPure(div, {
+      const select = new SelectPure(div, {
         options: [
           {
             label: "Poland",
@@ -185,6 +186,8 @@ describe("SelectPure component", () => {
         ],
         value: "UA",
       });
+
+      expect(select.value()).toEqual("UA");
 
       const selectedOption = document.querySelectorAll(".select-pure__select .select-pure__label");
       expect(selectedOption.length).toBe(1);
@@ -199,7 +202,7 @@ describe("SelectPure component", () => {
       const div = document.createElement("div");
       document.body.appendChild(div);
 
-      new SelectPure(div, {
+      const select = new SelectPure(div, {
         options: [
           {
             label: "Poland",
@@ -213,12 +216,16 @@ describe("SelectPure component", () => {
         value: "UA",
       });
 
+      expect(select.value()).toEqual("UA");
+
       const selectNode = document.querySelector(".select-pure__select");
       const options = document.querySelectorAll(".select-pure__select .select-pure__option");
 
       selectNode.click();
 
       options[0].click();
+
+      expect(select.value()).toEqual("PL");
 
       expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
       expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
@@ -368,7 +375,6 @@ describe("SelectPure component", () => {
             value: "UA",
           },
         ],
-        value: ["UA"],
         multiple: true,
         onChange: mockedOnChange,
       });
@@ -385,7 +391,7 @@ describe("SelectPure component", () => {
       options[0].click();
 
       expect(mockedOnChange.mock.calls.length).toBe(1);
-      expect(mockedOnChange.mock.calls[0][0]).toEqual(["UA", "PL"]);
+      expect(mockedOnChange.mock.calls[0][0]).toEqual(["PL"]);
     });
 
     it("properly renders", () => {
@@ -615,7 +621,7 @@ describe("SelectPure component", () => {
   });
 
   describe("autocomplete", () => {
-    it("properly renderd autocomplete select", () => {
+    it("properly renders autocomplete select", () => {
       const div = document.createElement("div");
       document.body.appendChild(div);
 

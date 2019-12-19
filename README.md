@@ -50,6 +50,13 @@ new SelectPure(element, config);
 | inlineIcon | false | HMTLElement | Custom cross icon for multiple select. |
 | onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
+| placeholder | false | String | Placeholder for cases when value is not selected by default. |
+
+### API
+
+| Method | Description |
+| --- | --- |
+| value() | Returns currently selected value. |
 
 ### Example
 
