@@ -59,12 +59,6 @@ new SelectPure(element, config);
 | --- | --- |
 | value() | Returns currently selected value. |
 
-### Example
-
-```javascript
-const form = new FormPure(".form-wrapper", {});
-```
-
 ## Structure
 
 ```
