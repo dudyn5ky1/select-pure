@@ -1,5 +1,20 @@
 import SelectPure from "./../index.js";
 
+const mockedClassNames = {
+  select: "select",
+  dropdownShown: "select-dropdownShown",
+  multiselect: "select-multiselect",
+  label: "select-label",
+  placeholder: "select-placeholder",
+  dropdown: "select-dropdown",
+  option: "select-option",
+  autocompleteInput: "select-autocomplete",
+  selectedLabel: "select-selected-label",
+  selectedOption: "select-selected-option",
+  placeholderHidden: "select-placeholder",
+  optionHidden: "select-option-hidden",
+};
+
 describe("SelectPure component", () => {
   afterEach(() => {
     document.body.innerHTML = "";
@@ -23,26 +38,13 @@ describe("SelectPure component", () => {
             value: "PL",
           },
         ],
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelectorAll(".select-pure__select");
-      expect(selectNode.length).toBe(1);
-      const optionsWrapper = selectNode[0].querySelectorAll(".select-pure__options");
-      expect(optionsWrapper.length).toBe(1);
-      const options = optionsWrapper[0].querySelectorAll(".select-pure__option");
-      // eslint-disable-next-line no-magic-numbers
-      expect(options.length).toBe(2);
-      const option0 = options[0];
-      expect(option0.textContent).toEqual("Ukraine");
-      expect(option0.getAttribute("data-value")).toBe("UA");
-      expect(option0.getAttribute("data-disabled")).toBe("true");
-      const option1 = options[1];
-      expect(option1.textContent).toEqual("Poland");
-      expect(option1.getAttribute("data-value")).toBe("PL");
-      expect(option1.getAttribute("data-disabled")).toBe(null);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
-    it("renders select with options", () => {
+    it("renders select with disabled option", () => {
       const div = document.createElement("div");
       document.body.appendChild(div);
 
@@ -58,23 +60,10 @@ describe("SelectPure component", () => {
             value: "UA",
           },
         ],
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelectorAll(".select-pure__select");
-      expect(selectNode.length).toBe(1);
-      const optionsWrapper = selectNode[0].querySelectorAll(".select-pure__options");
-      expect(optionsWrapper.length).toBe(1);
-      const options = optionsWrapper[0].querySelectorAll(".select-pure__option");
-      // eslint-disable-next-line no-magic-numbers
-      expect(options.length).toBe(2);
-      const option0 = options[0];
-      expect(option0.textContent).toEqual("Poland");
-      expect(option0.getAttribute("data-value")).toBe("PL");
-      expect(option0.getAttribute("data-disabled")).toBe("true");
-      const option1 = options[1];
-      expect(option1.textContent).toEqual("Ukraine");
-      expect(option1.getAttribute("data-value")).toBe("UA");
-      expect(option1.getAttribute("data-disabled")).toBe(null);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("toggles on click", () => {
@@ -93,19 +82,20 @@ describe("SelectPure component", () => {
             value: "UA",
           },
         ],
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
-
-      selectNode.click();
-
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+      expect(selectNode).toMatchSnapshot();
 
       selectNode.click();
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+      expect(selectNode).toMatchSnapshot();
+
+      selectNode.click();
+
+      expect(selectNode).toMatchSnapshot();
     });
 
     it("closes on outside element click", () => {
@@ -126,19 +116,20 @@ describe("SelectPure component", () => {
             value: "UA",
           },
         ],
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+      expect(selectNode).toMatchSnapshot();
 
       selectNode.click();
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+      expect(selectNode).toMatchSnapshot();
 
       targetSpan.click();
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+      expect(selectNode).toMatchSnapshot();
     });
 
     it("displays placeholder when value is not provided", () => {
@@ -157,16 +148,11 @@ describe("SelectPure component", () => {
             value: "UA",
           },
         ],
+        classNames: mockedClassNames,
         placeholder: "placeholder text",
       });
 
-      const placeholder = document.querySelectorAll(".select-pure__select .select-pure__placeholder");
-      expect(placeholder.length).toBe(1);
-      expect(placeholder[0].textContent).toBe("placeholder text");
-
-      const options = document.querySelectorAll(".select-pure__select .select-pure__option");
-      expect(options[0].classList.contains("select-pure__option--selected")).toBe(false);
-      expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("sets option when value is provided", () => {
@@ -185,17 +171,11 @@ describe("SelectPure component", () => {
           },
         ],
         value: "UA",
+        classNames: mockedClassNames,
       });
 
       expect(select.value()).toEqual("UA");
-
-      const selectedOption = document.querySelectorAll(".select-pure__select .select-pure__label");
-      expect(selectedOption.length).toBe(1);
-      expect(selectedOption[0].textContent).toBe("Ukraine");
-
-      const options = document.querySelectorAll(".select-pure__select .select-pure__option");
-      expect(options[0].classList.contains("select-pure__option--selected")).toBe(false);
-      expect(options[1].classList.contains("select-pure__option--selected")).toBe(true);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("selects another value", () => {
@@ -214,22 +194,22 @@ describe("SelectPure component", () => {
           },
         ],
         value: "UA",
+        classNames: mockedClassNames,
       });
 
       expect(select.value()).toEqual("UA");
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       selectNode.click();
 
       options[0].click();
 
       expect(select.value()).toEqual("PL");
-
-      expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
-      expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("calls onChange callback on click", () => {
@@ -251,10 +231,13 @@ describe("SelectPure component", () => {
         ],
         value: "UA",
         onChange: mockedOnChange,
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       expect(mockedOnChange.mock.calls.length).toBe(0);
 
@@ -298,11 +281,14 @@ describe("SelectPure component", () => {
         value: ["NY"],
         multiple: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
-      const dropdown = document.querySelector(".select-pure__options");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
+      const dropdown = document.querySelector(`.${mockedClassNames.dropdown}`);
 
       selectNode.style.height = "24px";
 
@@ -330,15 +316,18 @@ describe("SelectPure component", () => {
             value: 2,
           },
         ],
+        classNames: mockedClassNames,
       });
 
       expect(method).not.toThrow();
 
-      const selectNode = document.querySelector(".select-pure__select");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
 
       selectNode.click();
 
-      const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       expect(() => {
         options[0].click();
@@ -377,10 +366,13 @@ describe("SelectPure component", () => {
         ],
         multiple: true,
         onChange: mockedOnChange,
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const options = document.querySelectorAll(".select-pure__select .select-pure__option");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       expect(mockedOnChange.mock.calls.length).toBe(0);
 
@@ -424,43 +416,10 @@ describe("SelectPure component", () => {
         value: ["NY", "CA"],
         multiple: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-
-      expect(selectNode.classList.contains("select-pure__select--multiple")).toBe(true);
-
-      const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(options.length).toBe(5);
-
-      expect(options[0].classList.contains("select-pure__option--selected")).toBe(true);
-      expect(options[1].classList.contains("select-pure__option--selected")).toBe(false);
-      expect(options[2].classList.contains("select-pure__option--selected")).toBe(true);
-      expect(options[3].classList.contains("select-pure__option--selected")).toBe(false);
-      expect(options[4].classList.contains("select-pure__option--selected")).toBe(false);
-
-      const label = document.querySelector(".select-pure__select .select-pure__label");
-
-      const selectedLabels = label.querySelectorAll(".select-pure__selected-label");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(selectedLabels.length).toBe(2);
-
-      const label0 = selectedLabels[0];
-      expect(label0.textContent).toBe("New York");
-
-      const icon0 = label0.querySelectorAll("i");
-      expect(icon0.length).toBe(1);
-      expect(icon0[0].classList.contains("mocked-icon")).toBe(true);
-
-      const label1 = selectedLabels[1];
-      expect(label1.textContent).toBe("California");
-
-      const icon1 = label1.querySelectorAll("i");
-      expect(icon1.length).toBe(1);
-      expect(icon1[0].classList.contains("mocked-icon")).toBe(true);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("selects new option on click", () => {
@@ -493,36 +452,19 @@ describe("SelectPure component", () => {
         value: ["NY"],
         multiple: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-
-      const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       selectNode.click();
 
       options[4].click();
 
-      const label = document.querySelector(".select-pure__select .select-pure__label");
-
-      const selectedLabels = label.querySelectorAll(".select-pure__selected-label");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(selectedLabels.length).toBe(2);
-
-      const label0 = selectedLabels[0];
-      expect(label0.textContent).toBe("New York");
-
-      const icon0 = label0.querySelectorAll("i");
-      expect(icon0.length).toBe(1);
-      expect(icon0[0].classList.contains("mocked-icon")).toBe(true);
-
-      const label1 = selectedLabels[1];
-      expect(label1.textContent).toBe("North Carolina");
-
-      const icon1 = label1.querySelectorAll("i");
-      expect(icon1.length).toBe(1);
-      expect(icon1[0].classList.contains("mocked-icon")).toBe(true);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("unselects new option on icon click", () => {
@@ -555,39 +497,31 @@ describe("SelectPure component", () => {
         value: ["NY"],
         multiple: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-
-      const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       selectNode.click();
-
       options[4].click();
 
-      const label = document.querySelector(".select-pure__select .select-pure__label");
+      expect(document.body.innerHTML).toMatchSnapshot();
 
-      let selectedLabels = label.querySelectorAll(".select-pure__selected-label");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(selectedLabels.length).toBe(2);
-
-      selectedLabels[0].querySelector("i").click();
-
-      selectedLabels = label.querySelectorAll(".select-pure__selected-label");
-
-      expect(selectedLabels.length).toBe(1);
-      expect(selectedLabels[0].textContent).toBe("North Carolina");
-
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+      const label = document.querySelector(
+        `.${mockedClassNames.select} .${mockedClassNames.label}`
+      );
+      const selectedLabels = label.querySelectorAll(`.${mockedClassNames.selectedLabel}`);
 
       selectedLabels[0].querySelector("i").click();
 
-      selectedLabels = label.querySelectorAll(".select-pure__selected-label");
+      expect(document.body.innerHTML).toMatchSnapshot();
 
-      expect(selectedLabels.length).toBe(0);
+      selectedLabels[0].querySelector("i").click();
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(false);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("properly renders with custom icon", () => {
@@ -614,6 +548,7 @@ describe("SelectPure component", () => {
         value: ["NY", "CA"],
         multiple: true,
         inlineIcon,
+        classNames: mockedClassNames,
       });
 
       expect(document.body.innerHTML).toMatchSnapshot();
@@ -652,21 +587,10 @@ describe("SelectPure component", () => {
         multiple: true,
         autocomplete: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-
-      expect(selectNode.classList.contains("select-pure__select--multiple")).toBe(true);
-
-      const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(options.length).toBe(5);
-
-      const autocomplete = document.querySelectorAll(".select-pure__select--multiple .select-pure__options input");
-
-      expect(autocomplete.length).toBe(1);
-      expect(autocomplete[0].classList.contains("select-pure__autocomplete")).toBe(true);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("doesn't close dropdown on input click", () => {
@@ -700,18 +624,21 @@ describe("SelectPure component", () => {
         multiple: true,
         autocomplete: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const autocomplete = document.querySelector(
+        `.${mockedClassNames.autocompleteInput}`
+      );
 
       selectNode.click();
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+      expect(selectNode).toMatchSnapshot();
 
       autocomplete.click();
 
-      expect(selectNode.classList.contains("select-pure__select--opened")).toBe(true);
+      expect(selectNode).toMatchSnapshot();
     });
 
     it("focuses autocomplete input on dropdown opening", () => {
@@ -745,11 +672,16 @@ describe("SelectPure component", () => {
         multiple: true,
         autocomplete: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
-      const options = document.querySelectorAll(".select-pure__select--multiple .select-pure__option");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const autocomplete = document.querySelector(
+        `.${mockedClassNames.autocompleteInput}`
+      );
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`
+      );
 
       expect(document.activeElement).not.toEqual(autocomplete);
 
@@ -795,10 +727,13 @@ describe("SelectPure component", () => {
         multiple: true,
         autocomplete: true,
         icon: "mocked-icon",
+        classNames: mockedClassNames,
       });
 
-      const selectNode = document.querySelector(".select-pure__select");
-      const autocomplete = document.querySelector(".select-pure__select--multiple .select-pure__options input");
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const autocomplete = document.querySelector(
+        `.${mockedClassNames.autocompleteInput}`
+      );
 
       selectNode.click();
 
@@ -810,25 +745,12 @@ describe("SelectPure component", () => {
       autocomplete.value = "new";
       autocomplete.dispatchEvent(event);
 
-      let hiddenOptions = document.querySelectorAll(".select-pure__select--multiple .select-pure__option--hidden");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(hiddenOptions.length).toEqual(3);
-      expect(hiddenOptions[0].textContent).toBe("Washington");
-      expect(hiddenOptions[1].textContent).toBe("California");
-      expect(hiddenOptions[2].textContent).toBe("North Carolina");
+      expect(selectNode).toMatchSnapshot();
 
       autocomplete.value = "North";
       autocomplete.dispatchEvent(event);
 
-      hiddenOptions = document.querySelectorAll(".select-pure__select--multiple .select-pure__option--hidden");
-
-      // eslint-disable-next-line no-magic-numbers
-      expect(hiddenOptions.length).toEqual(4);
-      expect(hiddenOptions[0].textContent).toBe("New York");
-      expect(hiddenOptions[1].textContent).toBe("Washington");
-      expect(hiddenOptions[2].textContent).toBe("California");
-      expect(hiddenOptions[3].textContent).toBe("New Jersey");
+      expect(selectNode).toMatchSnapshot();
     });
   });
 });

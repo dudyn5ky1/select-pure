@@ -43,6 +43,7 @@ new SelectPure(element, config);
 | options | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`.  |
 | options[].value | true | String | Value of an option. |
 | options[].label | true | String | Label of an option. |
+| classNames | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 | options[].disabled | false | Boolean | `true` if option is disabled. `false` by default. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
@@ -57,12 +58,6 @@ new SelectPure(element, config);
 | Method | Description |
 | --- | --- |
 | value() | Returns currently selected value. |
-
-### Example
-
-```javascript
-const form = new FormPure(".form-wrapper", {});
-```
 
 ## Structure
 

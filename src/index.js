@@ -17,7 +17,13 @@ const CLASSES = {
 
 class SelectPure {
   constructor(element, config) {
-    this._config = { ...config };
+    this._config = {
+      ...config,
+      classNames: {
+        ...CLASSES,
+        ...config.classNames,
+      },
+    };
     this._state = {
       opened: false,
     };
@@ -44,12 +50,12 @@ class SelectPure {
     const element = typeof _element === "string" ? document.querySelector(_element) : _element;
 
     this._parent = new Element(element);
-    this._select = new Element("div", { class: CLASSES.select });
-    this._label = new Element("span", { class: CLASSES.label });
-    this._optionsWrapper = new Element("div", { class: CLASSES.dropdown });
+    this._select = new Element("div", { class: this._config.classNames.select });
+    this._label = new Element("span", { class: this._config.classNames.label });
+    this._optionsWrapper = new Element("div", { class: this._config.classNames.dropdown });
 
     if (this._config.multiple) {
-      this._select.addClass(CLASSES.multiselect);
+      this._select.addClass(this._config.classNames.multiselect);
     }
 
     this._options = this._generateOptions();
@@ -60,7 +66,7 @@ class SelectPure {
     this._parent.append(this._select.get());
     this._placeholder = new Element("span",
       {
-        class: CLASSES.placeholder,
+        class: this._config.classNames.placeholder,
         textContent: this._config.placeholder,
       }
     );
@@ -69,7 +75,7 @@ class SelectPure {
 
   _generateOptions() {
     if (this._config.autocomplete) {
-      this._autocomplete = new Element("input", { class: CLASSES.autocompleteInput, type: "text" });
+      this._autocomplete = new Element("input", { class: this._config.classNames.autocompleteInput, type: "text" });
       this._autocomplete.addEventListener("input", this._boundSortOptions);
 
       this._optionsWrapper.append(this._autocomplete.get());
@@ -77,7 +83,7 @@ class SelectPure {
 
     return this._config.options.map(_option => {
       const option = new Element("div", {
-        class: CLASSES.option,
+        class: this._config.classNames.option,
         value: _option.value,
         textContent: _option.label,
         disabled: _option.disabled,
@@ -92,7 +98,7 @@ class SelectPure {
   _handleClick(event) {
     event.stopPropagation();
 
-    if (event.target.className === CLASSES.autocompleteInput) {
+    if (event.target.className === this._config.classNames.autocompleteInput) {
       return;
     }
 
@@ -103,7 +109,7 @@ class SelectPure {
         this._setValue(option.get().getAttribute("data-value"), true);
       }
 
-      this._select.removeClass(CLASSES.dropdownShown);
+      this._select.removeClass(this._config.classNames.dropdownShown);
       this._body.removeEventListener("click", this._boundHandleClick);
       this._select.addEventListener("click", this._boundHandleClick);
 
@@ -115,7 +121,7 @@ class SelectPure {
       return;
     }
 
-    this._select.addClass(CLASSES.dropdownShown);
+    this._select.addClass(this._config.classNames.dropdownShown);
     this._body.addEventListener("click", this._boundHandleClick);
     this._select.removeEventListener("click", this._boundHandleClick);
 
@@ -135,9 +141,9 @@ class SelectPure {
     }
 
     this._options.forEach(_option => {
-      _option.removeClass(CLASSES.selectedOption);
+      _option.removeClass(this._config.classNames.selectedOption);
     });
-    this._placeholder.removeClass(CLASSES.placeholderHidden);
+    this._placeholder.removeClass(this._config.classNames.placeholderHidden);
 
     if (this._config.multiple) {
       const options = this._config.value.map(_value => {
@@ -146,13 +152,13 @@ class SelectPure {
           _option => _option.get().getAttribute("data-value") === option.value.toString()
         );
 
-        optionNode.addClass(CLASSES.selectedOption);
+        optionNode.addClass(this._config.classNames.selectedOption);
 
         return option;
       });
 
       if (options.length) {
-        this._placeholder.addClass(CLASSES.placeholderHidden);
+        this._placeholder.addClass(this._config.classNames.placeholderHidden);
       }
       this._selectOptions(options, manual);
 
@@ -167,8 +173,8 @@ class SelectPure {
       _option => _option.get().getAttribute("data-value") === option.value.toString()
     );
 
-    optionNode.addClass(CLASSES.selectedOption);
-    this._placeholder.addClass(CLASSES.placeholderHidden);
+    optionNode.addClass(this._config.classNames.selectedOption);
+    this._placeholder.addClass(this._config.classNames.placeholderHidden);
     this._selectOption(option, manual);
   }
 
@@ -187,7 +193,7 @@ class SelectPure {
 
     this._icons = options.map(_option => {
       const selectedLabel = new Element("span", {
-        class: CLASSES.selectedLabel,
+        class: this._config.classNames.selectedLabel,
         textContent: _option.label,
       });
       const icon = new Element(this._config.inlineIcon ?
@@ -229,10 +235,10 @@ class SelectPure {
   _sortOptions(event) {
     this._options.forEach(_option => {
       if (!_option.get().textContent.toLowerCase().startsWith(event.target.value.toLowerCase())) {
-        _option.addClass(CLASSES.optionHidden);
+        _option.addClass(this._config.classNames.optionHidden);
         return;
       }
-      _option.removeClass(CLASSES.optionHidden);
+      _option.removeClass(this._config.classNames.optionHidden);
     });
   }
 }
