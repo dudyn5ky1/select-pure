@@ -44,7 +44,6 @@ new SelectPure(element, config);
 | options | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`.  |
 | options[].value | true | String | Value of an option. |
 | options[].label | true | String | Label of an option. |
-| classNames | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 | options[].disabled | false | Boolean | `true` if option is disabled. `false` by default. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
@@ -53,12 +52,13 @@ new SelectPure(element, config);
 | onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
 | placeholder | false | String | Placeholder for cases when value is not selected by default. |
+| *classNames* | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 
 #### classNames
 
 In the next major version default classNames will be removed and this property will become required.
 
-| Property | Required | Description |
+| Property | Default value | Description |
 | --- | --- | --- |
 | select | "select-pure__select" | Wrapper div. |
 | dropdownShown | "select-pure__select--opened" | Applied to the wrapper when dropdown is shown. |
