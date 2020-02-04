@@ -100,6 +100,7 @@ select-pure/
 - [ ] API method for updating select.
 - [ ] Mobile select support.
 - [ ] Drop support of default classNames (starting from 1.x.x versions).
+- [ ] Drop support of default icon, support only inline SVG instead. (starting from 1.x.x versions).
 
 ## License
 
