@@ -41,14 +41,14 @@ new SelectPure(element, config);
 
 | Property | Required | Type | Description |
 | --- | --- | --- | --- |
-| options | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`. Properties for the single option object are listed below. |
+| <a name="option">options</a> | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`. Properties for the single option object are listed below. |
+| <a name="classNames">classNames</a> | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
 | icon | false | String | If specified - `<i></i>` will be inserted inside `select-pure__selected-label`. Works only with `multiple` option set to `true`. |
 | inlineIcon | false | HMTLElement | Custom cross icon for multiple select. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
 | placeholder | false | String | Placeholder for cases when value is not selected by default. |
-| *classNames* | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 | onChange | false | Function | Callback that returns value when option is being selected. Returns `Array` if `multiple` is `true`. |
 
 #### option
