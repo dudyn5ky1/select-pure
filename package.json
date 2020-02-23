@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -78,7 +78,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-latest": "^6.24.1",
-    "codecov": "^3.0.1",
+    "codecov": "3.6.5",
     "commitizen": "4.0.3",
     "cz-conventional-changelog": "3.0.2",
     "eslint-config-hackerspot": "^1.0.0",
