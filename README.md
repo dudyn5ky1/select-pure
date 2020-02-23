@@ -1,7 +1,8 @@
 # SelectPure JavaScript component
 
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
-[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/select-pure.svg)](https://www.npmjs.com/package/select-pure)
+[![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/bundle.min.js)
+[![brotli size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=brotli&label=brotli)](https://unpkg.com/select-pure/dist/bundle.min.js)
 [![npm](https://img.shields.io/npm/dt/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![Build Status](https://travis-ci.org/dudyn5ky1/select-pure.svg?branch=master)](https://travis-ci.org/dudyn5ky1/select-pure)
 [![codecov](https://codecov.io/gh/dudyn5ky1/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/dudyn5ky1/select-pure)
@@ -40,24 +41,31 @@ new SelectPure(element, config);
 
 | Property | Required | Type | Description |
 | --- | --- | --- | --- |
-| options | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`.  |
-| options[].value | true | String | Value of an option. |
-| options[].label | true | String | Label of an option. |
-| classNames | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
-| options[].disabled | false | Boolean | `true` if option is disabled. `false` by default. |
+| [option](#option) | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`. Properties for the single option object are listed below. |
+| [classNames](#classNames) | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
 | icon | false | String | If specified - `<i></i>` will be inserted inside `select-pure__selected-label`. Works only with `multiple` option set to `true`. |
 | inlineIcon | false | HMTLElement | Custom cross icon for multiple select. |
-| onChange | false | Function | Return value on select. Return `Array` if `multiple` is `true`. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
 | placeholder | false | String | Placeholder for cases when value is not selected by default. |
+| onChange | false | Function | Callback that returns value when option is being selected. Returns `Array` if `multiple` is `true`. |
+
+#### option
+
+Properties of a single option passed to the options Array in configuration.
+
+| Property | Required | Type | Description |
+| --- | --- | --- | --- |
+| value | true | String | Value of an option. |
+| label | true | String | Label of an option. |
+| disabled | false | Boolean | `true` if option is disabled. `false` by default. |
 
 #### classNames
 
 In the next major version default classNames will be removed and this property will become required.
 
-| Property | Required | Description |
+| Property | Default value | Description |
 | --- | --- | --- |
 | select | "select-pure__select" | Wrapper div. |
 | dropdownShown | "select-pure__select--opened" | Applied to the wrapper when dropdown is shown. |
@@ -89,9 +97,10 @@ select-pure/
 
 ## TODO
 
-- [ ] Callback for updating select
-- [ ] React wrapper
-- [ ] Angular wrapper
+- [ ] API method for updating select.
+- [ ] Mobile select support.
+- [ ] Drop support of default classNames (starting from 1.x.x versions).
+- [ ] Drop support of default icon, support only inline SVG instead. (starting from 1.x.x versions).
 
 ## License
 
