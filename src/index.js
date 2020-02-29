@@ -1,4 +1,4 @@
-import Element from "./components/Element";
+import Element from "./components/Element.js";
 
 const CLASSES = {
   select: "select-pure__select",
@@ -18,6 +18,7 @@ const CLASSES = {
 class SelectPure {
   constructor(element, config) {
     this._config = {
+      autocompleteMatchLabel: (label, search) => label.toLowerCase().startsWith(search.toLowerCase()),
       ...config,
       classNames: {
         ...CLASSES,
@@ -44,6 +45,9 @@ class SelectPure {
 
   value() {
     return this._config.value;
+  }
+  reset() {
+    this._setValue();
   }
 
   _create(_element) {
@@ -133,6 +137,9 @@ class SelectPure {
   }
 
   _setValue(value, manual, unselected) {
+    if (!value) { 
+      this._config.value = this._config.multiple ? [] : undefined;
+    }
     if (value && !unselected) {
       this._config.value = this._config.multiple ? [...this._config.value || [], value] : value;
     }
@@ -234,7 +241,9 @@ class SelectPure {
 
   _sortOptions(event) {
     this._options.forEach(_option => {
-      if (!_option.get().textContent.toLowerCase().startsWith(event.target.value.toLowerCase())) {
+      const label = _option.get().textContent;
+      const search = event.target.value;
+      if (!this._config.autocompleteMatchLabel(label, search)) {
         _option.addClass(this._config.classNames.optionHidden);
         return;
       }

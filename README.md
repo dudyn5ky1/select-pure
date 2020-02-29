@@ -45,6 +45,7 @@ new SelectPure(element, config);
 | [classNames](#classNames) | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
 | multiple | false | Boolean | `true` if multiple options can be selected. |
 | autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
+| autocompleteMatchLabel | false | Function | Autocomplete matching function. Default uses `startsWith`, but if you rather match any substring use `(label, search) => RegExp(search,'i').test(value)` |
 | icon | false | String | If specified - `<i></i>` will be inserted inside `select-pure__selected-label`. Works only with `multiple` option set to `true`. |
 | inlineIcon | false | HMTLElement | Custom cross icon for multiple select. |
 | value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
@@ -86,6 +87,7 @@ In the next major version default classNames will be removed and this property w
 | Method | Description |
 | --- | --- |
 | value() | Returns currently selected value. |
+| reset() | Unselects all. |
 
 ## Structure
 
