@@ -42,10 +42,17 @@ class SelectPure {
     this._setValue();
   }
 
+  // Public API
   value() {
     return this._config.value;
   }
 
+  reset() {
+    this._config.value = this._config.multiple ? [] : null;
+    this._setValue();
+  }
+
+  // Private methods
   _create(_element) {
     const element = typeof _element === "string" ? document.querySelector(_element) : _element;
 
@@ -173,6 +180,10 @@ class SelectPure {
       _option => _option.get().getAttribute("data-value") === option.value.toString()
     );
 
+    if (!this._config.value) {
+      this._label.setText("");
+      return;
+    }
     optionNode.addClass(this._config.classNames.selectedOption);
     this._placeholder.addClass(this._config.classNames.placeholderHidden);
     this._selectOption(option, manual);

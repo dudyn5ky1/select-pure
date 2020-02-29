@@ -344,6 +344,46 @@ describe("SelectPure component", () => {
         });
       }).not.toThrow();
     });
+
+    it("resets selected value", () => {
+      const div = document.createElement("div");
+      document.body.appendChild(div);
+
+      const select = new SelectPure(div, {
+        options: [
+          {
+            label: "New York",
+            value: "NY",
+          },
+          {
+            label: "Washington",
+            value: "WA",
+          },
+          {
+            label: "California",
+            value: "CA",
+          },
+          {
+            label: "New Jersey",
+            value: "NJ",
+          },
+          {
+            label: "North Carolina",
+            value: "NC",
+          },
+        ],
+        value: "NY",
+        icon: "mocked-icon",
+        classNames: mockedClassNames,
+      });
+
+      expect(select.value()).toEqual("NY");
+
+      select.reset();
+
+      expect(select.value()).toEqual(null);
+      expect(document.body.innerHTML).toMatchSnapshot();
+    });
   });
 
   describe("multiselect", () => {
@@ -694,6 +734,40 @@ describe("SelectPure component", () => {
       selectNode.click();
 
       expect(document.activeElement).toEqual(autocomplete);
+    });
+
+    it("resets selected state", () => {
+      const div = document.createElement("div");
+      document.body.appendChild(div);
+
+      const select = new SelectPure(div, {
+        options: [
+          {
+            label: "New York",
+            value: "NY",
+          },
+          {
+            label: "California",
+            value: "CA",
+          },
+          {
+            label: "North Carolina",
+            value: "NC",
+          },
+        ],
+        value: ["NY", "CA"],
+        multiple: true,
+        autocomplete: true,
+        icon: "mocked-icon",
+        classNames: mockedClassNames,
+      });
+
+      expect(select.value()).toEqual(["NY", "CA"]);
+
+      select.reset();
+
+      expect(select.value()).toEqual([]);
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it("hides not matching options on input change", () => {
