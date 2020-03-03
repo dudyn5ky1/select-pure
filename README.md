@@ -87,7 +87,6 @@ In the next major version default classNames will be removed and this property w
 | Method | Description |
 | --- | --- |
 | value() | Returns currently selected value. |
-| reset() | Unselects all. |
 
 ## Structure
 

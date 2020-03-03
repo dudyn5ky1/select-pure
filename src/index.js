@@ -46,9 +46,6 @@ class SelectPure {
   value() {
     return this._config.value;
   }
-  reset() {
-    this._setValue();
-  }
 
   _create(_element) {
     const element = typeof _element === "string" ? document.querySelector(_element) : _element;
@@ -137,9 +134,6 @@ class SelectPure {
   }
 
   _setValue(value, manual, unselected) {
-    if (!value) { 
-      this._config.value = this._config.multiple ? [] : undefined;
-    }
     if (value && !unselected) {
       this._config.value = this._config.multiple ? [...this._config.value || [], value] : value;
     }
