@@ -207,15 +207,18 @@ class SelectPure {
         class: this._config.classNames.selectedLabel,
         textContent: _option.label,
       });
+      const iconContainer = new Element("span", {
+        value: _option.value
+      });
       const icon = new Element(this._config.inlineIcon ?
         this._config.inlineIcon.cloneNode(true) : "i", {
-        class: this._config.icon,
-        value: _option.value,
+        class: this._config.icon
       });
 
-      icon.addEventListener("click", this._boundUnselectOption);
+      iconContainer.addEventListener("click", this._boundUnselectOption);
 
-      selectedLabel.append(icon.get());
+      iconContainer.append(icon.get())
+      selectedLabel.append(iconContainer.get());
       this._label.append(selectedLabel.get());
 
       return icon.get();
@@ -233,7 +236,7 @@ class SelectPure {
 
   _unselectOption(event) {
     const newValue = [...this._config.value];
-    const index = newValue.indexOf(event.target.getAttribute("data-value"));
+    const index = newValue.indexOf(event.currentTarget.getAttribute("data-value"));
 
     // eslint-disable-next-line no-magic-numbers
     if (index !== -1) {
