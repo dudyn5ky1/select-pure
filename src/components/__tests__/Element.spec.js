@@ -174,14 +174,15 @@ describe("Element component", () => {
   });
 
   test("focuses", () => {
+    const focusSpy = jest.fn();
+    HTMLElement.prototype.focus = focusSpy;
+
     const input = new Element("input");
 
-    expect(document.activeElement).not.toEqual(input.get());
+    expect(focusSpy).toHaveBeenCalledTimes(0);
 
-    const focusedInput = input.focus();
+    input.focus();
 
-    expect(focusedInput).toBeInstanceOf(Element);
-
-    expect(document.activeElement).toEqual(input.get());
+    expect(focusSpy).toHaveBeenCalledTimes(1);
   });
 });

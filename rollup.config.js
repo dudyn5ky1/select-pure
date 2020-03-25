@@ -1,8 +1,8 @@
 import babel from "rollup-plugin-babel";
-import eslint from "rollup-plugin-eslint";
-import uglify from "rollup-plugin-uglify";
-import resolve from "rollup-plugin-node-resolve";
-import commonjs from "rollup-plugin-commonjs";
+import { eslint } from "rollup-plugin-eslint";
+import { uglify } from "rollup-plugin-uglify";
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 
 export default {
   input: "src/index.js",
@@ -25,7 +25,10 @@ export default {
     commonjs(),
     babel({
       plugins: [
-        "transform-object-rest-spread",
+      	"@babel/plugin-proposal-object-rest-spread",
+      ],
+      presets: [
+	"@babel/env"
       ],
       babelrc: false,
     }),

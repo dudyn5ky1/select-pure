@@ -75,7 +75,7 @@ class SelectPure {
       {
         class: this._config.classNames.placeholder,
         textContent: this._config.placeholder,
-      }
+      },
     );
     this._select.append(this._placeholder.get());
   }
@@ -156,7 +156,7 @@ class SelectPure {
       const options = this._config.value.map(_value => {
         const option = this._config.options.find(_option => _option.value === _value);
         const optionNode = this._options.find(
-          _option => _option.get().getAttribute("data-value") === option.value.toString()
+          _option => _option.get().getAttribute("data-value") === option.value.toString(),
         );
 
         optionNode.addClass(this._config.classNames.selectedOption);
@@ -177,7 +177,7 @@ class SelectPure {
       this._config.options[0];
 
     const optionNode = this._options.find(
-      _option => _option.get().getAttribute("data-value") === option.value.toString()
+      _option => _option.get().getAttribute("data-value") === option.value.toString(),
     );
 
     if (!this._config.value) {

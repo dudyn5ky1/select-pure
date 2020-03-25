@@ -201,7 +201,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       selectNode.click();
@@ -236,7 +236,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       expect(mockedOnChange.mock.calls.length).toBe(0);
@@ -286,7 +286,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
       const dropdown = document.querySelector(`.${mockedClassNames.dropdown}`);
 
@@ -326,7 +326,7 @@ describe("SelectPure component", () => {
       selectNode.click();
 
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       expect(() => {
@@ -411,7 +411,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       expect(mockedOnChange.mock.calls.length).toBe(0);
@@ -497,7 +497,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       selectNode.click();
@@ -542,7 +542,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       selectNode.click();
@@ -551,7 +551,7 @@ describe("SelectPure component", () => {
       expect(document.body.innerHTML).toMatchSnapshot();
 
       const label = document.querySelector(
-        `.${mockedClassNames.select} .${mockedClassNames.label}`
+        `.${mockedClassNames.select} .${mockedClassNames.label}`,
       );
       const selectedLabels = label.querySelectorAll(`.${mockedClassNames.selectedLabel}`);
 
@@ -669,7 +669,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const autocomplete = document.querySelector(
-        `.${mockedClassNames.autocompleteInput}`
+        `.${mockedClassNames.autocompleteInput}`,
       );
 
       selectNode.click();
@@ -717,10 +717,10 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const autocomplete = document.querySelector(
-        `.${mockedClassNames.autocompleteInput}`
+        `.${mockedClassNames.autocompleteInput}`,
       );
       const options = document.querySelectorAll(
-        `.${mockedClassNames.select} .${mockedClassNames.option}`
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
       );
 
       expect(document.activeElement).not.toEqual(autocomplete);
@@ -806,7 +806,7 @@ describe("SelectPure component", () => {
 
       const selectNode = document.querySelector(`.${mockedClassNames.select}`);
       const autocomplete = document.querySelector(
-        `.${mockedClassNames.autocompleteInput}`
+        `.${mockedClassNames.autocompleteInput}`,
       );
 
       selectNode.click();
