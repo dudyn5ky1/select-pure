@@ -74,6 +74,7 @@ In the next major version default classNames will be removed and this property w
 | placeholder | "select-pure__placeholder" | Placeholder span. |
 | dropdown | "select-pure__options" | Options dropdown. |
 | option | "select-pure__option" | Single option. |
+| optionDisabled | "select-pure__option--disabled" | Single option. |
 | autocompleteInput | "select-pure__autocomplete" | Autocomplete input |
 | selectedLabel | "select-pure__selected-label" | Selected label for multiselect. |
 | selectedOption | "select-pure__option--selected" | Applied to option when selected. |
