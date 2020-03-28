@@ -25,6 +25,8 @@
       <span class="autocomplete-select"></span>
       <button onclick="resetAutocomplete()">Reset</button>
 
+      <h3>With disabled options:</h3>
+      <span class="disabled-options-select"></span>
     </div>
     <script src="./../dist/bundle.min.js"></script>
     <script>
@@ -276,6 +278,10 @@
         height: 44px;
         line-height: 25px;
         padding: 10px;
+      }
+
+      .select-pure__option--disabled {
+        color: #e4e4e4;
       }
 
       .select-pure__option--selected {

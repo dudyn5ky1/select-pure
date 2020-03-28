@@ -8,6 +8,7 @@ const mockedClassNames = {
   placeholder: "select-placeholder",
   dropdown: "select-dropdown",
   option: "select-option",
+  optionDisabled: "select-option__disabled",
   autocompleteInput: "select-autocomplete",
   selectedLabel: "select-selected-label",
   selectedOption: "select-selected-option",
@@ -209,6 +210,41 @@ describe("SelectPure component", () => {
       options[0].click();
 
       expect(select.value()).toEqual("PL");
+      expect(document.body.innerHTML).toMatchSnapshot();
+    });
+
+    it("doesn't select disabled option", () => {
+      const div = document.createElement("div");
+      document.body.appendChild(div);
+
+      const select = new SelectPure(div, {
+        options: [
+          {
+            label: "Poland",
+            value: "PL",
+            disabled: true,
+          },
+          {
+            label: "Ukraine",
+            value: "UA",
+          },
+        ],
+        value: "UA",
+        classNames: mockedClassNames,
+      });
+
+      expect(select.value()).toEqual("UA");
+
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
+      );
+
+      selectNode.click();
+
+      options[0].click();
+
+      expect(select.value()).toEqual("UA");
       expect(document.body.innerHTML).toMatchSnapshot();
     });
 
@@ -424,6 +460,45 @@ describe("SelectPure component", () => {
 
       expect(mockedOnChange.mock.calls.length).toBe(1);
       expect(mockedOnChange.mock.calls[0][0]).toEqual(["PL"]);
+    });
+
+    it("doesn't select disabled option", () => {
+      const div = document.createElement("div");
+      document.body.appendChild(div);
+
+      const mockedOnChange = jest.fn();
+
+      const select = new SelectPure(div, {
+        options: [
+          {
+            label: "Poland",
+            value: "PL",
+            disabled: true,
+          },
+          {
+            label: "Ukraine",
+            value: "UA",
+          },
+        ],
+        multiple: true,
+        onChange: mockedOnChange,
+        classNames: mockedClassNames,
+      });
+
+      const selectNode = document.querySelector(`.${mockedClassNames.select}`);
+      const options = document.querySelectorAll(
+        `.${mockedClassNames.select} .${mockedClassNames.option}`,
+      );
+
+      expect(mockedOnChange.mock.calls.length).toBe(0);
+
+      selectNode.click();
+
+      expect(mockedOnChange.mock.calls.length).toBe(0);
+      options[0].click();
+
+      expect(mockedOnChange.mock.calls.length).toBe(0);
+      expect(select.value()).toEqual();
     });
 
     it("properly renders", () => {

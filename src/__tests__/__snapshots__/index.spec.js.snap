@@ -295,7 +295,7 @@ exports[`SelectPure component basic closes on outside element click 1`] = `
     class="select-dropdown"
   >
     <div
-      class="select-option"
+      class="select-option select-option__disabled"
       data-disabled="true"
       data-value="PL"
     >
@@ -325,7 +325,7 @@ exports[`SelectPure component basic closes on outside element click 2`] = `
     class="select-dropdown"
   >
     <div
-      class="select-option"
+      class="select-option select-option__disabled"
       data-disabled="true"
       data-value="PL"
     >
@@ -355,7 +355,7 @@ exports[`SelectPure component basic closes on outside element click 3`] = `
     class="select-dropdown"
   >
     <div
-      class="select-option"
+      class="select-option select-option__disabled"
       data-disabled="true"
       data-value="PL"
     >
@@ -374,11 +374,13 @@ exports[`SelectPure component basic closes on outside element click 3`] = `
 </div>
 `;
 
-exports[`SelectPure component basic displays placeholder when value is not provided 1`] = `"<div><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option\\" data-value=\\"PL\\" data-disabled=\\"true\\">Poland</div><div class=\\"select-option\\" data-value=\\"UA\\">Ukraine</div></div><span class=\\"select-placeholder\\">placeholder text</span></div></div>"`;
+exports[`SelectPure component basic displays placeholder when value is not provided 1`] = `"<div><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option select-option__disabled\\" data-value=\\"PL\\" data-disabled=\\"true\\">Poland</div><div class=\\"select-option\\" data-value=\\"UA\\">Ukraine</div></div><span class=\\"select-placeholder\\">placeholder text</span></div></div>"`;
 
-exports[`SelectPure component basic renders select with disabled option 1`] = `"<div><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option\\" data-value=\\"PL\\" data-disabled=\\"true\\">Poland</div><div class=\\"select-option\\" data-value=\\"UA\\">Ukraine</div></div><span class=\\"select-placeholder\\"></span></div></div>"`;
+exports[`SelectPure component basic doesn't select disabled option 1`] = `"<div><div class=\\"select\\"><span class=\\"select-label\\">Ukraine</span><div class=\\"select-dropdown\\"><div class=\\"select-option select-option__disabled\\" data-value=\\"PL\\" data-disabled=\\"true\\">Poland</div><div class=\\"select-option select-selected-option\\" data-value=\\"UA\\">Ukraine</div></div><span class=\\"select-placeholder\\"></span></div></div>"`;
 
-exports[`SelectPure component basic renders select with options 1`] = `"<div class=\\"my-div\\"><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option\\" data-value=\\"UA\\" data-disabled=\\"true\\">Ukraine</div><div class=\\"select-option\\" data-value=\\"PL\\">Poland</div></div><span class=\\"select-placeholder\\"></span></div></div>"`;
+exports[`SelectPure component basic renders select with disabled option 1`] = `"<div><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option select-option__disabled\\" data-value=\\"PL\\" data-disabled=\\"true\\">Poland</div><div class=\\"select-option\\" data-value=\\"UA\\">Ukraine</div></div><span class=\\"select-placeholder\\"></span></div></div>"`;
+
+exports[`SelectPure component basic renders select with options 1`] = `"<div class=\\"my-div\\"><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option select-option__disabled\\" data-value=\\"UA\\" data-disabled=\\"true\\">Ukraine</div><div class=\\"select-option\\" data-value=\\"PL\\">Poland</div></div><span class=\\"select-placeholder\\"></span></div></div>"`;
 
 exports[`SelectPure component basic resets selected value 1`] = `"<div><div class=\\"select\\"><span class=\\"select-label\\"></span><div class=\\"select-dropdown\\"><div class=\\"select-option\\" data-value=\\"NY\\">New York</div><div class=\\"select-option\\" data-value=\\"WA\\">Washington</div><div class=\\"select-option\\" data-value=\\"CA\\">California</div><div class=\\"select-option\\" data-value=\\"NJ\\">New Jersey</div><div class=\\"select-option\\" data-value=\\"NC\\">North Carolina</div></div><span class=\\"\\"></span></div></div>"`;
 
@@ -397,7 +399,7 @@ exports[`SelectPure component basic toggles on click 1`] = `
     class="select-dropdown"
   >
     <div
-      class="select-option"
+      class="select-option select-option__disabled"
       data-disabled="true"
       data-value="PL"
     >
@@ -427,7 +429,7 @@ exports[`SelectPure component basic toggles on click 2`] = `
     class="select-dropdown"
   >
     <div
-      class="select-option"
+      class="select-option select-option__disabled"
       data-disabled="true"
       data-value="PL"
     >
@@ -457,7 +459,7 @@ exports[`SelectPure component basic toggles on click 3`] = `
     class="select-dropdown"
   >
     <div
-      class="select-option"
+      class="select-option select-option__disabled"
       data-disabled="true"
       data-value="PL"
     >

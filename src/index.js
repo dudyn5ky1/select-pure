@@ -8,6 +8,7 @@ const CLASSES = {
   placeholder: "select-pure__placeholder",
   dropdown: "select-pure__options",
   option: "select-pure__option",
+  optionDisabled: "select-pure__option--disabled",
   autocompleteInput: "select-pure__autocomplete",
   selectedLabel: "select-pure__selected-label",
   selectedOption: "select-pure__option--selected",
@@ -23,6 +24,7 @@ class SelectPure {
         ...CLASSES,
         ...config.classNames,
       },
+      disabledOptions: [],
     };
     this._state = {
       opened: false,
@@ -90,12 +92,15 @@ class SelectPure {
 
     return this._config.options.map(_option => {
       const option = new Element("div", {
-        class: this._config.classNames.option,
+        class: `${this._config.classNames.option}${_option.disabled ?
+          " " + this._config.classNames.optionDisabled : ""}`,
         value: _option.value,
         textContent: _option.label,
         disabled: _option.disabled,
       });
-
+      if (_option.disabled) {
+        this._config.disabledOptions.push(String(_option.value));
+      }
       this._optionsWrapper.append(option.get());
 
       return option;
@@ -140,13 +145,15 @@ class SelectPure {
   }
 
   _setValue(value, manual, unselected) {
+    if (this._config.disabledOptions.indexOf(value) > -1) {
+      return;
+    }
     if (value && !unselected) {
       this._config.value = this._config.multiple ? [...this._config.value || [], value] : value;
     }
     if (value && unselected) {
       this._config.value = value;
     }
-
     this._options.forEach(_option => {
       _option.removeClass(this._config.classNames.selectedOption);
     });
