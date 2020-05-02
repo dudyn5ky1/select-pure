@@ -252,7 +252,7 @@ class SelectPure {
 
   _sortOptions(event) {
     this._options.forEach(_option => {
-      if (!_option.get().textContent.toLowerCase().startsWith(event.target.value.toLowerCase())) {
+      if (!_option.get().textContent.toLowerCase().includes(event.target.value.toLowerCase())) {
         _option.addClass(this._config.classNames.optionHidden);
         return;
       }
