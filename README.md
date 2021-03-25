@@ -99,6 +99,12 @@ select-pure/
 
 ## TODO
 
+- [ ] Migrate to Webpack
+- [ ] Use Lerna or standard versioning
+- [ ] Use Changelog
+
+## Old TODO
+
 - [ ] API method for updating select.
 - [ ] Mobile select support.
 - [ ] Drop support of default classNames (starting from 1.x.x versions).
