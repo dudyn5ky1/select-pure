@@ -1,4 +1,4 @@
-# SelectPure JavaScript component
+[#](#) SelectPure JavaScript component
 
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/bundle.min.js)
@@ -7,108 +7,49 @@
 [![Build Status](https://travis-ci.org/dudyn5ky1/select-pure.svg?branch=master)](https://travis-ci.org/dudyn5ky1/select-pure)
 [![codecov](https://codecov.io/gh/dudyn5ky1/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/dudyn5ky1/select-pure)
 
-## Installation
+## V2 TODO
 
-#### NPM
+Abstraction component, built on top of HTMl `<select>` element. It extends native API and allows to implement a custom styling.
 
-```
-npm i select-pure --save
-```
+### Use cases
 
-#### Yarn
+#### Single selectable value
 
-```
-yarn add select-pure
-```
-
-#### CDN
-
-```
-<script src="https://unpkg.com/select-pure@latest/dist/bundle.min.js"></script>
-```
-## Usage
-
-```javascript
-import SelectPure from "select-pure";
-
-new SelectPure(element, config);
-
-`element` // Required. Either selector or HTML node.
-`config` // Required. Configuration object.
-```
-
-### Configuration
-
-| Property | Required | Type | Description |
-| --- | --- | --- | --- |
-| [option](#option) | true | Array | Collection of options to be rendered. Each `option` consists of `value`, `label` and optional property `disabled`. Properties for the single option object are listed below. |
-| [classNames](#classNames) | false | Object | Object with custom classNames to be used inside select. In the next major version default classNames will be removed and this property will become required. |
-| multiple | false | Boolean | `true` if multiple options can be selected. |
-| autocomplete | false | Boolean | Adds autocomplete input. Disabled by default. |
-| icon | false | String | If specified - `<i></i>` will be inserted inside `select-pure__selected-label`. Works only with `multiple` option set to `true`. |
-| inlineIcon | false | HMTLElement | Custom cross icon for multiple select. |
-| value | false | String \| Array | Initially selected value. If not provided - first option will be selected. If `multiple` is `true` -- `Array` should be provided. |
-| placeholder | false | String | Placeholder for cases when value is not selected by default. |
-| onChange | false | Function | Callback that returns value when option is being selected. Returns `Array` if `multiple` is `true`. |
-
-#### option
-
-Properties of a single option passed to the options Array in configuration.
-
-| Property | Required | Type | Description |
-| --- | --- | --- | --- |
-| value | true | String | Value of an option. |
-| label | true | String | Label of an option. |
-| disabled | false | Boolean | `true` if option is disabled. `false` by default. |
-
-#### classNames
-
-In the next major version default classNames will be removed and this property will become required.
-
-| Property | Default value | Description |
-| --- | --- | --- |
-| select | "select-pure__select" | Wrapper div. |
-| dropdownShown | "select-pure__select--opened" | Applied to the wrapper when dropdown is shown. |
-| multiselect | "select-pure__select--multiple" | Applied to the wrapper if it's a multiselect. |
-| label | "select-pure__label" | Label span. |
-| placeholder | "select-pure__placeholder" | Placeholder span. |
-| dropdown | "select-pure__options" | Options dropdown. |
-| option | "select-pure__option" | Single option. |
-| optionDisabled | "select-pure__option--disabled" | Single option. |
-| autocompleteInput | "select-pure__autocomplete" | Autocomplete input |
-| selectedLabel | "select-pure__selected-label" | Selected label for multiselect. |
-| selectedOption | "select-pure__option--selected" | Applied to option when selected. |
-| placeholderHidden | "select-pure__placeholder--hidden" | Hides placeholder when the value is selected. |
-| optionHidden | "select-pure__option--hidden" | Hides options that does not match autocomplete input. |
+1. Empty select;
+2. Array of options, with no default value;
+3. Array of options with a default value (preselected);
+4. Callback after element got selected;
+5. [List here attributes that can be set on the select];
+6. Make sure it works correctly inside a `<form>`;
+7. Dynamically select an option (API method);
+8. Dynamically update options array (API method);
+9. Disabled select;
+10. Disabled option;
+11. Dynamically disable / enable select (API method);
+12. Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
 
 
-### API
+#### Multiple values can be selected (multiple)
 
-| Method | Description |
-| --- | --- |
-| value() | Returns currently selected value. |
-| reset() | Resets currently selected value. |
+All of the above but allow multiple selected options;
 
-## Structure
+#### Autocomplete
 
-```
-select-pure/
-└── lib/
-    └── select-pure.min.js
-```
+1. Provide a way to search and filter options;
+2. Provide a way to fire a callback when user enters search string (nothing filtered??);
+3. Custom matching pattern (or/and provide matching options);
 
-## TODO
+#### Out of MVP scope
 
-- [ ] Migrate to Webpack
-- [ ] Use Lerna or standard versioning
-- [ ] Use Changelog
+1. Custom styles (developer provides own stylesheet);
+2. Option to not render styles;
+3. Contribution guide;
+4. Option groups;
 
-## Old TODO
 
-- [ ] API method for updating select.
-- [ ] Mobile select support.
-- [ ] Drop support of default classNames (starting from 1.x.x versions).
-- [ ] Drop support of default icon, support only inline SVG instead. (starting from 1.x.x versions).
+### Browser support
+
+
 
 ## License
 
