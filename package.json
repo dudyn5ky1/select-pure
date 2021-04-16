@@ -7,25 +7,37 @@
     "email": "hello@dudynskyi.com",
     "url": "https://github.com/dudyn5ky1"
   },
+  "scripts": {
+    "commit": "git-cz",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
   "keywords": [
     "javascript",
     "select",
     "js"
   ],
-  "main": "lib/index.js",
-  "scripts": {
-    "commit": "git-cz"
-  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "svelte": "src/index.js",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/dudyn5ky1/select-pure.git"
   },
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^9.0.0",
     "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.22.0",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "rollup": "^2.0.0",
+    "rollup-plugin-svelte": "^6.0.0",
+    "svelte": "^3.0.0"
   },
   "config": {
     "commitizen": {
