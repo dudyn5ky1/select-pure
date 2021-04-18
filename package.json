@@ -10,6 +10,7 @@
   "scripts": {
     "commit": "git-cz",
     "build": "rollup -c",
+    "test": "jest",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -30,19 +31,29 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@testing-library/jest-dom": "^5.11.10",
+    "babel-jest": "^26.6.3",
     "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.22.0",
+    "jest": "^26.6.3",
+    "jest-transform-svelte": "^2.1.1",
     "pre-commit": "^1.2.2",
     "rollup": "^2.0.0",
     "rollup-plugin-svelte": "^6.0.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-jester": "^1.4.0"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog",
       "defaultScope": "general"
     }
+  },
+  "dependencies": {
+    "@testing-library/svelte": "^3.0.3"
   }
 }

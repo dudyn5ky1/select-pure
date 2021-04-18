@@ -27,6 +27,8 @@ Abstraction component, built on top of HTMl `<select>` element. It extends nativ
 10. Disabled option;
 11. Dynamically disable / enable select (API method);
 12. Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
+13. Mobile devices support;
+14. Accessibility (keyboard / tabs support);
 
 
 #### Multiple values can be selected (multiple)
@@ -47,9 +49,35 @@ All of the above but allow multiple selected options;
 4. Option groups;
 
 
-### Browser support
+## Usage
 
+#### Initial render
 
+SelectPure tries to mimik native HTML select as much as possible.
+
+```
+<select-pure name="country" class="country">
+  <option-pure value="NY">New York</option-pure>
+  <option-pure value="LA" selected>Los Angeles</option-pure>
+  <option-pure value="SF" disabled>San Francisco</option-pure>
+</select-pure>
+```
+
+#### API methods
+
+You can select SelectPure instance using `document.querySelector` or with any other library/framework you use.
+
+`const select = document.querySelector('select-pure.country');`
+
+After that you can call the following API methods:
+
+| name     | description                                                                             |
+|----------|-----------------------------------------------------------------------------------------|
+| setValue | Provide a value to be selected.                                                         |
+| disable  | Disables whole select-pure instance (Do we need it, maybe just add disabled attribute?) |
+|          |                                                                                         |
+
+Also, you can use the following callbacks.
 
 ## License
 
