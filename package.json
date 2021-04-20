@@ -10,7 +10,6 @@
   "scripts": {
     "commit": "git-cz",
     "build": "rollup -c",
-    "test": "jest",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

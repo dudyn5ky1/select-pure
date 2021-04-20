@@ -1,9 +1,11 @@
 <html>
   <body>
     <script src="./../dist/index.js"></script>
+    <h1>Firing onChange callback</h1>
     <select-pure>
-      <option-pure value="NY">New York</option-pure>
-      <option-pure value="CA">California</option-pure>
+      <template>
+        <option value="NY" slot="option">New York</option>
+      </template>
     </select-pure>
   </body>
 </html>

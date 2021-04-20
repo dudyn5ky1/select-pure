@@ -7,7 +7,7 @@ exports[`Select component closes dropdown 1`] = `
       class="select"
     >
        
-      <div
+      <select
         class="dropdown"
       />
     </div>
@@ -22,7 +22,7 @@ exports[`Select component closes dropdown on click outside 1`] = `
       class="select"
     >
        
-      <div
+      <select
         class="dropdown visible"
       />
     </div>
@@ -37,7 +37,7 @@ exports[`Select component opens dropdown 1`] = `
       class="select"
     >
        
-      <div
+      <select
         class="dropdown visible"
       />
     </div>
@@ -52,7 +52,7 @@ exports[`Select component renders empty select 1`] = `
       class="select"
     >
        
-      <div
+      <select
         class="dropdown"
       />
     </div>

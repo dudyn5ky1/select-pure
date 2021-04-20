@@ -1,9 +1,10 @@
 <svelte:options tag="select-pure" />
 
 <script>
-  import { selected } from "./store.js";
+  import { selected } from "./../store.js";
   let label;
   let dropdownVisible = false;
+  let select;
 
   const unsubscribeValue = selected.subscribe(value => {
     // callback
@@ -11,16 +12,27 @@
 
   function toggleDropdown() {
     dropdownVisible = !dropdownVisible;
+    const options = select.parentNode.querySelectorAll("option-pure");
+    console.log(select);
+    console.log(options);
+    console.log($$slots);
+  }
+
+  function onChange() {
+    console.log("ON CHANGE!");
   }
 </script>
 
-<div class="select" on:click={toggleDropdown}>
+<div class="select" on:click={toggleDropdown} bind:this={select}>
   {#if $selected.value}
     <span>{$selected.label}</span>
   {/if}
-  <div class:visible="{dropdownVisible}" class="dropdown">
+  <select
+    class:visible="{dropdownVisible}"
+    class="dropdown"
+  >
     <slot></slot>
-  </div>
+  </select>
 </div>
 
 <style>
