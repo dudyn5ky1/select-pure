@@ -1,2 +1,4 @@
-export { default as Select } from "./components/Select.svelte";
-export { default as Option } from "./components/Option.svelte";
+import { Select, Option } from "./components";
+
+customElements.define("select-pure", Select);
+customElements.define("option-pure", Option);

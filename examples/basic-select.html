@@ -1,11 +1,15 @@
 <html>
   <body>
-    <script src="./../dist/index.js"></script>
-    <h1>Firing onChange callback</h1>
+    <script type="module" src="./index.js"></script>
+    <h1>Basic select</h1>
     <select-pure>
-      <template>
-        <option value="NY" slot="option">New York</option>
-      </template>
+      <option-pure value="NY">New York</option-pure>
+      <option-pure value="SF">San Francisco</option-pure>
+    </select-pure>
+    <h1>OnChange callback</h1>
+    <select-pure>
+      <option-pure value="Caputo">Caputo</option-pure>
+      <option-pure value="Lubella">Lubella</option-pure>
     </select-pure>
   </body>
 </html>
