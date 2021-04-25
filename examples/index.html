@@ -70,6 +70,17 @@
           <option-pure value="GOOGL">Google</option-pure>
         </select-pure>
       </div>
+
+      <div>
+        <h2>Custom styling</h2>
+        <select-pure class="green">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL" disabled>Google</option-pure>
+        </select-pure>
+      </div>
     </div>
 
     <script>
@@ -105,6 +116,27 @@
         .grid {
           grid-template-columns: 1fr 1fr;
         }
+      }
+      /*
+        Example of custom styling
+      */
+      select-pure.green {
+        --select-height: 40px;
+        --select-width: 390px;
+        --border-radius: 8px;
+        --border-width: 2px;
+        --border-color: #2f3640;
+        --padding: 0 10px;
+        --dropdown-z-index: 100;
+        --disabled-background-color: #636e72;
+        --disabled-color: #b2bec3;
+        --background-color: #2f3640;
+        --color: #fff;
+        --hover-background-color: #404a55;
+        --hover-color: #fff;
+        --selected-background-color: #404a55;
+        --selected-color: #fff;
+        --dropdown-gap: 2px;
       }
     </style>
   </body>

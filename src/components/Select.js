@@ -9,43 +9,45 @@ export class Select extends LitElement {
       .select {
         display: flex;
         flex-wrap: wrap;
-        height: 44px;
+        height: var(--select-height, 44px);
         position: relative;
-        width: 400px;
+        width: var(--select-width, 100%);
       }
       .selected {
         align-items: center;
-        border-radius: 4px;
-        border: 1px solid black;
+        background-color: var(--background-color, #fff);
+        border-radius: var(--border-radius, 4px);
+        border: var(--border-width, 1px) solid var(--border-color, #000);
         box-sizing: border-box;
+        color: var(--color, #000);
         cursor: pointer;
         display: flex;
         height: 100%;
         justify-content: space-between;
-        padding: 0 10px;
+        padding: var(--padding, 0 10px);
         width: 100%;
       }
       .dropdown {
-        background-color: black;
-        border-radius: 4px;
-        border: 1px solid black;
+        background-color: var(--border-color, #000);
+        border-radius: var(--border-radius, 4px);
+        border: var(--border-width, 1px) solid var(--border-color, #000);
         display: none;
         flex-direction: column;
-        gap: 1px;
+        gap: var(--border-width, 1px);
         justify-content: space-between;
+        max-height: calc(var(--select-height, 44px) * 4);
         overflow-y: scroll;
         position: absolute;
-        top: 44px;
-        width: calc(100% - 2px);
-        max-height: calc(44px * 4);
-        z-index: 2;
+        top: calc(var(--select-height, 44px) + var(--dropdown-gap, 0px));
+        width: calc(100% - var(--border-width, 1px) * 2);
+        z-index: var(--dropdown-z-index, 2);
       }
       .dropdown.visible {
         display: flex;
       }
       .disabled {
-        background-color: #bdc3c7;
-        color: #ecf0f1;
+        background-color: var(--disabled-background-color, #bdc3c7);
+        color: var(--disabled-color, #ecf0f1);
         cursor: default;
       }
     `;

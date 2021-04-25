@@ -6,23 +6,27 @@ export class Option extends LitElement {
       .option {
         align-items: center;
         box-sizing: border-box;
-        background-color: #fff;
+        background-color: var(--background-color, #fff);
+        color: var(--color, #000);
         cursor: pointer;
         display: flex;
-        height: 44px;
+        height: var(--select-height, 44px);
         justify-content: flex-start;
-        padding-left: 8px;
+        padding: var(--padding, 0 10px);
+        height: var(--select-height, 44px);
         width: 100%;
       }
       .option:not(.disabled):not(.selected):hover {
-        background-color: #e3e3e3;
+        background-color: var(--hover-background-color, #e3e3e3);
+        color: var(--hover-color, #000);
       }
       .selected {
-        background-color: #e3e3e3;
+        background-color: var(--selected-background-color, #e3e3e3);
+        color: var(--selected-color, #000);
       }
       .disabled {
-        background-color: #bdc3c7;
-        color: #ecf0f1;
+        background-color: var(--disabled-background-color, #e3e3e3);
+        color: var(--disabled-color, #000);
         cursor: default;
       }
     `;

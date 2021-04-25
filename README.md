@@ -74,6 +74,31 @@ selectPure.addEventListener("change", (event) => {
 | disable() | Disables select. |
 | enable()  | Enables select.  |
 
+### Custom styles
+
+SelectPure offers high level of customisation. You can match any design you want by just providing a simple set of css variables. Below you can find their names and default values that are included in the package.
+
+```
+select-pure {
+  --select-height: 44px;
+  --select-width: 100%;
+  --border-radius: 4px;
+  --border-width: 1px;
+  --border-color: #000;
+  --padding: 0 10px;
+  --dropdown-z-index: 2;
+  --disabled-background-color: #bdc3c7;
+  --disabled-color: #ecf0f1;
+  --background-color: #fff;
+  --color: #000;
+  --hover-background-color: #e3e3e3;
+  --hover-color: #000;
+  --selected-background-color: #e3e3e3;
+  --selected-color: #000;
+  --dropdown-gap: 0;
+}
+```
+
 ## V2 TODO
 
 2.0
@@ -85,9 +110,9 @@ selectPure.addEventListener("change", (event) => {
 [x] Disabled option;
 [x] Disabled select;
 [x] Callback after element got selected;
-[] Custom styling (css variables)
-[] [List here attributes that can be set on the select];
+[x] Custom styling (css variables)
 [] Make sure it works correctly inside a `<form>`;
+[] [List here attributes that can be set on the select];
 [] Dynamically disable / enable select (API method);
 [] Dynamically select an option (API method);
 [] Mobile devices support;
@@ -95,6 +120,7 @@ selectPure.addEventListener("change", (event) => {
 [] Required attribute support
 [] Disable accessibility for disable select and option
 [] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM.
+[] Add chevron
 
 2.1
 [] Mutiple
