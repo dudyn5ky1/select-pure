@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "1.0.0-alpha.0",
+  "version": "2.0.0-alpha.0",
   "description": "Pure JavaScript select component.",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "serve": "es-dev-server --app-index examples/basic-select.html --node-resolve --watch --open",
+    "serve": "es-dev-server --app-index examples/index.html --node-resolve --watch --open",
     "build": "rollup -c",
     "prepublishOnly": "npm run build"
   },

@@ -35,6 +35,45 @@ and use in the similar way as you would use a native HTML `<select>`.
 </select-pure>
 ```
 
+## SelectPure instance
+
+In order to call API methods of the `SelectPure`, subscribe to callbacks or use it's properties, you can simple use `querySelector`.
+
+```
+const selectPure = document.querySelector("select-pure");
+
+console.log(selectPure.selectedIndex);
+
+selectPure.disable();
+```
+
+### Available properties
+
+| property      | description                           |
+|---------------|---------------------------------------|
+| selectedIndex | Returns index of the selected option. |
+| value         | Returns selected value.               |
+
+### Callbacks
+
+If you want to set a callback for when the new value is selected, you can just use the traditional `addEventListener`.
+
+```
+const selectPure = document.querySelector("select-pure");
+selectPure.addEventListener("change", (event) => {
+  // You can use
+  // event.target.value or
+  // event.currentTarget.value
+});
+```
+
+### API methods
+
+| method    | description      |
+|-----------|------------------|
+| disable() | Disables select. |
+| enable()  | Enables select.  |
+
 ## V2 TODO
 
 2.0
@@ -44,16 +83,18 @@ and use in the similar way as you would use a native HTML `<select>`.
 [x] Default selected option;
 [x] Default not selectable option that acts like a default label;
 [x] Disabled option;
-[] Disabled select;
-[] Callback after element got selected;
+[x] Disabled select;
+[x] Callback after element got selected;
+[] Custom styling (css variables)
 [] [List here attributes that can be set on the select];
 [] Make sure it works correctly inside a `<form>`;
-[] Custom styling (css variables)
 [] Dynamically disable / enable select (API method);
 [] Dynamically select an option (API method);
-[] Dynamically update options array (API method);
 [] Mobile devices support;
 [] Accessibility (keyboard / tabs support);
+[] Required attribute support
+[] Disable accessibility for disable select and option
+[] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM.
 
 2.1
 [] Mutiple

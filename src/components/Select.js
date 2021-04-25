@@ -17,6 +17,7 @@ export class Select extends LitElement {
         align-items: center;
         border-radius: 4px;
         border: 1px solid black;
+        box-sizing: border-box;
         cursor: pointer;
         display: flex;
         height: 100%;
@@ -30,16 +31,22 @@ export class Select extends LitElement {
         border: 1px solid black;
         display: none;
         flex-direction: column;
-        gap: 0.5px;
+        gap: 1px;
         justify-content: space-between;
-        overflow: hidden;
+        overflow-y: scroll;
         position: absolute;
         top: 44px;
         width: calc(100% - 2px);
+        max-height: calc(44px * 4);
         z-index: 2;
       }
       .dropdown.visible {
         display: flex;
+      }
+      .disabled {
+        background-color: #bdc3c7;
+        color: #ecf0f1;
+        cursor: default;
       }
     `;
   }
@@ -54,6 +61,15 @@ export class Select extends LitElement {
       },
       selectedOption: {
         type: Object,
+      },
+      disabled: {
+        type: Boolean,
+      },
+      listeners: {
+        type: Object,
+      },
+      value: {
+        type: String,
       },
     };
   }
@@ -70,7 +86,11 @@ export class Select extends LitElement {
     this.options = [];
     this.visible = false;
     this.selectedOption = {};
+    this.disabled = this.getAttribute("disabled") !== null;
+    this.listeners = {};
+    this.value = null;
 
+    this.nativeSelect = this.querySelector("select");
 
     const options = this.querySelectorAll("option-pure");
     for (let i = 0; i < options.length; i++) {
@@ -78,6 +98,8 @@ export class Select extends LitElement {
       options[i].onSelect = this.onSelect;
     }
   }
+
+  // private methods
 
   addOption(option) {
     const { value, label, select, unselect, selected } = option;
@@ -97,25 +119,31 @@ export class Select extends LitElement {
       const option = this.options[i];
       if (option.value === optionValue) {
         this.selectedOption = option;
+        this.value = optionValue;
         option.select();
+        this.dispatchEvent(new Event("change"));
         continue;
       }
       option.unselect();
     }
   }
 
-  get selectedIndex() {
-    return 0;
-  }
-
   renderOptions() {
-    return this.options.map(({ value, label }) => html`<option value=${value}>${label}</option>`);
+    return this.options.map(({ value, label }) => {
+      const isSelected = this.selectedOption.value === value;
+      return html`<option value=${value} ?selected=${isSelected}>${label}</option>`;
+    });
   }
 
-  open(event) {
-    event.stopPropagation(); // causes problem when one select is open and other is clicked
+  open() {
+    if (this.disabled) {
+      return;
+    }
     this.visible = true;
-    document.body.addEventListener("click", this.close);
+    setTimeout(() => {
+      // :( don't close the select right away
+      document.body.addEventListener("click", this.close);
+    });
   }
 
   close() {
@@ -131,7 +159,10 @@ export class Select extends LitElement {
         </select>
 
         <div class="select" aria-hidden="true">
-          <div class="selected" @click="${this.visible ? this.close : this.open}">
+          <div
+            class="selected${this.disabled ? " disabled": ""}"
+            @click="${this.visible ? this.close : this.open}"
+          >
             ${this.selectedOption.label || "Default label"}
           </div>
           <div class="dropdown${this.visible ? " visible" : ""}">

@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body>
+    <script type="module" src="./index.js"></script>
+    <h1>SelectPure examples</h1>
+    <div class="grid">
+      <div>
+        <h2>Basic select</h2>
+        <select-pure>
+          <option-pure value="NY">New York</option-pure>
+          <option-pure value="SF" selected>San Francisco</option-pure>
+        </select-pure>
+      </div>
+
+      <div>
+        <h2>Label passed as an attribute</h2>
+        <select-pure>
+          <option-pure value="Caputo" label="Caputo" selected></option-pure>
+          <option-pure value="Lubella" label="Lubella"></option-pure>
+        </select-pure>
+
+      </div>
+
+      <div>
+        <h2>Default label</h2>
+        <select-pure>
+          <option-pure value="" selected disabled hidden>- Select a company -</option-pure>
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+
+      </div>
+
+      <div>
+        <h2>Disabled option</h2>
+        <select-pure>
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX" disabled>Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </div>
+
+      <div>
+        <h2>Disabled select</h2>
+        <select-pure disabled>
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX" disabled>Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+
+      </div>
+
+      <div>
+        <h2>Callback on select</h2>
+        <select-pure class="callback">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX" disabled>Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </div>
+    </div>
+
+    <script>
+      const selectWithCallback = document.querySelector("select-pure.callback");
+      selectWithCallback.addEventListener("change", (event) => {
+        alert(event.target.value);
+      });
+    </script>
+
+    <style>
+      /*
+         Important! This CSS is not needed for the SelectPure to function
+         It's only here for the layout of the example page.
+       */
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-column-gap: 16px;
+        margin: 0 auto;
+        max-width: 800px;
+        grid-template-columns: 1fr;
+        grid-row-gap: 32px;
+      }
+      @media (min-width: 800px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </body>
+</html>

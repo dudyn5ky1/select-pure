@@ -21,7 +21,7 @@ export class Option extends LitElement {
         background-color: #e3e3e3;
       }
       .disabled {
-        background-color: #7f8c8d;
+        background-color: #bdc3c7;
         color: #ecf0f1;
         cursor: default;
       }
