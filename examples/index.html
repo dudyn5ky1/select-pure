@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
@@ -81,11 +82,29 @@
           <option-pure value="GOOGL" disabled>Google</option-pure>
         </select-pure>
       </div>
+
+      <form>
+        <h2>Select inside form</h2>
+        <select-pure name="company">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </form>
     </div>
 
     <script>
+      // Important! This JS is not needed for the SelectPure to function
+      // It's only here for the example page.
       const selectWithCallback = document.querySelector("select-pure.callback");
       selectWithCallback.addEventListener("change", (event) => {
+        alert(event.target.value);
+      });
+
+      const form = document.querySelector("form");
+      form.addEventListener("change", (event) => {
         alert(event.target.value);
       });
     </script>
@@ -97,6 +116,7 @@
        */
       body {
         font-family: "Roboto", sans-serif;
+        padding-bottom: 120px;
       }
       h1 {
         text-align: center;
@@ -122,7 +142,7 @@
       */
       select-pure.green {
         --select-height: 40px;
-        --select-width: 390px;
+        --select-width: calc(100% - 20px);
         --border-radius: 8px;
         --border-width: 2px;
         --border-color: #2f3640;

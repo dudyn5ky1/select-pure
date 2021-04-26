@@ -5,15 +5,18 @@ export class Option extends LitElement {
     return css`
       .option {
         align-items: center;
-        box-sizing: border-box;
         background-color: var(--background-color, #fff);
+        box-sizing: border-box;
         color: var(--color, #000);
         cursor: pointer;
         display: flex;
+        font-family: var(--font-family, inherit);
+        font-size: var(--font-size, 14px);
+        font-weight: var(--font-weight, 400);
+        height: var(--select-height, 44px);
         height: var(--select-height, 44px);
         justify-content: flex-start;
         padding: var(--padding, 0 10px);
-        height: var(--select-height, 44px);
         width: 100%;
       }
       .option:not(.disabled):not(.selected):hover {
@@ -56,31 +59,25 @@ export class Option extends LitElement {
     this.onClick = this.onClick.bind(this);
     this.select = this.select.bind(this);
     this.unselect = this.unselect.bind(this);
+    this.getOption = this.getOption.bind(this);
 
     // properties
     this.label = this.textContent || this.getAttribute("label");
     this.value = this.getAttribute("value");
     this.selected = this.getAttribute("selected") !== null;
     this.disabled = this.getAttribute("disabled") !== null;
+  }
 
-    if (!this.onInit) {
-      return;
-    }
-    this.onInit({
+  //public
+  getOption() {
+    return {
       label: this.label,
       value: this.value,
       select: this.select,
       unselect: this.unselect,
       selected: this.selected,
-    });
-  }
-
-  onClick(event) {
-    if (!this.onSelect || this.disabled) {
-      event.stopPropagation();
-      return;
-    }
-    this.onSelect(this.value);
+      disabled: this.disabled,
+    };
   }
 
   select() {
@@ -89,6 +86,14 @@ export class Option extends LitElement {
 
   unselect() {
     this.selected = false;
+  }
+
+  onClick(event) {
+    if (!this.onSelect || this.disabled) {
+      event.stopPropagation();
+      return;
+    }
+    this.onSelect(this.value);
   }
 
   render() {

@@ -26,7 +26,7 @@ then include it in your JavaScript file
 and use in the similar way as you would use a native HTML `<select>`.
 
 ```
-<select-pure>
+<select-pure name="country" id="country">
   <option-pure value="UA">Ukraine</option-pure>
   <option-pure value="PL">Poland</option-pure>
   <option-pure value="DE">Germany</option-pure>
@@ -47,12 +47,18 @@ console.log(selectPure.selectedIndex);
 selectPure.disable();
 ```
 
+### Attributes
+
+`<select-pure>` supports the following attributes: `name`, `id` and `disabled`.
+
+`<option-pure>` supports `value`, `label`, `disabled`, `selected` and `hidden` attributes.
+
 ### Available properties
 
-| property      | description                           |
-|---------------|---------------------------------------|
-| selectedIndex | Returns index of the selected option. |
-| value         | Returns selected value.               |
+| property      | description                                                                                                                                                                    |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| selectedIndex | Returns index of the selected option. You can also manipulate selected value with changing this property (`selectPure.selectedIndex = 2`). Just like in the native `<select>`. |
+| value         | Returns selected value.                                                                                                                                                        |
 
 ### Callbacks
 
@@ -96,30 +102,24 @@ select-pure {
   --selected-background-color: #e3e3e3;
   --selected-color: #000;
   --dropdown-gap: 0;
+  --font-size: 14px;
+  --font-family: inherit;
+  --font-weight: 400;
 }
 ```
+
+### <form> support
+
+If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attribute, it will then append a hidden `input` with a given name inside a `<form>` and trigger `change` event, when value is selected.
 
 ## V2 TODO
 
 2.0
 
-[x] Dropdown with options;
-[x] Hide dropdown on body click;
-[x] Default selected option;
-[x] Default not selectable option that acts like a default label;
-[x] Disabled option;
-[x] Disabled select;
-[x] Callback after element got selected;
-[x] Custom styling (css variables)
-[] Make sure it works correctly inside a `<form>`;
-[] [List here attributes that can be set on the select];
 [] Dynamically disable / enable select (API method);
 [] Dynamically select an option (API method);
-[] Mobile devices support;
 [] Accessibility (keyboard / tabs support);
-[] Required attribute support
-[] Disable accessibility for disable select and option
-[] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM.
+[] Disable accessibility for disabled select and option
 [] Add chevron
 
 2.1
@@ -128,9 +128,14 @@ select-pure {
 [] Callback for autocomplete input
 [] Custom matching/filter pattern
 [] Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
+[] Precommit hooks;
+[] Add destroy method;
+[] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
+[] Sometimes one select scrolls dropdown in the others?
 
 2.2
 [] Option groups;
+[] Required attribute support
 [] Contribution guide;
 
 ## License

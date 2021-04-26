@@ -3,17 +3,32 @@ import { css, LitElement, html } from "lit-element";
 export class Select extends LitElement {
   static get styles() {
     return css`
-      select {
-        display: none;
+      .select-wrapper {
+        position: relative;
+      }
+      .select-wrapper:hover .select {
+        z-index: 2;
       }
       .select {
+        bottom: 0;
         display: flex;
         flex-wrap: wrap;
-        height: var(--select-height, 44px);
-        position: relative;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
         width: var(--select-width, 100%);
       }
-      .selected {
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        position: relative;
+        opacity: 0;
+        z-index: 1;
+      }
+      select,
+      .label {
         align-items: center;
         background-color: var(--background-color, #fff);
         border-radius: var(--border-radius, 4px);
@@ -22,7 +37,10 @@ export class Select extends LitElement {
         color: var(--color, #000);
         cursor: pointer;
         display: flex;
-        height: 100%;
+        font-family: var(--font-family, inherit);
+        font-size: var(--font-size, 14px);
+        font-weight: var(--font-weight, 400);
+        height: var(--select-height, 44px);
         justify-content: space-between;
         padding: var(--padding, 0 10px);
         width: 100%;
@@ -67,10 +85,13 @@ export class Select extends LitElement {
       disabled: {
         type: Boolean,
       },
-      listeners: {
-        type: Object,
-      },
       value: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      formName: {
         type: String,
       },
     };
@@ -80,39 +101,80 @@ export class Select extends LitElement {
     super();
 
     // bindings
-    this.addOption = this.addOption.bind(this);
     this.close = this.close.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.processOptions = this.processOptions.bind(this);
+    this.watchNativeSelect = this.watchNativeSelect.bind(this);
+    this.processForm = this.processForm.bind(this);
 
     // properties
     this.options = [];
     this.visible = false;
     this.selectedOption = {};
     this.disabled = this.getAttribute("disabled") !== null;
-    this.listeners = {};
+    this.name = this.getAttribute("name");
+    this.id = this.getAttribute("id");
+    this.formName = this.name || this.id;
     this.value = null;
+  }
 
-    this.nativeSelect = this.querySelector("select");
+  firstUpdated() {
+    this.processOptions();
+    this.watchNativeSelect();
+    this.processForm();
+  }
 
-    const options = this.querySelectorAll("option-pure");
-    for (let i = 0; i < options.length; i++) {
-      options[i].onInit = this.addOption;
-      options[i].onSelect = this.onSelect;
-    }
+  get selectedIndex() {
+    return this.nativeSelect.selectedIndex;
+  }
+
+  set selectedIndex(index) {
+    this.onSelect(this.options[index].value);
   }
 
   // private methods
 
-  addOption(option) {
-    const { value, label, select, unselect, selected } = option;
-    this.options.push({
-      label,
-      value,
-      select,
-      unselect,
+  processForm() {
+    this.form = this.closest("form");
+    if (!this.form) {
+      return;
+    }
+    this.hiddenInput = document.createElement("input");
+    this.hiddenInput.setAttribute("type", "hidden");
+    this.hiddenInput.setAttribute("name", this.formName);
+    this.form.appendChild(this.hiddenInput);
+  }
+
+  watchNativeSelect() {
+    this.nativeSelect.addEventListener("change", () => {
+      this.selectedIndex = this.nativeSelect.selectedIndex;
     });
-    if (selected) {
-      this.selectedOption = option;
+  }
+
+  processOptions() {
+    this.nativeSelect = this.shadowRoot.querySelector("select");
+    const options = this.querySelectorAll("option-pure");
+    for (let i = 0; i < options.length; i++) {
+      const { value, label, select, unselect, selected, hidden, disabled } = options[i].getOption();
+      this.options.push({
+        label,
+        value,
+        select,
+        unselect,
+        hidden,
+        disabled,
+      });
+      if (selected) {
+        this.selectedOption = options[i];
+        this.nativeSelect.selectedIndex = i;
+      }
+      options[i].onSelect = this.onSelect;
+
+      if (i === options.length - 1 && !this.selectedOption.value) {
+        this.selectedOption = options[0];
+        options[0].select();
+        this.nativeSelect.selectedIndex = i;
+      }
     }
   }
 
@@ -120,20 +182,43 @@ export class Select extends LitElement {
     for (let i = 0; i < this.options.length; i++) {
       const option = this.options[i];
       if (option.value === optionValue) {
-        this.selectedOption = option;
-        this.value = optionValue;
-        option.select();
-        this.dispatchEvent(new Event("change"));
+        this.selectOption(option, i);
         continue;
       }
       option.unselect();
     }
+    if (this.form) {
+      this.hiddenInput.value = this.value;
+      const event = new Event("change", { bubbles: true });
+      this.hiddenInput.dispatchEvent(event);
+    }
+  }
+
+  selectOption(option, index) {
+    this.selectedOption = option;
+    this.value = option.value;
+    option.select();
+    this.nativeSelect.selectedIndex = index;
+    this.afterSelect();
+  }
+
+  afterSelect() {
+    this.dispatchEvent(new Event("change"));
   }
 
   renderOptions() {
-    return this.options.map(({ value, label }) => {
+    return this.options.map(({ value, label, hidden, disabled }) => {
       const isSelected = this.selectedOption.value === value;
-      return html`<option value=${value} ?selected=${isSelected}>${label}</option>`;
+      return html`
+        <option
+          value=${value}
+          ?selected=${isSelected}
+          ?hidden=${hidden}
+          ?disabled=${disabled}
+        >
+          ${label}
+        </option>
+      `;
     });
   }
 
@@ -156,16 +241,16 @@ export class Select extends LitElement {
   render() {
     return html`
       <div class="select-wrapper">
-        <select>
+        <select ?disabled=${this.disabled} name="${this.name}" id=${this.id}>
           ${this.renderOptions()}
         </select>
 
         <div class="select" aria-hidden="true">
           <div
-            class="selected${this.disabled ? " disabled": ""}"
+            class="label${this.disabled ? " disabled": ""}"
             @click="${this.visible ? this.close : this.open}"
           >
-            ${this.selectedOption.label || "Default label"}
+            ${this.selectedOption.label}
           </div>
           <div class="dropdown${this.visible ? " visible" : ""}">
             <slot></slot>
