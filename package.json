@@ -1,7 +1,7 @@
 {
   "name": "select-pure",
   "version": "2.0.0-alpha.0",
-  "description": "Pure JavaScript select component.",
+  "description": "Custom JavaScript <select> component. Easy-to-use, accessible, mobile friendly and super efficient",
   "author": {
     "name": "Maksym Dudynskyi",
     "email": "hello@dudynskyi.com",
@@ -14,9 +14,13 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "javascript",
     "select",
-    "js"
+    "custom select",
+    "web component",
+    "customizable",
+    "accessible",
+    "mobile friendly",
+    "select box"
   ],
   "files": [
     "src",
