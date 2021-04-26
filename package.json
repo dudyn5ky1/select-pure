@@ -1,7 +1,7 @@
 {
   "name": "select-pure",
   "scripts": {
-    "prerelease": "lerna version prerelease",
+    "prerelease": "lerna version prerelease --conventional-commits --yes",
     "serve:pure": "lerna run serve --scope=select-pure"
   },
   "devDependencies": {
