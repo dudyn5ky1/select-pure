@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.1",
   "description": "Custom JavaScript <select> component. Easy-to-use, accessible, mobile friendly and super efficient",
   "author": {
     "name": "Maksym Dudynskyi",
@@ -20,14 +20,18 @@
     "customizable",
     "accessible",
     "mobile friendly",
-    "select box"
+    "select box",
+    "lit",
+    "element",
+    "litelement",
+    "lit-element"
   ],
   "files": [
     "src",
     "dist"
   ],
   "svelte": "src/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
