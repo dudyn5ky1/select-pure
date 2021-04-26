@@ -1,4 +1,4 @@
-[#](#) Custom JavaScript `<select>` component. Easy-to-use, accessible, mobile friendly and super efficient.
+# Custom JavaScript `<select>` component. Easy-to-use, accessible, mobile friendly and super efficient.
 
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/bundle.min.js)
@@ -25,7 +25,7 @@ then include it in your JavaScript file
 
 and use in the similar way as you would use a native HTML `<select>`.
 
-```
+```javascript
 <select-pure name="country" id="country">
   <option-pure value="UA">Ukraine</option-pure>
   <option-pure value="PL">Poland</option-pure>
@@ -39,7 +39,7 @@ and use in the similar way as you would use a native HTML `<select>`.
 
 In order to call API methods of the `SelectPure`, subscribe to callbacks or use it's properties, you can simple use `querySelector`.
 
-```
+```javascript
 const selectPure = document.querySelector("select-pure");
 
 console.log(selectPure.selectedIndex);
@@ -64,7 +64,7 @@ selectPure.disable();
 
 If you want to set a callback for when the new value is selected, you can just use the traditional `addEventListener`.
 
-```
+```javascript
 const selectPure = document.querySelector("select-pure");
 selectPure.addEventListener("change", (event) => {
   // You can use
@@ -86,7 +86,7 @@ selectPure.addEventListener("change", (event) => {
 
 SelectPure offers high level of customisation. You can match any design you want by just providing a simple set of css variables. Below you can find their names and default values that are included in the package.
 
-```
+```css
 select-pure {
   --select-height: 44px;
   --select-width: 100%;
@@ -107,31 +107,32 @@ select-pure {
   --font-size: 14px;
   --font-family: inherit;
   --font-weight: 400;
+  --select-outline: 2px solid #e3e3e3;
 }
 ```
 
-### <form> support
+### `<form>` support
 
 If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attribute, it will then append a hidden `input` with a given name inside a `<form>` and trigger `change` event, when value is selected.
 
 ## TODO
 
 2.1
-[] Mutiple
-[] Autocomplete input
-[] Callback for autocomplete input
-[] Custom matching/filter pattern
-[] Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
-[] Precommit hooks;
-[] Add destroy method;
-[] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
-[] Sometimes one select scrolls dropdown in the others?
+[ ] Mutiple
+[ ] Autocomplete input
+[ ] Callback for autocomplete input
+[ ] Custom matching/filter pattern
+[ ] Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
+[ ] Precommit hooks;
+[ ] Add destroy method;
+[ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
+[ ] Sometimes one select scrolls dropdown in the others?
 
 2.2
-[] Option groups;
-[] Required attribute support
-[] Contribution guide;
-[] Position of the dropdown;
+[ ] Option groups;
+[ ] Required attribute support
+[ ] Contribution guide;
+[ ] Position of the dropdown;
 
 ## License
 

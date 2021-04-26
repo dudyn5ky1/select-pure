@@ -22,7 +22,7 @@ export class Select extends LitElement {
         width: var(--select-width, 100%);
       }
       .label:focus {
-        outline: 2px solid #e3e3e3;
+        outline: var(--select-outline, 2px solid #e3e3e3);
       }
       .label:after {
         border-bottom: 1px solid var(--color, #000);
@@ -33,7 +33,13 @@ export class Select extends LitElement {
         height: 10px;
         margin-top: -2px;
         transform: rotate(45deg);
+        transition: 0.2s ease-in-out;
         width: 10px;
+      }
+      .label.visible:after {
+        margin-bottom: -4px;
+        margin-top: 0;
+        transform: rotate(225deg);
       }
       select {
         -webkit-appearance: none;
@@ -273,6 +279,13 @@ export class Select extends LitElement {
   }
 
   render() {
+    const labelClassNames = ["label"];
+    if (this.disabled) {
+      labelClassNames.push("disabled");
+    }
+    if (this.visible) {
+      labelClassNames.push("visible");
+    }
     return html`
       <div class="select-wrapper">
         <select ?disabled=${this.disabled} name="${this.name}" id=${this.id}>
@@ -281,7 +294,7 @@ export class Select extends LitElement {
 
         <div class="select">
           <div
-            class="label${this.disabled ? " disabled": ""}"
+            class="${labelClassNames.join(" ")}"
             @click="${this.visible ? this.close : this.open}"
             @keydown="${this.handleKeyPress}"
             tabindex="0"
