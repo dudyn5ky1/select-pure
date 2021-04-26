@@ -143,7 +143,8 @@ export class Select extends LitElement {
   firstUpdated() {
     this.processOptions();
     this.watchNativeSelect();
-    this.processForm();
+    // :( Fails with React
+    setTimeout(this.processForm);
   }
 
   // public

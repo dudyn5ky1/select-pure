@@ -1,7 +1,8 @@
 {
   "name": "select-pure",
   "scripts": {
-    "prerelease": "lerna version prerelease"
+    "prerelease": "lerna version prerelease",
+    "serve:pure": "lerna run serve --scope=select-pure"
   },
   "devDependencies": {
     "commitizen": "4.2.3",

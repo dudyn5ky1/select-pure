@@ -118,21 +118,21 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 ## TODO
 
 2.1
-[ ] Mutiple
-[ ] Autocomplete input
-[ ] Callback for autocomplete input
-[ ] Custom matching/filter pattern
-[ ] Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
-[ ] Precommit hooks;
-[ ] Add destroy method;
-[ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
-[ ] Sometimes one select scrolls dropdown in the others?
+- [ ] Mutiple
+- [ ] Autocomplete input
+- [ ] Callback for autocomplete input
+- [ ] Custom matching/filter pattern
+- [ ] Fill README with React/Angular/Vue/Svelte/Purejs examples of usage;
+- [ ] Precommit hooks;
+- [ ] Add destroy method;
+- [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
+- [ ] Sometimes one select scrolls dropdown in the others?
 
 2.2
-[ ] Option groups;
-[ ] Required attribute support
-[ ] Contribution guide;
-[ ] Position of the dropdown;
+- [ ] Option groups;
+- [ ] Required attribute support
+- [ ] Contribution guide;
+- [ ] Position of the dropdown;
 
 ## License
 
