@@ -1,56 +1,13 @@
 {
   "name": "select-pure",
-  "version": "2.0.0-alpha.2",
-  "description": "Custom JavaScript <select> component. Easy-to-use, accessible, mobile friendly and super efficient",
-  "author": {
-    "name": "Maksym Dudynskyi",
-    "email": "hello@dudynskyi.com",
-    "url": "https://github.com/dudyn5ky1"
-  },
   "scripts": {
-    "commit": "git-cz",
-    "serve": "es-dev-server --app-index examples/index.html --node-resolve --watch --open",
-    "build": "rollup -c",
-    "prepublishOnly": "npm run build"
+    "prerelease": "lerna version prerelease"
   },
-  "keywords": [
-    "select",
-    "custom select",
-    "web component",
-    "customizable",
-    "accessible",
-    "mobile friendly",
-    "select box",
-    "lit",
-    "element",
-    "litelement",
-    "lit-element"
-  ],
-  "files": [
-    "src",
-    "dist"
-  ],
-  "svelte": "src/index.js",
-  "module": "dist/index.js",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/dudyn5ky1/select-pure.git"
-  },
-  "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^11.2.1",
     "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
-    "es-dev-server": "^2.1.0",
-    "eslint": "7.22.0",
-    "jest": "^26.6.3",
-    "lit-element": "^2.4.0",
-    "pre-commit": "^1.2.2",
-    "rollup": "^2.45.2",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-minify-html-literals": "^1.2.6",
-    "rollup-plugin-terser": "^7.0.2"
+    "lerna": "^4.0.0",
+    "pre-commit": "^1.2.2"
   },
   "config": {
     "commitizen": {
