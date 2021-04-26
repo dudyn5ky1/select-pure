@@ -144,7 +144,7 @@ export class Select extends LitElement {
     this.processOptions();
     this.watchNativeSelect();
     // :( Fails with React
-    setTimeout(this.processForm);
+    window.addEventListener("DOMContentLoaded", this.processForm);
   }
 
   // public
