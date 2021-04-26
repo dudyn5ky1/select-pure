@@ -75,10 +75,12 @@ selectPure.addEventListener("change", (event) => {
 
 ### API methods
 
-| method    | description      |
-|-----------|------------------|
-| disable() | Disables select. |
-| enable()  | Enables select.  |
+| method    | description        |
+|-----------|--------------------|
+| disable() | Disables select.   |
+| enable()  | Enables select.    |
+| open()    | Opens a dropdown.  |
+| close()   | Closes a dropdown. |
 
 ### Custom styles
 
@@ -112,15 +114,7 @@ select-pure {
 
 If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attribute, it will then append a hidden `input` with a given name inside a `<form>` and trigger `change` event, when value is selected.
 
-## V2 TODO
-
-2.0
-
-[] Dynamically disable / enable select (API method);
-[] Dynamically select an option (API method);
-[] Accessibility (keyboard / tabs support);
-[] Disable accessibility for disabled select and option
-[] Add chevron
+## TODO
 
 2.1
 [] Mutiple
@@ -137,6 +131,7 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 [] Option groups;
 [] Required attribute support
 [] Contribution guide;
+[] Position of the dropdown;
 
 ## License
 

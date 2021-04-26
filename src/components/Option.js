@@ -1,5 +1,7 @@
 import { css, LitElement, html } from "lit-element";
 
+import { KEYS } from "./constants";
+
 export class Option extends LitElement {
   static get styles() {
     return css`
@@ -19,7 +21,7 @@ export class Option extends LitElement {
         padding: var(--padding, 0 10px);
         width: 100%;
       }
-      .option:not(.disabled):not(.selected):hover {
+      .option:focus, .option:not(.disabled):not(.selected):hover {
         background-color: var(--hover-background-color, #e3e3e3);
         color: var(--hover-color, #000);
       }
@@ -96,6 +98,12 @@ export class Option extends LitElement {
     this.onSelect(this.value);
   }
 
+  handleKeyPress(event) {
+    if (event.which === KEYS.ENTER) {
+      this.onClick();
+    }
+  }
+
   render() {
     const classNames = ["option"];
     if (this.selected) {
@@ -104,8 +112,15 @@ export class Option extends LitElement {
     if (this.disabled) {
       classNames.push("disabled");
     }
-    return html`<div class="${classNames.join(" ")}" @click=${this.onClick}>
-      ${this.label}
-    </div>`;
+    return html`
+      <div
+        class="${classNames.join(" ")}"
+        @click=${this.onClick}
+        @keydown="${this.handleKeyPress}"
+        tabindex="0"
+      >
+        ${this.label}
+      </div>
+    `;
   }
 }

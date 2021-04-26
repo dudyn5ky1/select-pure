@@ -1,5 +1,7 @@
 import { css, LitElement, html } from "lit-element";
 
+import { KEYS } from "./constants";
+
 export class Select extends LitElement {
   static get styles() {
     return css`
@@ -18,6 +20,20 @@ export class Select extends LitElement {
         right: 0;
         top: 0;
         width: var(--select-width, 100%);
+      }
+      .label:focus {
+        outline: 2px solid #e3e3e3;
+      }
+      .label:after {
+        border-bottom: 1px solid var(--color, #000);
+        border-right: 1px solid var(--color, #000);
+        box-sizing: border-box;
+        content: "";
+        display: block;
+        height: 10px;
+        margin-top: -2px;
+        transform: rotate(45deg);
+        width: 10px;
       }
       select {
         -webkit-appearance: none;
@@ -53,7 +69,7 @@ export class Select extends LitElement {
         flex-direction: column;
         gap: var(--border-width, 1px);
         justify-content: space-between;
-        max-height: calc(var(--select-height, 44px) * 4);
+        max-height: calc(var(--select-height, 44px) * 4 + var(--border-width, 1px) * 3);
         overflow-y: scroll;
         position: absolute;
         top: calc(var(--select-height, 44px) + var(--dropdown-gap, 0px));
@@ -124,12 +140,39 @@ export class Select extends LitElement {
     this.processForm();
   }
 
+  // public
+
   get selectedIndex() {
     return this.nativeSelect.selectedIndex;
   }
 
   set selectedIndex(index) {
     this.onSelect(this.options[index].value);
+  }
+
+  open() {
+    if (this.disabled) {
+      return;
+    }
+    document.body.removeEventListener("click", this.close);
+    this.visible = true;
+    setTimeout(() => {
+      // :( don't close the select right away
+      document.body.addEventListener("click", this.close);
+    });
+  }
+
+  close() {
+    this.visible = false;
+    document.body.removeEventListener("click", this.close);
+  }
+
+  enable() {
+    this.disabled = false;
+  }
+
+  disable() {
+    this.disabled = true;
   }
 
   // private methods
@@ -192,6 +235,7 @@ export class Select extends LitElement {
       const event = new Event("change", { bubbles: true });
       this.hiddenInput.dispatchEvent(event);
     }
+    this.visible = false;
   }
 
   selectOption(option, index) {
@@ -222,20 +266,10 @@ export class Select extends LitElement {
     });
   }
 
-  open() {
-    if (this.disabled) {
-      return;
+  handleKeyPress(event) {
+    if (event.which === KEYS.ENTER || event.which === KEYS.TAB) {
+      this.open();
     }
-    this.visible = true;
-    setTimeout(() => {
-      // :( don't close the select right away
-      document.body.addEventListener("click", this.close);
-    });
-  }
-
-  close() {
-    this.visible = false;
-    document.body.removeEventListener("click", this.close);
   }
 
   render() {
@@ -245,10 +279,12 @@ export class Select extends LitElement {
           ${this.renderOptions()}
         </select>
 
-        <div class="select" aria-hidden="true">
+        <div class="select">
           <div
             class="label${this.disabled ? " disabled": ""}"
             @click="${this.visible ? this.close : this.open}"
+            @keydown="${this.handleKeyPress}"
+            tabindex="0"
           >
             ${this.selectedOption.label}
           </div>

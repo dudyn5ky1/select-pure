@@ -93,6 +93,45 @@
           <option-pure value="GOOGL">Google</option-pure>
         </select-pure>
       </form>
+
+      <div>
+        <h2>Close / open a dropdown</h2>
+        <button id="open">Open</button>
+        <button id="close">Close</button>
+        <select-pure class="open-close">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </div>
+
+      <div>
+        <h2>Enable / disable a dropdown</h2>
+        <button id="enable">Enable</button>
+        <button id="disable">Disable</button>
+        <select-pure class="enable-disable">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </div>
+
+      <div>
+        <h2>Set selected value</h2>
+        <button id="select-fb">Select Facebook</button>
+        <button id="select-google">Select Google</button>
+        <select-pure class="api-select">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </div>
     </div>
 
     <script>
@@ -106,6 +145,36 @@
       const form = document.querySelector("form");
       form.addEventListener("change", (event) => {
         alert(event.target.value);
+      });
+
+      const openCloseSelect = document.querySelector("select-pure.open-close");
+      const openBtn = document.querySelector("#open");
+      const closeBtn = document.querySelector("#close");
+      openBtn.addEventListener("click", () => {
+        openCloseSelect.open();
+      });
+      closeBtn.addEventListener("click", () => {
+        openCloseSelect.close();
+      });
+
+      const enableDisableSelect = document.querySelector("select-pure.enable-disable");
+      const enableBtn = document.querySelector("#enable");
+      const disableBtn = document.querySelector("#disable");
+      enableBtn.addEventListener("click", () => {
+        enableDisableSelect.enable();
+      });
+      disableBtn.addEventListener("click", () => {
+        enableDisableSelect.disable();
+      });
+
+      const apiValueSelect = document.querySelector("select-pure.api-select");
+      const selectFb = document.querySelector("#select-fb");
+      const selectGoogle = document.querySelector("#select-google");
+      selectFb.addEventListener("click", () => {
+        apiValueSelect.selectedIndex = 0;
+      });
+      selectGoogle.addEventListener("click", () => {
+        apiValueSelect.selectedIndex = 4;
       });
     </script>
 
