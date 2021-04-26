@@ -1,0 +1,11 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.0.0-alpha.6](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.5...select-pure@2.0.0-alpha.6) (2021-04-26)
+
+
+### Bug Fixes
+
+* **select-pure:** temprorary remove form handling ([f256227](https://github.com/dudyn5ky1/select-pure/commit/f2562277b24c916f3600217f322814708c543d34))
