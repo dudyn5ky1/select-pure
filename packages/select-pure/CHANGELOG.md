@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.8](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.7...select-pure@2.0.0-alpha.8) (2021-04-27)
+
+
+### Bug Fixes
+
+* **build:** remove comments to decrease build size ([89ad5f7](https://github.com/dudyn5ky1/select-pure/commit/89ad5f7f1bd0eed63f49a2e08e87f2d7fdc66cdb))
+
+
+
+
+
 # [2.0.0-alpha.7](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.6...select-pure@2.0.0-alpha.7) (2021-04-27)
 
 
