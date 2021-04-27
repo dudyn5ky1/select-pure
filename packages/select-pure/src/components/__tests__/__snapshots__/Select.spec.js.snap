@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select component closes dropdown 1`] = `
+<body>
+  <div>
+    <div
+      class="select"
+    >
+       
+      <select
+        class="dropdown"
+      />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Select component closes dropdown on click outside 1`] = `
+<body>
+  <div>
+    <div
+      class="select"
+    >
+       
+      <select
+        class="dropdown visible"
+      />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Select component opens dropdown 1`] = `
+<body>
+  <div>
+    <div
+      class="select"
+    >
+       
+      <select
+        class="dropdown visible"
+      />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Select component renders empty select 1`] = `
+<body>
+  <div>
+    <div
+      class="select"
+    >
+       
+      <select
+        class="dropdown"
+      />
+    </div>
+  </div>
+</body>
+`;

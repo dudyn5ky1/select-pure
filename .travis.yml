@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - "node"
-  - "13"
-  - "12"
-  - "11"
-  - "10"
-script:
-  - jest

@@ -1,94 +1,14 @@
 {
   "name": "select-pure",
-  "version": "0.6.2",
-  "description": "Pure JavaScript select component.",
-  "author": {
-    "name": "Maksym Dudynskyi",
-    "email": "hello@dudynskyi.com",
-    "url": "https://github.com/dudyn5ky1"
-  },
-  "keywords": [
-    "javascript",
-    "select",
-    "js"
-  ],
-  "files": [
-    "lib/",
-    "dist/",
-    "LICENSE",
-    "README.md"
-  ],
-  "main": "lib/index.js",
   "scripts": {
-    "build:dist": "rollup -c",
-    "build:lib": "babel -d lib src",
-    "build": "yarn build:dist && yarn build:lib",
-    "test": "jest --no-cache --coverage",
-    "test:update-coverage": "./scripts/update-coverage.sh",
-    "lint:js": "./node_modules/eslint/bin/eslint.js src/",
-    "lint:tests": "./node_modules/eslint/bin/eslint.js src/**/__tests__",
-    "lint:all": "yarn lint:js && yarn lint:tests",
-    "prepublish": "yarn lint:all && yarn test && yarn build && yarn test:update-coverage",
-    "commit": "git-cz"
+    "prerelease": "lerna version prerelease --conventional-commits --yes",
+    "serve:pure": "lerna run serve --scope=select-pure"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/dudyn5ky1/select-pure.git"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-object-rest-spread",
-      "transform-es2015-modules-commonjs"
-    ],
-    "env": {
-      "test": {
-        "presets": [
-          [
-            "@babel/env",
-            {
-              "modules": false
-            }
-          ],
-          "jest"
-        ]
-      }
-    }
-  },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "testURL": "http://localhost",
-    "testPathIgnorePatterns": [
-      "lib/"
-    ]
-  },
-  "pre-commit": [
-    "lint:all",
-    "test",
-    "build"
-  ],
-  "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.13.10",
-    "@babel/core": "7.13.10",
-    "@babel/preset-env": "7.13.12",
-    "@rollup/plugin-commonjs": "17.1.0",
-    "@rollup/plugin-node-resolve": "11.2.0",
-    "babel-jest": "26.6.3",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
-    "codecov": "3.7.2",
     "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "7.22.0",
-    "jest": "26.6.3",
-    "pre-commit": "^1.2.2",
-    "rollup": "2.42.4",
-    "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-eslint": "7.0.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "lerna": "^4.0.0",
+    "pre-commit": "^1.2.2"
   },
   "config": {
     "commitizen": {
