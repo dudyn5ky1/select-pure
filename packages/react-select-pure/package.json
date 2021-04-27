@@ -1,0 +1,18 @@
+{
+  "name": "react-select-pure",
+  "version": "0.0.1",
+  "description": "React wrapper for SelectPure component",
+  "author": {
+    "name": "Maksym Dudynskyi",
+    "email": "hello@dudynskyi.com",
+    "url": "https://github.com/dudyn5ky1"
+  },
+  "scripts": {
+    "commit": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dudyn5ky1/select-pure.git"
+  },
+  "license": "MIT"
+}
