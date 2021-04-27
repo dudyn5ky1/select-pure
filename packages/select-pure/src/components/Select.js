@@ -116,6 +116,9 @@ export class Select extends LitElement {
       formName: {
         type: String,
       },
+      id: {
+        type: String,
+      },
     };
   }
 
@@ -143,8 +146,7 @@ export class Select extends LitElement {
   firstUpdated() {
     this.processOptions();
     this.watchNativeSelect();
-    // :( Fails with React
-    // window.addEventListener("DOMContentLoaded", this.processForm);
+    this.processForm();
   }
 
   // public
