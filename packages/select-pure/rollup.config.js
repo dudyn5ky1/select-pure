@@ -16,7 +16,7 @@ const config = {
 };
 
 if (process.env.NODE_ENV !== "development") {
-  config.plugins.push(terser());
+  config.plugins.push(terser({ output: { comments: false } }));
 }
 
 export default config;
