@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.7](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.6...select-pure@2.0.0-alpha.7) (2021-04-27)
+
+
+### Bug Fixes
+
+* **general:** make id a property ([ba74121](https://github.com/dudyn5ky1/select-pure/commit/ba74121fc42616a9235a35d2b6f37a05a991ee31))
+
+
+
+
+
 # [2.0.0-alpha.6](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.5...select-pure@2.0.0-alpha.6) (2021-04-26)
 
 
