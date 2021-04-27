@@ -1,8 +1,8 @@
 # Custom JavaScript `<select>` component. Easy-to-use, accessible, mobile friendly and super efficient.
 
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
-[![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/index.js)
-[![brotli size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=brotli&label=brotli)](https://unpkg.com/select-pure/dist/index.js)
+[![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/index.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/index.js)
+[![brotli size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/index.js?compression=brotli&label=brotli)](https://unpkg.com/select-pure/dist/index.js)
 [![npm](https://img.shields.io/npm/dm/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![Build Status](https://travis-ci.org/dudyn5ky1/select-pure.svg?branch=master)](https://travis-ci.org/dudyn5ky1/select-pure)
 [![codecov](https://codecov.io/gh/dudyn5ky1/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/dudyn5ky1/select-pure)
@@ -28,7 +28,9 @@ npm i select-pure --save
 
 then include it in your JavaScript file
 
-`import 'select-pure';`
+```javascript
+import 'select-pure';
+```
 
 and use in the similar way as you would use a native HTML `<select>`.
 

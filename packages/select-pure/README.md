@@ -1,8 +1,8 @@
 # Custom JavaScript `<select>` component. Easy-to-use, accessible, mobile friendly and super efficient.
 
 [![npm version](https://img.shields.io/npm/v/select-pure.svg)](https://www.npmjs.com/package/select-pure)
-[![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/bundle.min.js)
-[![brotli size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/bundle.min.js?compression=brotli&label=brotli)](https://unpkg.com/select-pure/dist/bundle.min.js)
+[![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/index.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/index.js)
+[![brotli size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/index.js?compression=brotli&label=brotli)](https://unpkg.com/select-pure/dist/index.js)
 [![npm](https://img.shields.io/npm/dm/select-pure.svg)](https://www.npmjs.com/package/select-pure)
 [![Build Status](https://travis-ci.org/dudyn5ky1/select-pure.svg?branch=master)](https://travis-ci.org/dudyn5ky1/select-pure)
 [![codecov](https://codecov.io/gh/dudyn5ky1/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/dudyn5ky1/select-pure)
@@ -17,16 +17,26 @@ If you want to use older version, please refer to this [README](./README-v1.md).
 
 SelectPure is very easy to use. At first you have to install a package
 
-`yarn add select-pure` or `npm i select-pure --save`
+```bash
+yarn add select-pure
+```
+or
+
+```bash
+npm i select-pure --save
+```
 
 then include it in your JavaScript file
 
-`import 'select-pure';`
+```javascript
+import 'select-pure';
+```
 
 and use in the similar way as you would use a native HTML `<select>`.
 
 ```javascript
 <select-pure name="country" id="country">
+  <option-pure value="" disabled hidden>-- Please select a country --</option-pure>
   <option-pure value="UA">Ukraine</option-pure>
   <option-pure value="PL">Poland</option-pure>
   <option-pure value="DE">Germany</option-pure>
