@@ -24,7 +24,10 @@
     "lit",
     "element",
     "litelement",
-    "lit-element"
+    "lit-element",
+    "multiple",
+    "multiselect",
+    "dropdown"
   ],
   "files": [
     "src",

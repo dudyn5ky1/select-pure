@@ -9,7 +9,7 @@
 
 ## Description
 
-SelectPure is a Web Component (Custom Element) which makes it super use and customize. Main goal is to use extended API of the native HTML `<select>` element and provide additional features, like autocomplete, custom styling and many more. The package itself is stable to be used, however, if you've found any issues, please report them [here](https://github.com/dudyn5ky1/select-pure/issues) or create a PR of your own.
+SelectPure is a Web Component (Custom Element) which makes it super easy to use and customize. Main goal is to use extended API of the native HTML `<select>` element and provide additional features, like autocomplete, custom styling and many more. The package itself is stable to be used, however, if you've found any issues, please report them [here](https://github.com/dudyn5ky1/select-pure/issues) or create a PR of your own.
 
 If you want to use older version, please refer to this [README](./README-v1.md).
 

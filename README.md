@@ -9,7 +9,7 @@
 
 ## Description
 
-SelectPure is a Web Component (Custom Element) which makes it super use and customize. Main goal is to use extended API of the native HTML `<select>` element and provide additional features, like autocomplete, custom styling and many more. The package itself is stable to be used, however, if you've found any issues, please report them [here](https://github.com/dudyn5ky1/select-pure/issues) or create a PR of your own.
+SelectPure is a Web Component (Custom Element) which makes it super easy to use and customize. Main goal is to use extended API of the native HTML `<select>` element and provide additional features, like autocomplete, custom styling and many more. The package itself is stable to be used, however, if you've found any issues, please report them [here](https://github.com/dudyn5ky1/select-pure/issues) or create a PR of your own.
 
 If you want to use older version, please refer to this [README](./README-v1.md).
 
@@ -59,16 +59,18 @@ selectPure.disable();
 
 ### Attributes
 
-`<select-pure>` supports the following attributes: `name`, `id` and `disabled`.
+`<select-pure>` supports the following attributes: `name`, `id`, `multiple`, `default-label` and `disabled`.
 
 `<option-pure>` supports `value`, `label`, `disabled`, `selected` and `hidden` attributes.
 
 ### Available properties
 
-| property      | description                                                                                                                                                                    |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| selectedIndex | Returns index of the selected option. You can also manipulate selected value with changing this property (`selectPure.selectedIndex = 2`). Just like in the native `<select>`. |
-| value         | Returns selected value.                                                                                                                                                        |
+| property        | description                                                                                                                                                                    |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| selectedIndex   | Returns index of the selected option. You can also manipulate selected value with changing this property (`selectPure.selectedIndex = 2`). Just like in the native `<select>`. |
+| value           | Returns selected value.                                                                                                                                                        |
+| selectedOptions | Returns and array of selected `<option>`s. Works only in `multiple` mode.                                                                                                      |
+| values          | Returns and array of selected values. Works only in `multiple` mode.                                                                                                           |
 
 ### Callbacks
 
@@ -127,8 +129,6 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 
 ## TODO
 
-2.1
-- [ ] Mutiple
 - [ ] Autocomplete input
 - [ ] Callback for autocomplete input
 - [ ] Custom matching/filter pattern
@@ -138,7 +138,7 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
 - [ ] Sometimes one select scrolls dropdown in the others?
 
-2.2
+2.1
 - [ ] Option groups;
 - [ ] Required attribute support
 - [ ] Contribution guide;
