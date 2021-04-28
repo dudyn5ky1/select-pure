@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.9](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.8...select-pure@2.0.0-alpha.9) (2021-04-28)
+
+
+### Bug Fixes
+
+* **readme:** fix build size badges ([f005aa6](https://github.com/dudyn5ky1/select-pure/commit/f005aa683704bb7b057b0e260ebd252b712c94de))
+
+
+### Features
+
+* **multiple:** add multiselect functionality ([d7d559e](https://github.com/dudyn5ky1/select-pure/commit/d7d559e7349172fbcfee0af9e5d1f520743abd8b))
+
+
+
+
+
 # [2.0.0-alpha.8](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.7...select-pure@2.0.0-alpha.8) (2021-04-27)
 
 
