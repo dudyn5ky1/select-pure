@@ -10,7 +10,7 @@
   "scripts": {
     "commit": "git-cz",
     "serve": "es-dev-server --app-index examples/index.html --node-resolve --watch --open",
-    "build": "rollup -c",
+    "build": "tsc && rollup -c",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -27,13 +27,12 @@
     "lit-element",
     "multiple",
     "multiselect",
-    "dropdown"
+    "dropdown",
+    "typescript"
   ],
   "files": [
-    "src",
     "dist"
   ],
-  "svelte": "src/index.js",
   "module": "dist/index.js",
   "main": "dist/index.js",
   "repository": {
@@ -46,7 +45,7 @@
     "es-dev-server": "^2.1.0",
     "eslint": "7.22.0",
     "jest": "^26.6.3",
-    "lit-element": "^2.4.0",
+    "lit": "^2.0.0-rc.1",
     "rollup": "^2.45.2",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-minify-html-literals": "^1.2.6",

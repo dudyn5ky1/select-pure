@@ -1,8 +1,12 @@
-import { css, LitElement, html } from "lit-element";
+import { css, LitElement, html } from "lit";
+import { customElement } from "lit/decorators/custom-element.js";
+import { property } from "lit/decorators/property.js";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 
 import { KEYS } from "./constants";
 
-export class Option extends LitElement {
+@customElement("option-pure")
+export class OptionPure extends LitElement {
   static get styles() {
     return css`
       .option {
@@ -21,7 +25,7 @@ export class Option extends LitElement {
         padding: var(--padding, 0 10px);
         width: 100%;
       }
-      .option:focus, .option:not(.disabled):not(.selected):hover {
+      .option:not(.disabled):focus, .option:not(.disabled):not(.selected):hover {
         background-color: var(--hover-background-color, #e3e3e3);
         color: var(--hover-color, #000);
       }
@@ -37,22 +41,15 @@ export class Option extends LitElement {
     `;
   }
 
-  static get properties() {
-    return {
-      selected: {
-        type: Boolean,
-      },
-      label: {
-        type: String,
-      },
-      value: {
-        type: String,
-      },
-      disabled: {
-        type: Boolean,
-      },
-    };
-  }
+  @property() selected: boolean = this.getAttribute("selected") !== null;
+
+  @property() disabled: boolean = this.getAttribute("disabled") !== null;
+
+  @property() value: string = this.getAttribute("value") || "";
+
+  @property() label: string = this.textContent || this.getAttribute("label") || "";
+
+  private onSelect?: Function;
 
   constructor() {
     super();
@@ -62,16 +59,10 @@ export class Option extends LitElement {
     this.select = this.select.bind(this);
     this.unselect = this.unselect.bind(this);
     this.getOption = this.getOption.bind(this);
-
-    // properties
-    this.label = this.textContent || this.getAttribute("label");
-    this.value = this.getAttribute("value");
-    this.selected = this.getAttribute("selected") !== null;
-    this.disabled = this.getAttribute("disabled") !== null;
   }
 
   //public
-  getOption() {
+  public getOption() {
     return {
       label: this.label,
       value: this.value,
@@ -82,15 +73,21 @@ export class Option extends LitElement {
     };
   }
 
-  select() {
+  public select() {
     this.selected = true;
+    this.setAttribute("selected", "");
   }
 
-  unselect() {
+  public unselect() {
     this.selected = false;
+    this.removeAttribute("selected");
   }
 
-  onClick(event) {
+  public setOnSelectCallback(callback: Function) {
+    this.onSelect = callback;
+  }
+
+  private onClick(event: Event) {
     if (!this.onSelect || this.disabled) {
       event.stopPropagation();
       return;
@@ -98,9 +95,9 @@ export class Option extends LitElement {
     this.onSelect(this.value);
   }
 
-  handleKeyPress(event) {
+  private handleKeyPress(event: KeyboardEvent) {
     if (event.which === KEYS.ENTER) {
-      this.onClick();
+      this.onClick(event);
     }
   }
 
@@ -117,7 +114,7 @@ export class Option extends LitElement {
         class="${classNames.join(" ")}"
         @click=${this.onClick}
         @keydown="${this.handleKeyPress}"
-        tabindex="0"
+        tabindex="${ifDefined(this.disabled ? "0" : undefined)}"
       >
         ${this.label}
       </div>

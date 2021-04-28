@@ -1,9 +1,22 @@
-import { css, LitElement, html } from "lit-element";
-import { ifDefined } from "lit-html/directives/if-defined";
+import { css, LitElement, html } from "lit";
+import { ifDefined } from "lit-html/directives/if-defined.js";
+import { customElement } from "lit/decorators/custom-element.js";
+import { property } from "lit/decorators/property.js";
 
 import { KEYS } from "./constants";
+import { Option, OptionPureElement } from "./../models";
 
-export class Select extends LitElement {
+const defaultOption = {
+  label: "",
+  value: "",
+  select: () => {},
+  unselect: () => {},
+  disabled: false,
+  hidden: false,
+};
+
+@customElement("select-pure")
+export class SelectPure extends LitElement {
   static get styles() {
     return css`
       .select-wrapper {
@@ -116,46 +129,35 @@ export class Select extends LitElement {
     `;
   }
 
-  static get properties() {
-    return {
-      options: {
-        type: Array,
-      },
-      visible: {
-        type: Boolean,
-      },
-      selectedOption: {
-        type: Object,
-      },
-      _selectedOptions: {
-        type: Array,
-      },
-      disabled: {
-        type: Boolean,
-      },
-      value: {
-        type: String,
-      },
-      values: {
-        type: Array,
-      },
-      name: {
-        type: String,
-      },
-      formName: {
-        type: String,
-      },
-      id: {
-        type: String,
-      },
-      multiple: {
-        type: Boolean,
-      },
-      defaultLabel: {
-        type: String,
-      },
-    };
-  }
+  @property() options: Option[] = [];
+
+  @property() visible: boolean = false;
+
+  @property() selectedOption: Option = defaultOption;
+
+  @property() _selectedOptions: Option[] = [];
+
+  @property() disabled: boolean = this.getAttribute("disabled") !== null;
+
+  @property() multiple: boolean = this.getAttribute("multiple") !== null;
+
+  @property() name: string = this.getAttribute("name") || "";
+
+  @property() _id: string = this.getAttribute("id") || "";
+
+  @property() formName: string = this.name || this.id;
+
+  @property() value: string = "";
+
+  @property() values: string[] = [];
+
+  @property() defaultLabel: string = this.getAttribute("default-label") || "";
+
+  private nativeSelect: HTMLSelectElement | null = null;
+
+  private form: HTMLFormElement | null = null;
+
+  private hiddenInput: HTMLInputElement | null = null;
 
   constructor() {
     super();
@@ -164,34 +166,15 @@ export class Select extends LitElement {
     this.close = this.close.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.processOptions = this.processOptions.bind(this);
-    this.watchNativeSelect = this.watchNativeSelect.bind(this);
     this.processForm = this.processForm.bind(this);
-
-    // properties
-    this.options = [];
-    this.visible = false;
-    this.selectedOption = {};
-    this._selectedOptions = [];
-    this.disabled = this.getAttribute("disabled") !== null;
-    this.multiple = this.getAttribute("multiple") !== null;
-    this.name = this.getAttribute("name");
-    this.id = this.getAttribute("id");
-    this.formName = this.name || this.id;
-    this.value = null;
-    this.values = [];
-    this.defaultLabel = this.getAttribute("default-label");
   }
-
-  // lifecycle
 
   firstUpdated() {
     this.processOptions();
-    this.watchNativeSelect();
     this.processForm();
   }
 
-  // public methods
-  open() {
+  public open() {
     if (this.disabled) {
       return;
     }
@@ -203,35 +186,35 @@ export class Select extends LitElement {
     });
   }
 
-  close() {
+  public close() {
     this.visible = false;
     document.body.removeEventListener("click", this.close);
   }
 
-  enable() {
+  public enable() {
     this.disabled = false;
   }
 
-  disable() {
+  public disable() {
     this.disabled = true;
   }
 
-  // public properties
-  get selectedIndex() {
-    return this.nativeSelect.selectedIndex;
+  get selectedIndex(): number | undefined {
+    return this.nativeSelect?.selectedIndex;
   }
 
-  set selectedIndex(index) {
+  set selectedIndex(index: number | undefined) {
+    if (!index) {
+      return;
+    }
     this.onSelect(this.options[index].value);
   }
 
   get selectedOptions() {
-    return this.nativeSelect.selectedOptions;
+    return this.nativeSelect?.selectedOptions;
   }
 
-  // internal methods
-
-  processForm() {
+  private processForm() {
     this.form = this.closest("form");
     if (!this.form) {
       return;
@@ -242,17 +225,17 @@ export class Select extends LitElement {
     this.form.appendChild(this.hiddenInput);
   }
 
-  watchNativeSelect() {
-    this.nativeSelect.addEventListener("change", () => {
-      this.selectedIndex = this.nativeSelect.selectedIndex;
-    });
+  private handleNativeSelectChange() {
+    this.selectedIndex = this.nativeSelect?.selectedIndex;
   }
 
-  processOptions() {
+  private processOptions() {
+    // @ts-ignore
     this.nativeSelect = this.shadowRoot.querySelector("select");
     const options = this.querySelectorAll("option-pure");
     for (let i = 0; i < options.length; i++) {
-      const { value, label, select, unselect, selected, hidden, disabled } = options[i].getOption();
+      const currentOption = options[i] as OptionPureElement;
+      const { value, label, select, unselect, selected, hidden, disabled } = currentOption.getOption();
       this.options.push({
         label,
         value,
@@ -262,21 +245,21 @@ export class Select extends LitElement {
         disabled,
       });
       if (selected) {
-        this.selectOption(options[i], i, true);
+        this.selectOption(this.options[i], true);
       }
-      options[i].onSelect = this.onSelect;
+      currentOption.setOnSelectCallback(this.onSelect);
 
       if (i === options.length - 1 && !this.selectedOption.value && !this.multiple) {
-        this.selectOption(options[0], 0, true);
+        this.selectOption(this.options[0], true);
       }
     }
   }
 
-  onSelect(optionValue) {
+  private onSelect(optionValue: string) {
     for (let i = 0; i < this.options.length; i++) {
       const option = this.options[i];
       if (option.value === optionValue) {
-        this.selectOption(option, i);
+        this.selectOption(option);
         continue;
       }
       if (!this.multiple) {
@@ -286,7 +269,7 @@ export class Select extends LitElement {
     this.visible = false;
   }
 
-  selectOption(option, index, isInitialRender) {
+  private selectOption(option: Option, isInitialRender?: boolean) {
     if (this.multiple) {
       const isSelected = this._selectedOptions.find(({ value }) => value === option.value);
       if (isSelected) {
@@ -305,8 +288,8 @@ export class Select extends LitElement {
       this.value = option.value;
       option.select();
     }
-    if (this.form) {
-      this.hiddenInput.value = this.multiple ? this.values : this.value;
+    if (this.form && this.hiddenInput) {
+      this.hiddenInput.value = this.multiple ? this.values.join(",") : this.value;
       const event = new Event("change", { bubbles: true });
       this.hiddenInput.dispatchEvent(event);
     }
@@ -316,28 +299,26 @@ export class Select extends LitElement {
     this.afterSelect();
   }
 
-  afterSelect() {
+  private afterSelect() {
     this.dispatchEvent(new Event("change"));
   }
 
-  handleKeyPress(event) {
+  private handleKeyPress(event: KeyboardEvent) {
     if (event.which === KEYS.ENTER || event.which === KEYS.TAB) {
       this.open();
     }
   }
 
-  onCrossClick(event, value) {
+  private onCrossClick(event: Event, value: string) {
     event.stopPropagation();
     this.onSelect(value);
   }
 
-  // internal render methods
-
-  renderOptions() {
+  private renderNativeOptions() {
     return this.options.map(({ value, label, hidden, disabled }) => {
       let isSelected = this.selectedOption.value === value;
       if (this.multiple) {
-        isSelected = this._selectedOptions.find(option => option.value === value);
+        isSelected = Boolean(this._selectedOptions.find(option => option.value === value));
       }
       return html`
         <option
@@ -352,14 +333,14 @@ export class Select extends LitElement {
     });
   }
 
-  renderLabel() {
+  private renderLabel() {
     if (this.multiple && this._selectedOptions.length) {
       return html`
         <div class="multi-selected-wrapper">
           ${this._selectedOptions.map(({ label, value }) => html`
               <span class="multi-selected">
                 ${label}
-                <span class="cross" @click=${event => this.onCrossClick(event, value)}></span>
+                <span class="cross" @click=${(event: Event) => this.onCrossClick(event, value)}></span>
               </span>
           `)}
         </div>
@@ -380,13 +361,14 @@ export class Select extends LitElement {
     return html`
       <div class="select-wrapper">
         <select
+          @change=${this.handleNativeSelectChange}
           ?disabled=${this.disabled}
           ?multiple=${this.multiple}
           name="${ifDefined(this.name || undefined)}"
           id=${ifDefined(this.id || undefined)}
           size="1"
         >
-          ${this.renderOptions()}
+          ${this.renderNativeOptions()}
         </select>
 
         <div class="select">

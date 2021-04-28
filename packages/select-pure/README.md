@@ -41,7 +41,7 @@ and use in the similar way as you would use a native HTML `<select>`.
   <option-pure value="PL">Poland</option-pure>
   <option-pure value="DE">Germany</option-pure>
   <option-pure value="US">USA</option-pure>
-  <option-pure value="US" disabled>Russia</option-pure>
+  <option-pure value="RU" disabled>Russia</option-pure>
 </select-pure>
 ```
 
@@ -128,7 +128,6 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 ## TODO
 
 2.1
-- [ ] Mutiple
 - [ ] Autocomplete input
 - [ ] Callback for autocomplete input
 - [ ] Custom matching/filter pattern
@@ -137,6 +136,8 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Add destroy method;
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
 - [ ] Sometimes one select scrolls dropdown in the others?
+- [ ] Don't close dropdown in `multiple` mode.
+- [ ] Use `connectedCallback` / `disconnectedCallback` to remove listeners when element is destroyed;
 
 2.2
 - [ ] Option groups;

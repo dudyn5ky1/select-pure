@@ -3,7 +3,7 @@ import { terser } from "rollup-plugin-terser";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 
 const config = {
-  input: "src/index.js",
+  input: "lib/index.js",
   output: {
     dir: "dist",
     format: "es",

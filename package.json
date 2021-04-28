@@ -2,13 +2,17 @@
   "name": "select-pure",
   "scripts": {
     "prerelease": "lerna version prerelease --conventional-commits --yes",
-    "serve:pure": "lerna run serve --scope=select-pure"
+    "serve:pure": "lerna run serve --scope=select-pure",
+    "lint": "eslint packages",
+    "build": "lerna run build"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^4.22.0",
     "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
     "lerna": "^4.0.0",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "typescript": "^4.2.4"
   },
   "config": {
     "commitizen": {
