@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.10](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.9...select-pure@2.0.0-alpha.10) (2021-04-29)
+
+
+### Bug Fixes
+
+* **general:** small fixes and improvements ([462cdff](https://github.com/dudyn5ky1/select-pure/commit/462cdff53c34464f00716ca11593256307d30e9f))
+
+
+### Features
+
+* **typescript:** migrate to TS ([7be8fdf](https://github.com/dudyn5ky1/select-pure/commit/7be8fdf31e6a34879981746a9c7eec21e8e6cb72))
+
+
+
+
+
 # [2.0.0-alpha.9](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.8...select-pure@2.0.0-alpha.9) (2021-04-28)
 
 
