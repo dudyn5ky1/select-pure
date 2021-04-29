@@ -252,7 +252,10 @@ class SelectPure {
 
   _sortOptions(event) {
     this._options.forEach(_option => {
-      if (!_option.get().textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').startsWith(event.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''))) {
+      if (!_option.get().textContent.toLowerCase().normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .startsWith(event.target.value.toLowerCase().normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, ""))) {
         _option.addClass(this._config.classNames.optionHidden);
         return;
       }
