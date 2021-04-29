@@ -31,7 +31,8 @@
     "typescript"
   ],
   "files": [
-    "dist"
+    "dist",
+    "lib"
   ],
   "module": "dist/index.js",
   "main": "dist/index.js",
