@@ -41,13 +41,13 @@ export class OptionPure extends LitElement {
     `;
   }
 
-  @property() selected: boolean = this.getAttribute("selected") !== null;
+  @property() _selected: boolean = this.getAttribute("selected") !== null;
 
-  @property() disabled: boolean = this.getAttribute("disabled") !== null;
+  @property() _disabled: boolean = this.getAttribute("disabled") !== null;
 
-  @property() value: string = this.getAttribute("value") || "";
+  @property() _value: string = this.getAttribute("value") || "";
 
-  @property() label: string = this.textContent || this.getAttribute("label") || "";
+  @property() _label: string = this.textContent || this.getAttribute("label") || "";
 
   private onSelect?: Function;
 
@@ -64,22 +64,22 @@ export class OptionPure extends LitElement {
   //public
   public getOption() {
     return {
-      label: this.label,
-      value: this.value,
+      label: this._label,
+      value: this._value,
       select: this.select,
       unselect: this.unselect,
-      selected: this.selected,
-      disabled: this.disabled,
+      selected: this._selected,
+      disabled: this._disabled,
     };
   }
 
   public select() {
-    this.selected = true;
+    this._selected = true;
     this.setAttribute("selected", "");
   }
 
   public unselect() {
-    this.selected = false;
+    this._selected = false;
     this.removeAttribute("selected");
   }
 
@@ -88,11 +88,11 @@ export class OptionPure extends LitElement {
   }
 
   private onClick(event: Event) {
-    if (!this.onSelect || this.disabled) {
+    if (!this.onSelect || this._disabled) {
       event.stopPropagation();
       return;
     }
-    this.onSelect(this.value);
+    this.onSelect(this._value);
   }
 
   private handleKeyPress(event: KeyboardEvent) {
@@ -103,10 +103,10 @@ export class OptionPure extends LitElement {
 
   render() {
     const classNames = ["option"];
-    if (this.selected) {
+    if (this._selected) {
       classNames.push("selected");
     }
-    if (this.disabled) {
+    if (this._disabled) {
       classNames.push("disabled");
     }
     return html`
@@ -114,9 +114,9 @@ export class OptionPure extends LitElement {
         class="${classNames.join(" ")}"
         @click=${this.onClick}
         @keydown="${this.handleKeyPress}"
-        tabindex="${ifDefined(this.disabled ? "0" : undefined)}"
+        tabindex="${ifDefined(this._disabled ? undefined : "0")}"
       >
-        ${this.label}
+        ${this._label}
       </div>
     `;
   }

@@ -63,6 +63,9 @@ export class SelectPure extends LitElement {
         opacity: 0;
         z-index: 1;
       }
+      select[multiple] {
+        z-index: 0;
+      }
       select,
       .label {
         align-items: center;
@@ -139,7 +142,7 @@ export class SelectPure extends LitElement {
 
   @property() disabled: boolean = this.getAttribute("disabled") !== null;
 
-  @property() multiple: boolean = this.getAttribute("multiple") !== null;
+  @property() _multiple: boolean = this.getAttribute("multiple") !== null;
 
   @property() name: string = this.getAttribute("name") || "";
 
@@ -204,7 +207,7 @@ export class SelectPure extends LitElement {
   }
 
   set selectedIndex(index: number | undefined) {
-    if (!index) {
+    if (!index && index !== 0) {
       return;
     }
     this.onSelect(this.options[index].value);
@@ -249,7 +252,7 @@ export class SelectPure extends LitElement {
       }
       currentOption.setOnSelectCallback(this.onSelect);
 
-      if (i === options.length - 1 && !this.selectedOption.value && !this.multiple) {
+      if (i === options.length - 1 && !this.selectedOption.value && !this._multiple) {
         this.selectOption(this.options[0], true);
       }
     }
@@ -262,7 +265,7 @@ export class SelectPure extends LitElement {
         this.selectOption(option);
         continue;
       }
-      if (!this.multiple) {
+      if (!this._multiple) {
         option.unselect();
       }
     }
@@ -270,7 +273,7 @@ export class SelectPure extends LitElement {
   }
 
   private selectOption(option: Option, isInitialRender?: boolean) {
-    if (this.multiple) {
+    if (this._multiple) {
       const isSelected = this._selectedOptions.find(({ value }) => value === option.value);
       if (isSelected) {
         const selectedIndex = this._selectedOptions.indexOf(isSelected);
@@ -289,7 +292,7 @@ export class SelectPure extends LitElement {
       option.select();
     }
     if (this.form && this.hiddenInput) {
-      this.hiddenInput.value = this.multiple ? this.values.join(",") : this.value;
+      this.hiddenInput.value = this._multiple ? this.values.join(",") : this.value;
       const event = new Event("change", { bubbles: true });
       this.hiddenInput.dispatchEvent(event);
     }
@@ -317,7 +320,7 @@ export class SelectPure extends LitElement {
   private renderNativeOptions() {
     return this.options.map(({ value, label, hidden, disabled }) => {
       let isSelected = this.selectedOption.value === value;
-      if (this.multiple) {
+      if (this._multiple) {
         isSelected = Boolean(this._selectedOptions.find(option => option.value === value));
       }
       return html`
@@ -334,7 +337,7 @@ export class SelectPure extends LitElement {
   }
 
   private renderLabel() {
-    if (this.multiple && this._selectedOptions.length) {
+    if (this._multiple && this._selectedOptions.length) {
       return html`
         <div class="multi-selected-wrapper">
           ${this._selectedOptions.map(({ label, value }) => html`
@@ -363,7 +366,7 @@ export class SelectPure extends LitElement {
         <select
           @change=${this.handleNativeSelectChange}
           ?disabled=${this.disabled}
-          ?multiple=${this.multiple}
+          ?multiple=${this._multiple}
           name="${ifDefined(this.name || undefined)}"
           id=${ifDefined(this.id || undefined)}
           size="1"
