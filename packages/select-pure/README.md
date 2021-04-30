@@ -127,7 +127,6 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 
 ## TODO
 
-2.1
 - [ ] Autocomplete input
 - [ ] Callback for autocomplete input
 - [ ] Custom matching/filter pattern
@@ -135,15 +134,13 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Precommit hooks;
 - [ ] Add destroy method;
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
-- [ ] Sometimes one select scrolls dropdown in the others?
-- [ ] Don't close dropdown in `multiple` mode.
-- [ ] Use `connectedCallback` / `disconnectedCallback` to remove listeners when element is destroyed;
 
-2.2
+2.1
 - [ ] Option groups;
 - [ ] Required attribute support
 - [ ] Contribution guide;
 - [ ] Position of the dropdown;
+
 
 ## License
 

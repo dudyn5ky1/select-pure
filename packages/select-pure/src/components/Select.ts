@@ -170,6 +170,7 @@ export class SelectPure extends LitElement {
     this.onSelect = this.onSelect.bind(this);
     this.processOptions = this.processOptions.bind(this);
     this.processForm = this.processForm.bind(this);
+    this.removeEventListeners = this.removeEventListeners.bind(this);
   }
 
   firstUpdated() {
@@ -181,17 +182,18 @@ export class SelectPure extends LitElement {
     if (this.disabled) {
       return;
     }
-    document.body.removeEventListener("click", this.close);
     this.visible = true;
-    setTimeout(() => {
-      // :( don't close the select right away
-      document.body.addEventListener("click", this.close);
-    });
+    this.removeEventListeners();
+    document.body.addEventListener("click", this.close, true);
   }
 
-  public close() {
+  public close(event?: Event) {
+    // @ts-ignore
+    if (event && this.contains(event.target)) {
+      return;
+    }
     this.visible = false;
-    document.body.removeEventListener("click", this.close);
+    this.removeEventListeners();
   }
 
   public enable() {
@@ -215,6 +217,10 @@ export class SelectPure extends LitElement {
 
   get selectedOptions() {
     return this.nativeSelect?.selectedOptions;
+  }
+
+  private removeEventListeners() {
+    document.body.removeEventListener("click", this.close);
   }
 
   private processForm() {
@@ -269,7 +275,9 @@ export class SelectPure extends LitElement {
         option.unselect();
       }
     }
-    this.visible = false;
+    if (!this._multiple) {
+      this.close();
+    }
   }
 
   private selectOption(option: Option, isInitialRender?: boolean) {

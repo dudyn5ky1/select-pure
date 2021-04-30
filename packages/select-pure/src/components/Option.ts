@@ -88,8 +88,8 @@ export class OptionPure extends LitElement {
   }
 
   private onClick(event: Event) {
-    if (!this.onSelect || this._disabled) {
-      event.stopPropagation();
+    event.stopPropagation();
+    if (!this.onSelect) {
       return;
     }
     this.onSelect(this._value);

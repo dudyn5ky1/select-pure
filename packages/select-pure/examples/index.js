@@ -1,2 +1,2 @@
-import "./../dist/index";
+import "./../lib/index";
 

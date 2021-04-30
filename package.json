@@ -2,9 +2,10 @@
   "name": "select-pure",
   "scripts": {
     "prerelease": "lerna version prerelease --conventional-commits --yes",
-    "serve:pure": "lerna run serve --scope=select-pure",
+    "serve:pure": "lerna run serve --scope=select-pure --stream",
     "lint": "eslint packages",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "build:watch": "lerna run build:watch --stream"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.22.0",

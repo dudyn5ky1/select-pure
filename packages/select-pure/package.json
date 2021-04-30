@@ -11,6 +11,7 @@
     "commit": "git-cz",
     "serve": "es-dev-server --app-index examples/index.html --node-resolve --watch --open",
     "build": "tsc && rollup -c",
+    "build:watch": "tsc -w",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
