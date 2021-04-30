@@ -6,11 +6,12 @@ import { property } from "lit/decorators/property.js";
 import { KEYS } from "./constants";
 import { Option, OptionPureElement } from "./../models";
 
+const noop = () => {};
 const defaultOption = {
   label: "",
   value: "",
-  select: () => {},
-  unselect: () => {},
+  select: noop,
+  unselect: noop,
   disabled: false,
   hidden: false,
 };
@@ -22,9 +23,6 @@ export class SelectPure extends LitElement {
       .select-wrapper {
         position: relative;
       }
-      .select-wrapper:hover .select {
-        z-index: 2;
-      }
       .select {
         bottom: 0;
         display: flex;
@@ -34,6 +32,11 @@ export class SelectPure extends LitElement {
         right: 0;
         top: 0;
         width: var(--select-width, 100%);
+      }
+      @media only screen and (hover: none) and (pointer: coarse){
+        select {
+          z-index: 3;
+        }
       }
       .label:focus {
         outline: var(--select-outline, 2px solid #e3e3e3);
@@ -61,7 +64,9 @@ export class SelectPure extends LitElement {
         appearance: none;
         position: relative;
         opacity: 0;
-        z-index: 1;
+      }
+      .select {
+        z-index: 2;
       }
       select[multiple] {
         z-index: 0;

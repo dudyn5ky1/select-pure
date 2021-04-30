@@ -9,7 +9,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "serve": "es-dev-server --app-index examples/index.html --node-resolve --watch --open",
+    "serve": "es-dev-server --app-index examples/index.html --node-resolve --watch --open --host 0.0.0.0",
     "build": "tsc && rollup -c",
     "build:watch": "tsc -w",
     "prepublishOnly": "npm run build"
@@ -32,8 +32,7 @@
     "typescript"
   ],
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "module": "dist/index.js",
   "main": "dist/index.js",
