@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.12](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.11...select-pure@2.0.0-alpha.12) (2021-04-30)
+
+
+### Bug Fixes
+
+* **general:** fix iOS not showing mobile select ([4fd7939](https://github.com/dudyn5ky1/select-pure/commit/4fd793910e3e90d0c3c81d2e5db927cee2554303))
+
+
+### Features
+
+* **general:** don't close dropdown in multiple mode ([f455cad](https://github.com/dudyn5ky1/select-pure/commit/f455cad921aaaf10c3ddd9d92b906f63c47a8d05))
+
+
+
+
+
 # [2.0.0-alpha.11](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.10...select-pure@2.0.0-alpha.11) (2021-04-29)
 
 
