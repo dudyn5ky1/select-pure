@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0...select-pure@2.0.1-alpha.0) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** add unpkg script for inline demo ([564ee09](https://github.com/dudyn5ky1/select-pure/commit/564ee095011ab17fb06a6091c1ce4df72191a458))
+
+
+
+
+
 # [2.0.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.14...select-pure@2.0.0) (2021-05-01)
 
 **Note:** Version bump only for package select-pure
