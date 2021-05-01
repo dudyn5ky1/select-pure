@@ -38,7 +38,7 @@ and use in the similar way as you would use a native HTML `<select>`.
 ```
 <custom-element-demo>
   <template>
-    <script src="https://unpkg.com/select-pure@2.0.0/dist/index.js"></script>
+    <script src="https://unpkg.com/select-pure@latest/dist/index.js"></script>
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
