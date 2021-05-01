@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.14](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.13...select-pure@2.0.0-alpha.14) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** add live web component demo to README ([9caaf8b](https://github.com/dudyn5ky1/select-pure/commit/9caaf8bb561fe40ab797d5b3deafe564bf02765f))
+
+
+
+
+
 # [2.0.0-alpha.13](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0-alpha.12...select-pure@2.0.0-alpha.13) (2021-05-01)
 
 **Note:** Version bump only for package select-pure
