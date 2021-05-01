@@ -45,7 +45,7 @@ Use in the similar way as you would use a native HTML `<select>`.
 
 <!--
 ```
-<custom-element-demo>
+<custom-element-demo height="300">
   <template>
     <script src="https://unpkg.com/select-pure@latest/dist/index.js"></script>
     <next-code-block></next-code-block>
@@ -60,7 +60,7 @@ Use in the similar way as you would use a native HTML `<select>`.
   <option-pure value="PL">Poland</option-pure>
   <option-pure value="DE">Germany</option-pure>
   <option-pure value="US">USA</option-pure>
-  <option-pure value="US" disabled>Russia</option-pure>
+  <option-pure value="RU" disabled>Russia</option-pure>
 </select-pure>
 ```
 
