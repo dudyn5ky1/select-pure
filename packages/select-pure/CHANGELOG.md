@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.6](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.5...select-pure@2.0.1-alpha.6) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** include the whole lib folder ([e950725](https://github.com/dudyn5ky1/select-pure/commit/e950725927996fc5443fcfbaf0de13307a7068de))
+
+
+
+
+
 ## [2.0.1-alpha.5](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.4...select-pure@2.0.1-alpha.5) (2021-05-01)
 
 
