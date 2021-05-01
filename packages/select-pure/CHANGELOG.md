@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.4](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.3...select-pure@2.0.1-alpha.4) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** include only latest published version to the inline demo ([24c423e](https://github.com/dudyn5ky1/select-pure/commit/24c423e20ae147dc4f750f3b8dfb2c050b2acff4))
+
+
+
+
+
 ## [2.0.1-alpha.3](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.2...select-pure@2.0.1-alpha.3) (2021-05-01)
 
 
