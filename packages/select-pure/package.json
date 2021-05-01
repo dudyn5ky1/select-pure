@@ -34,8 +34,8 @@
   "files": [
     "dist"
   ],
-  "module": "dist/index.js",
-  "main": "dist/index.js",
+  "module": "lib/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/dudyn5ky1/select-pure.git"

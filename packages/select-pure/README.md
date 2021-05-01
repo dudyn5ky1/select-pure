@@ -4,14 +4,17 @@
 [![gzip size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/index.js?compression=gzip&label=gzip)](https://unpkg.com/select-pure/dist/index.js)
 [![brotli size](http://img.badgesize.io/https://unpkg.com/select-pure/dist/index.js?compression=brotli&label=brotli)](https://unpkg.com/select-pure/dist/index.js)
 [![npm](https://img.shields.io/npm/dm/select-pure.svg)](https://www.npmjs.com/package/select-pure)
-[![Build Status](https://travis-ci.org/dudyn5ky1/select-pure.svg?branch=master)](https://travis-ci.org/dudyn5ky1/select-pure)
-[![codecov](https://codecov.io/gh/dudyn5ky1/select-pure/branch/master/graph/badge.svg)](https://codecov.io/gh/dudyn5ky1/select-pure)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/select-pure)
 
 ## Description
 
 SelectPure is a Web Component (Custom Element) which makes it super easy to use and customize. Main goal is to use extended API of the native HTML `<select>` element and provide additional features, like autocomplete, custom styling and many more. The package itself is stable to be used, however, if you've found any issues, please report them [here](https://github.com/dudyn5ky1/select-pure/issues) or create a PR of your own.
 
 If you want to use older version, please refer to this [README](./README-v1.md).
+
+## Demo
+
+Interactive demo with many examples is available [here](https://www.webcomponents.org/element/select-pure).
 
 ## Usage
 
@@ -26,19 +29,25 @@ or
 npm i select-pure --save
 ```
 
-then include it in your JavaScript file
+then include it in your JavaScript file:
 
 ```javascript
 import 'select-pure';
 ```
 
-and use in the similar way as you would use a native HTML `<select>`.
+*Important!* If you want to use a minified ES2015 version, include the package as following:
+
+```javascript
+import 'select-pure/dist/index.js';
+```
+
+Use in the similar way as you would use a native HTML `<select>`.
 
 <!--
 ```
 <custom-element-demo>
   <template>
-    <script src="https://unpkg.com/select-pure@2.0.0/dist/index.js"></script>
+    <script src="https://unpkg.com/select-pure@latest/dist/index.js"></script>
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
