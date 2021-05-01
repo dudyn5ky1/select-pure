@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.7](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.6...select-pure@2.0.1-alpha.7) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** add lit as a dependency ([3534162](https://github.com/dudyn5ky1/select-pure/commit/35341623bec28ea5968de80c2afe910e6135c954))
+
+
+
+
+
 ## [2.0.1-alpha.6](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.5...select-pure@2.0.1-alpha.6) (2021-05-01)
 
 
