@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.1](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.0...select-pure@2.0.1-alpha.1) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** fix WebComponents inline demo ([3511209](https://github.com/dudyn5ky1/select-pure/commit/351120981fd6bbdc8346b72de7b084d0ab2568d7))
+
+
+
+
+
 ## [2.0.1-alpha.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.0...select-pure@2.0.1-alpha.0) (2021-05-01)
 
 
