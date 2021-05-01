@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.8](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.7...select-pure@2.0.1-alpha.8) (2021-05-01)
+
+
+### Bug Fixes
+
+* add height to inline demo ([91e58b4](https://github.com/dudyn5ky1/select-pure/commit/91e58b4f285777dfef136e32f45ba35a541ca181))
+
+
+
+
+
 ## [2.0.1-alpha.7](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.6...select-pure@2.0.1-alpha.7) (2021-05-01)
 
 
