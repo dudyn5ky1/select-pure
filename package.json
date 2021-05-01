@@ -1,7 +1,8 @@
 {
   "name": "select-pure",
   "scripts": {
-    "prerelease": "lerna version prerelease --conventional-commits --yes",
+    "release:alpha": "lerna version prerelease --conventional-commits --yes",
+    "release": "lerna version --conventional-commits --yes",
     "serve:pure": "lerna run serve --scope=select-pure --stream",
     "lint": "eslint packages",
     "build": "lerna run build",

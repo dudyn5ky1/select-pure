@@ -59,16 +59,18 @@ selectPure.disable();
 
 ### Attributes
 
-`<select-pure>` supports the following attributes: `name`, `id` and `disabled`.
+`<select-pure>` supports the following attributes: `name`, `id`, `multiple`, `default-label` and `disabled`.
 
 `<option-pure>` supports `value`, `label`, `disabled`, `selected` and `hidden` attributes.
 
 ### Available properties
 
-| property      | description                                                                                                                                                                    |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| selectedIndex | Returns index of the selected option. You can also manipulate selected value with changing this property (`selectPure.selectedIndex = 2`). Just like in the native `<select>`. |
-| value         | Returns selected value.                                                                                                                                                        |
+| property        | description                                                                                                                                                                    |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| selectedIndex   | Returns index of the selected option. You can also manipulate selected value with changing this property (`selectPure.selectedIndex = 2`). Just like in the native `<select>`. |
+| value           | Returns selected value.                                                                                                                                                        |
+| selectedOptions | Returns and array of selected `<option>`s. Works only in `multiple` mode.                                                                                                      |
+| values          | Returns and array of selected values. Works only in `multiple` mode.                                                                                                           |
 
 ### Callbacks
 
@@ -134,13 +136,13 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Precommit hooks;
 - [ ] Add destroy method;
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
+- [ ] Publish to webcomponents;
 
 2.1
 - [ ] Option groups;
 - [ ] Required attribute support
 - [ ] Contribution guide;
 - [ ] Position of the dropdown;
-
 
 ## License
 
