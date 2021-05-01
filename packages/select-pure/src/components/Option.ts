@@ -41,15 +41,21 @@ export class OptionPure extends LitElement {
     `;
   }
 
-  @property() _selected: boolean = this.getAttribute("selected") !== null;
+  @property() _selected: boolean = false;
 
-  @property() _disabled: boolean = this.getAttribute("disabled") !== null;
+  @property() _disabled: boolean = false;
 
-  @property() _value: string = this.getAttribute("value") || "";
+  @property() _value: string = "";
 
-  @property() _label: string = this.textContent || this.getAttribute("label") || "";
+  @property() _label: string = "";
+
+  @property() optionIndex: number = -1;
+
+  @property() ready: boolean = false;
 
   private onSelect?: Function;
+
+  private onReady?: Function;
 
   constructor() {
     super();
@@ -61,7 +67,29 @@ export class OptionPure extends LitElement {
     this.getOption = this.getOption.bind(this);
   }
 
-  //public
+  connectedCallback() {
+    super.connectedCallback();
+    // set properties
+    this._selected = this.getAttribute("selected") !== null;
+    this._disabled = this.getAttribute("disabled") !== null;
+    this._value = this.getAttribute("value") || "";
+    this.ready = true;
+    this.processLabel();
+    if (this.onReady) {
+      this.onReady(this.getOption(), this.optionIndex);
+    }
+  }
+
+  private processLabel() {
+    if (this.textContent) {
+      this._label = this.textContent;
+      return;
+    }
+    if (this.getAttribute("label")) {
+      this._label = this.getAttribute("label") || "";
+    }
+  }
+
   public getOption() {
     return {
       label: this._label,
@@ -81,6 +109,11 @@ export class OptionPure extends LitElement {
   public unselect() {
     this._selected = false;
     this.removeAttribute("selected");
+  }
+
+  public setOnReadyCallback(callback: Function, index: number) {
+    this.onReady = callback;
+    this.optionIndex = index;
   }
 
   public setOnSelectCallback(callback: Function) {
@@ -116,6 +149,7 @@ export class OptionPure extends LitElement {
         @keydown="${this.handleKeyPress}"
         tabindex="${ifDefined(this._disabled ? undefined : "0")}"
       >
+        <slot hidden @slotchange=${this.processLabel}></slot>
         ${this._label}
       </div>
     `;

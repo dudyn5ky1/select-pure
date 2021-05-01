@@ -1,4 +1,4 @@
-import {LitElement} from "lit";
+import { LitElement } from "lit";
 
 export interface Option {
   label: string;
@@ -7,9 +7,12 @@ export interface Option {
   unselect: Function;
   hidden: boolean;
   disabled: boolean;
+  selected: boolean;
 }
 
 export interface OptionPureElement extends LitElement {
-  getOption: Function;
   setOnSelectCallback: Function;
+  setOnReadyCallback: Function;
+  ready: boolean;
+  getOption: Function;
 }

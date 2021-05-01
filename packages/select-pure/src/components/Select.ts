@@ -6,6 +6,7 @@ import { property } from "lit/decorators/property.js";
 import { KEYS } from "./constants";
 import { Option, OptionPureElement } from "./../models";
 
+// eslint-disable-next-line
 const noop = () => {};
 const defaultOption = {
   label: "",
@@ -14,6 +15,7 @@ const defaultOption = {
   unselect: noop,
   disabled: false,
   hidden: false,
+  selected: false,
 };
 
 @customElement("select-pure")
@@ -35,7 +37,7 @@ export class SelectPure extends LitElement {
       }
       @media only screen and (hover: none) and (pointer: coarse){
         select {
-          z-index: 3;
+          z-index: 2;
         }
       }
       .label:focus {
@@ -65,9 +67,6 @@ export class SelectPure extends LitElement {
         position: relative;
         opacity: 0;
       }
-      .select {
-        z-index: 2;
-      }
       select[multiple] {
         z-index: 0;
       }
@@ -88,6 +87,7 @@ export class SelectPure extends LitElement {
         justify-content: space-between;
         padding: var(--padding, 0 10px);
         width: 100%;
+        z-index: 1;
       }
       .dropdown {
         background-color: var(--border-color, #000);
@@ -106,6 +106,7 @@ export class SelectPure extends LitElement {
       }
       .dropdown.visible {
         display: flex;
+        z-index: 100;
       }
       .disabled {
         background-color: var(--disabled-background-color, #bdc3c7);
@@ -147,19 +148,21 @@ export class SelectPure extends LitElement {
 
   @property() disabled: boolean = this.getAttribute("disabled") !== null;
 
-  @property() _multiple: boolean = this.getAttribute("multiple") !== null;
+  @property() _multiple: boolean = false;
 
   @property() name: string = this.getAttribute("name") || "";
 
-  @property() _id: string = this.getAttribute("id") || "";
+  @property() _id: string = "";
 
-  @property() formName: string = this.name || this.id;
+  @property() formName: string = "";
 
   @property() value: string = "";
 
   @property() values: string[] = [];
 
-  @property() defaultLabel: string = this.getAttribute("default-label") || "";
+  @property() defaultLabel: string = "";
+
+  @property() _optionsLength: number = -1;
 
   private nativeSelect: HTMLSelectElement | null = null;
 
@@ -178,9 +181,15 @@ export class SelectPure extends LitElement {
     this.removeEventListeners = this.removeEventListeners.bind(this);
   }
 
-  firstUpdated() {
-    this.processOptions();
-    this.processForm();
+  connectedCallback() {
+    super.connectedCallback();
+    // set properties
+    this.disabled = this.getAttribute("disabled") !== null;
+    this._multiple = this.getAttribute("multiple") !== null;
+    this.name = this.getAttribute("name") || "";
+    this._id = this.getAttribute("id") || "";
+    this.formName =this.name || this.id;
+    this.defaultLabel = this.getAttribute("default-label") || "";
   }
 
   public open() {
@@ -247,26 +256,19 @@ export class SelectPure extends LitElement {
     // @ts-ignore
     this.nativeSelect = this.shadowRoot.querySelector("select");
     const options = this.querySelectorAll("option-pure");
+    this._optionsLength = options.length;
     for (let i = 0; i < options.length; i++) {
       const currentOption = options[i] as OptionPureElement;
-      const { value, label, select, unselect, selected, hidden, disabled } = currentOption.getOption();
-      this.options.push({
-        label,
-        value,
-        select,
-        unselect,
-        hidden,
-        disabled,
-      });
-      if (selected) {
-        this.selectOption(this.options[i], true);
-      }
       currentOption.setOnSelectCallback(this.onSelect);
-
-      if (i === options.length - 1 && !this.selectedOption.value && !this._multiple) {
+      this.options[i] = currentOption.getOption();
+      if (this.options[i].selected) {
+        this.onSelect(this.options[i].value);
+      }
+      if (i === this._optionsLength - 1 && !this.selectedOption.value && !this._multiple) {
         this.selectOption(this.options[0], true);
       }
     }
+    this.processForm();
   }
 
   private onSelect(optionValue: string) {
@@ -397,7 +399,7 @@ export class SelectPure extends LitElement {
             ${this.renderLabel()}
           </div>
           <div class="dropdown${this.visible ? " visible" : ""}">
-            <slot></slot>
+            <slot @slotchange=${this.processOptions}></slot>
           </div>
         </div>
       </div>
