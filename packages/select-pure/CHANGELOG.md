@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1-alpha.3](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.2...select-pure@2.0.1-alpha.3) (2021-05-01)
+
+
+### Bug Fixes
+
+* **general:** fix case when it was possible to select a disabled option ([a3f17f5](https://github.com/dudyn5ky1/select-pure/commit/a3f17f56a648d032a49ef1a70fea37787c632a34))
+
+
+
+
+
 ## [2.0.1-alpha.2](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.1...select-pure@2.0.1-alpha.2) (2021-05-01)
 
 
