@@ -34,6 +34,17 @@ import 'select-pure';
 
 and use in the similar way as you would use a native HTML `<select>`.
 
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="./packages/select-pure/examples/index.js">
+    <link rel="import" href="./examples/index.js">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
 ```javascript
 <select-pure name="country" id="country">
   <option-pure value="" disabled hidden>-- Please select a country --</option-pure>
@@ -41,7 +52,7 @@ and use in the similar way as you would use a native HTML `<select>`.
   <option-pure value="PL">Poland</option-pure>
   <option-pure value="DE">Germany</option-pure>
   <option-pure value="US">USA</option-pure>
-  <option-pure value="RU" disabled>Russia</option-pure>
+  <option-pure value="US" disabled>Russia</option-pure>
 </select-pure>
 ```
 
@@ -136,7 +147,7 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Precommit hooks;
 - [ ] Add destroy method;
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
-- [ ] Publish to webcomponents;
+- [ ] Sometimes one select scrolls dropdown in the others?
 
 2.1
 - [ ] Option groups;
