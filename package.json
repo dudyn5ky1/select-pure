@@ -6,7 +6,8 @@
     "serve:pure": "lerna run serve --scope=select-pure --stream",
     "lint": "eslint packages",
     "build": "lerna run build",
-    "build:watch": "lerna run build:watch --stream"
+    "build:watch": "lerna run build:watch --stream",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.22.0",

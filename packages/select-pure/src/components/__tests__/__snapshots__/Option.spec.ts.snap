@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option component fires onReady callback 1`] = `
+Array [
+  Array [
+    Object {
+      "disabled": false,
+      "label": "Poland",
+      "select": [Function],
+      "selected": false,
+      "unselect": [Function],
+      "value": "PL",
+    },
+    177,
+  ],
+]
+`;
