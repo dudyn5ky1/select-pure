@@ -7,7 +7,8 @@
     "lint": "eslint packages",
     "build": "lerna run build",
     "build:watch": "lerna run build:watch --stream",
-    "test": "lerna run test"
+    "test": "lerna run test --stream",
+    "test:mutations": "lerna run test:mutations --stream"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.22.0",

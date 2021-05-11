@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
 yarn-error.log
+
+# stryker temp files
+.stryker-tmp
