@@ -15,4 +15,6 @@ export interface OptionPureElement extends LitElement {
   setOnReadyCallback: Function;
   ready: boolean;
   getOption: Function;
+  select: Function;
+  unselect: Function;
 }

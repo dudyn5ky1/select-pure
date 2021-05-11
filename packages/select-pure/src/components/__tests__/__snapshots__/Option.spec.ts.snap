@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Option component fires onReady callback 1`] = `
+exports[`Option component callbacks fires onReady callback 1`] = `
 Array [
   Array [
     Object {
       "disabled": false,
+      "hidden": false,
       "label": "Poland",
       "select": [Function],
       "selected": false,
@@ -14,4 +15,73 @@ Array [
     177,
   ],
 ]
+`;
+
+exports[`Option component callbacks fires onReady callback with selected, disabled, hidden attributes 1`] = `
+Array [
+  Array [
+    Object {
+      "disabled": true,
+      "hidden": true,
+      "label": "Poland",
+      "select": [Function],
+      "selected": true,
+      "unselect": [Function],
+      "value": "PL",
+    },
+    177,
+  ],
+]
+`;
+
+exports[`Option component public methods selects 1`] = `
+Object {
+  "disabled": false,
+  "hidden": false,
+  "label": "Poland",
+  "select": [Function],
+  "selected": true,
+  "unselect": [Function],
+  "value": "PL",
+}
+`;
+
+exports[`Option component public methods selects 2`] = `"<option-pure value=\\"PL\\" selected=\\"\\">Poland</option-pure>"`;
+
+exports[`Option component public methods unselects 1`] = `
+Object {
+  "disabled": false,
+  "hidden": false,
+  "label": "Poland",
+  "select": [Function],
+  "selected": false,
+  "unselect": [Function],
+  "value": "PL",
+}
+`;
+
+exports[`Option component public methods unselects 2`] = `"<option-pure value=\\"PL\\">Poland</option-pure>"`;
+
+exports[`Option component sets default value to empty string if it's an empty string attribute 1`] = `
+Object {
+  "disabled": false,
+  "hidden": false,
+  "label": "",
+  "select": [Function],
+  "selected": false,
+  "unselect": [Function],
+  "value": "",
+}
+`;
+
+exports[`Option component sets default value to empty string if not provided 1`] = `
+Object {
+  "disabled": false,
+  "hidden": false,
+  "label": "Poland",
+  "select": [Function],
+  "selected": false,
+  "unselect": [Function],
+  "value": "",
+}
 `;

@@ -45,13 +45,13 @@ export class OptionPure extends LitElement {
 
   @property() _disabled: boolean = false;
 
+  @property() _hidden: boolean = false;
+
   @property() _value: string = "";
 
   @property() _label: string = "";
 
   @property() optionIndex: number = -1;
-
-  @property() ready: boolean = false;
 
   private onSelect?: Function;
 
@@ -72,21 +72,11 @@ export class OptionPure extends LitElement {
     // set properties
     this._selected = this.getAttribute("selected") !== null;
     this._disabled = this.getAttribute("disabled") !== null;
+    this._hidden = this.getAttribute("hidden") !== null;
     this._value = this.getAttribute("value") || "";
-    this.ready = true;
     this.processLabel();
     if (this.onReady) {
       this.onReady(this.getOption(), this.optionIndex);
-    }
-  }
-
-  private processLabel() {
-    if (this.textContent) {
-      this._label = this.textContent;
-      return;
-    }
-    if (this.getAttribute("label")) {
-      this._label = this.getAttribute("label") || "";
     }
   }
 
@@ -98,6 +88,7 @@ export class OptionPure extends LitElement {
       unselect: this.unselect,
       selected: this._selected,
       disabled: this._disabled,
+      hidden: this._hidden,
     };
   }
 
@@ -118,6 +109,16 @@ export class OptionPure extends LitElement {
 
   public setOnSelectCallback(callback: Function) {
     this.onSelect = callback;
+  }
+
+  private processLabel() {
+    if (this.textContent) {
+      this._label = this.textContent;
+      return;
+    }
+    if (this.getAttribute("label")) {
+      this._label = this.getAttribute("label") || "";
+    }
   }
 
   private onClick(event: Event) {
