@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1...select-pure@2.1.0) (2021-05-11)
+
+
+### Bug Fixes
+
+* **general:** fix not rendered native select on mobile ([27bff14](https://github.com/dudyn5ky1/select-pure/commit/27bff149d4f9779f52abc60dcee650564e2ed088))
+
+
+### Features
+
+* **general:** add stryker for mutant testing ([9b18942](https://github.com/dudyn5ky1/select-pure/commit/9b189420971958765924be8c1575574606cdcab7))
+
+
+
+
+
 ## [2.0.1](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1-alpha.8...select-pure@2.0.1) (2021-05-01)
 
 **Note:** Version bump only for package select-pure
