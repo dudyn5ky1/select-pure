@@ -13,7 +13,7 @@
     "build": "tsc && rollup -c",
     "build:watch": "tsc -w",
     "prepublishOnly": "npm run build && cp -f ./../../README.md README.md",
-    "test": "jest",
+    "test": "jest src",
     "test:mutations": "stryker run"
   },
   "keywords": [

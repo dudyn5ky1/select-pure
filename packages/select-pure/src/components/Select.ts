@@ -35,11 +35,6 @@ export class SelectPure extends LitElement {
         top: 0;
         width: var(--select-width, 100%);
       }
-      @media only screen and (hover: none) and (pointer: coarse){
-        select {
-          z-index: 2;
-        }
-      }
       .label:focus {
         outline: var(--select-outline, 2px solid #e3e3e3);
       }
@@ -88,6 +83,11 @@ export class SelectPure extends LitElement {
         padding: var(--padding, 0 10px);
         width: 100%;
         z-index: 1;
+      }
+      @media only screen and (hover: none) and (pointer: coarse){
+        select {
+          z-index: 2;
+        }
       }
       .dropdown {
         background-color: var(--border-color, #000);
