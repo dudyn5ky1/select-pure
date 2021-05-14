@@ -3,7 +3,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
 
-import { KEYS } from "./constants";
+import { KEYS } from "./../constants";
 import { Option, OptionPureElement } from "./../models";
 
 // eslint-disable-next-line
@@ -322,7 +322,7 @@ export class SelectPure extends LitElement {
   }
 
   private handleKeyPress(event: KeyboardEvent) {
-    if (event.which === KEYS.ENTER || event.which === KEYS.TAB) {
+    if (event.key === KEYS.ENTER || event.key === KEYS.TAB) {
       this.open();
     }
   }

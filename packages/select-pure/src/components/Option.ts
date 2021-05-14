@@ -3,7 +3,7 @@ import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 
-import { KEYS } from "./constants";
+import { KEYS } from "./../constants";
 
 @customElement("option-pure")
 export class OptionPure extends LitElement {
@@ -130,7 +130,7 @@ export class OptionPure extends LitElement {
   }
 
   private handleKeyPress(event: KeyboardEvent) {
-    if (event.which === KEYS.ENTER) {
+    if (event.key === KEYS.ENTER) {
       this.onClick(event);
     }
   }

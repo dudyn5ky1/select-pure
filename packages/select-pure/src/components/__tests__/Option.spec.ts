@@ -1,5 +1,6 @@
 import "./../Option";
 import { OptionPureElement } from "./../../models";
+import { KEYS } from "./../../constants";
 
 describe("Option component", () => {
   describe("render", () => {
@@ -53,6 +54,27 @@ describe("Option component", () => {
       await option.updateComplete;
 
       expect(option.shadowRoot?.querySelector(".option")?.getAttribute("class")).toEqual("option selected disabled");
+    });
+  });
+
+  describe("keyboard interactions", () => {
+    it("sellects by pressing enter", async() => {
+      document.body.innerHTML = "<option-pure value='UA' label='Ukraine'></option-pure>";
+      const option = document.body.querySelector("option-pure") as OptionPureElement;
+      const mockedOnSelect = jest.fn();
+
+      option.setOnSelectCallback(mockedOnSelect);
+
+      await option.updateComplete;
+
+      const optionDiv = option.shadowRoot?.querySelector(".option");
+
+      expect(mockedOnSelect).not.toHaveBeenCalled();
+
+      optionDiv?.dispatchEvent(new KeyboardEvent("keydown", { key: KEYS.ENTER }));
+
+      expect(mockedOnSelect).toHaveBeenCalledTimes(1);
+      expect(mockedOnSelect).toHaveBeenCalledWith("UA");
     });
   });
 

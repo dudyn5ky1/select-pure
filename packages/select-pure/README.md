@@ -45,7 +45,7 @@ Use in the similar way as you would use a native HTML `<select>`.
 
 <!--
 ```
-<custom-element-demo height="300">
+<custom-element-demo height="280">
   <template>
     <script src="https://unpkg.com/select-pure@latest/dist/index.js"></script>
     <next-code-block></next-code-block>
@@ -142,6 +142,48 @@ select-pure {
 }
 ```
 
+Example of the custom styles.
+<!--
+```
+<custom-element-demo height="280">
+  <template>
+    <script src="https://unpkg.com/select-pure@latest/dist/index.js"></script>
+    <style>
+      select-pure.dark {
+        --select-height: 40px;
+        --select-width: calc(100% - 20px);
+        --border-radius: 8px;
+        --border-width: 2px;
+        --border-color: #2f3640;
+        --padding: 0 10px;
+        --dropdown-z-index: 100;
+        --disabled-background-color: #636e72;
+        --disabled-color: #b2bec3;
+        --background-color: #2f3640;
+        --color: #fff;
+        --hover-background-color: #404a55;
+        --hover-color: #fff;
+        --selected-background-color: #404a55;
+        --selected-color: #fff;
+        --dropdown-gap: 2px;
+      }
+    </style>
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```javascript
+<select-pure name="country" id="country" class="dark">
+  <option-pure value="" disabled hidden>-- Please select a country --</option-pure>
+  <option-pure value="UA">Ukraine</option-pure>
+  <option-pure value="PL">Poland</option-pure>
+  <option-pure value="DE">Germany</option-pure>
+  <option-pure value="US">USA</option-pure>
+  <option-pure value="RU" disabled>Russia</option-pure>
+</select-pure>
+```
+
 ### `<form>` support
 
 If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attribute, it will then append a hidden `input` with a given name inside a `<form>` and trigger `change` event, when value is selected.
@@ -156,6 +198,8 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Add destroy method;
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
 - [ ] Sometimes one select scrolls dropdown in the others?
+- [ ] Support keyboard arrows;
+- [ ] Support keyboard navigation to the option;
 
 2.1
 - [ ] Option groups;
