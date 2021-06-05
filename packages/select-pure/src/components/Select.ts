@@ -1,194 +1,47 @@
-import { css, LitElement, html } from "lit";
+import { boundMethod } from "autobind-decorator";
+import { LitElement, html } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
+import { query } from "lit/decorators/query.js";
 
-import { KEYS } from "./../constants";
+import { KEYS, defaultOption } from "./../constants";
 import { Option, OptionPureElement } from "./../models";
-
-// eslint-disable-next-line
-const noop = () => {};
-const defaultOption = {
-  label: "",
-  value: "",
-  select: noop,
-  unselect: noop,
-  disabled: false,
-  hidden: false,
-  selected: false,
-};
+import { selectStyles } from "./../styles";
 
 @customElement("select-pure")
 export class SelectPure extends LitElement {
   static get styles() {
-    return css`
-      .select-wrapper {
-        position: relative;
-      }
-      .select {
-        bottom: 0;
-        display: flex;
-        flex-wrap: wrap;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: var(--select-width, 100%);
-      }
-      .label:focus {
-        outline: var(--select-outline, 2px solid #e3e3e3);
-      }
-      .label:after {
-        border-bottom: 1px solid var(--color, #000);
-        border-right: 1px solid var(--color, #000);
-        box-sizing: border-box;
-        content: "";
-        display: block;
-        height: 10px;
-        margin-top: -2px;
-        transform: rotate(45deg);
-        transition: 0.2s ease-in-out;
-        width: 10px;
-      }
-      .label.visible:after {
-        margin-bottom: -4px;
-        margin-top: 0;
-        transform: rotate(225deg);
-      }
-      select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        position: relative;
-        opacity: 0;
-      }
-      select[multiple] {
-        z-index: 0;
-      }
-      select,
-      .label {
-        align-items: center;
-        background-color: var(--background-color, #fff);
-        border-radius: var(--border-radius, 4px);
-        border: var(--border-width, 1px) solid var(--border-color, #000);
-        box-sizing: border-box;
-        color: var(--color, #000);
-        cursor: pointer;
-        display: flex;
-        font-family: var(--font-family, inherit);
-        font-size: var(--font-size, 14px);
-        font-weight: var(--font-weight, 400);
-        min-height: var(--select-height, 44px);
-        justify-content: space-between;
-        padding: var(--padding, 0 10px);
-        width: 100%;
-        z-index: 1;
-      }
-      @media only screen and (hover: none) and (pointer: coarse){
-        select {
-          z-index: 2;
-        }
-      }
-      .dropdown {
-        background-color: var(--border-color, #000);
-        border-radius: var(--border-radius, 4px);
-        border: var(--border-width, 1px) solid var(--border-color, #000);
-        display: none;
-        flex-direction: column;
-        gap: var(--border-width, 1px);
-        justify-content: space-between;
-        max-height: calc(var(--select-height, 44px) * 4 + var(--border-width, 1px) * 3);
-        overflow-y: scroll;
-        position: absolute;
-        top: calc(var(--select-height, 44px) + var(--dropdown-gap, 0px));
-        width: calc(100% - var(--border-width, 1px) * 2);
-        z-index: var(--dropdown-z-index, 2);
-      }
-      .dropdown.visible {
-        display: flex;
-        z-index: 100;
-      }
-      .disabled {
-        background-color: var(--disabled-background-color, #bdc3c7);
-        color: var(--disabled-color, #ecf0f1);
-        cursor: default;
-      }
-      .multi-selected {
-        background-color: var(--selected-background-color, #e3e3e3);
-        border-radius: var(--border-radius, 4px);
-        color: var(--selected-color, #000);
-        display: flex;
-        gap: 8px;
-        justify-content: space-between;
-        padding: 2px 4px;
-      }
-      .multi-selected-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        width: calc(100% - 30px);
-      }
-      .cross:after {
-        content: '\\00d7';
-        display: inline-block;
-        height: 100%;
-        text-align: center;
-        width: 12px;
-      }
-    `;
+    return selectStyles;
   }
 
   @property() options: Option[] = [];
-
   @property() visible: boolean = false;
-
   @property() selectedOption: Option = defaultOption;
-
   @property() _selectedOptions: Option[] = [];
-
-  @property() disabled: boolean = this.getAttribute("disabled") !== null;
-
-  @property() _multiple: boolean = false;
-
-  @property() name: string = this.getAttribute("name") || "";
-
+  @property() disabled: boolean = false;
+  @property() isMultipleSelect: boolean = false;
+  @property() name: string = "";
   @property() _id: string = "";
-
   @property() formName: string = "";
-
   @property() value: string = "";
-
   @property() values: string[] = [];
-
   @property() defaultLabel: string = "";
-
-  @property() _optionsLength: number = -1;
-
-  private nativeSelect: HTMLSelectElement | null = null;
+  @property() totalRenderedChildOptions: number = -1;
+  @query("select") nativeSelect!: HTMLSelectElement;
 
   private form: HTMLFormElement | null = null;
-
   private hiddenInput: HTMLInputElement | null = null;
 
-  constructor() {
-    super();
-
-    // bindings
-    this.close = this.close.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.processOptions = this.processOptions.bind(this);
-    this.processForm = this.processForm.bind(this);
-    this.removeEventListeners = this.removeEventListeners.bind(this);
-  }
 
   connectedCallback() {
     super.connectedCallback();
-    // set properties
+
     this.disabled = this.getAttribute("disabled") !== null;
-    this._multiple = this.getAttribute("multiple") !== null;
+    this.isMultipleSelect = this.getAttribute("multiple") !== null;
     this.name = this.getAttribute("name") || "";
     this._id = this.getAttribute("id") || "";
-    this.formName =this.name || this.id;
+    this.formName = this.name || this.id;
     this.defaultLabel = this.getAttribute("default-label") || "";
   }
 
@@ -201,6 +54,7 @@ export class SelectPure extends LitElement {
     document.body.addEventListener("click", this.close, true);
   }
 
+  @boundMethod
   public close(event?: Event) {
     // @ts-ignore
     if (event && this.contains(event.target)) {
@@ -222,150 +76,15 @@ export class SelectPure extends LitElement {
     return this.nativeSelect?.selectedIndex;
   }
 
-  set selectedIndex(index: number | undefined) {
-    if (!index && index !== 0) {
+  set selectedIndex(newSelectedIndex: number | undefined) {
+    if (!newSelectedIndex && newSelectedIndex !== 0) {
       return;
     }
-    this.onSelect(this.options[index].value);
+    this.selectOptionByValue(this.options[newSelectedIndex].value);
   }
 
   get selectedOptions() {
     return this.nativeSelect?.selectedOptions;
-  }
-
-  private removeEventListeners() {
-    document.body.removeEventListener("click", this.close);
-  }
-
-  private processForm() {
-    this.form = this.closest("form");
-    if (!this.form) {
-      return;
-    }
-    this.hiddenInput = document.createElement("input");
-    this.hiddenInput.setAttribute("type", "hidden");
-    this.hiddenInput.setAttribute("name", this.formName);
-    this.form.appendChild(this.hiddenInput);
-  }
-
-  private handleNativeSelectChange() {
-    this.selectedIndex = this.nativeSelect?.selectedIndex;
-  }
-
-  private processOptions() {
-    // @ts-ignore
-    this.nativeSelect = this.shadowRoot.querySelector("select");
-    const options = this.querySelectorAll("option-pure");
-    this._optionsLength = options.length;
-    for (let i = 0; i < options.length; i++) {
-      const currentOption = options[i] as OptionPureElement;
-      currentOption.setOnSelectCallback(this.onSelect);
-      this.options[i] = currentOption.getOption();
-      if (this.options[i].selected) {
-        this.onSelect(this.options[i].value);
-      }
-      if (i === this._optionsLength - 1 && !this.selectedOption.value && !this._multiple) {
-        this.selectOption(this.options[0], true);
-      }
-    }
-    this.processForm();
-  }
-
-  private onSelect(optionValue: string) {
-    for (let i = 0; i < this.options.length; i++) {
-      const option = this.options[i];
-      if (option.value === optionValue) {
-        this.selectOption(option);
-        continue;
-      }
-      if (!this._multiple) {
-        option.unselect();
-      }
-    }
-    if (!this._multiple) {
-      this.close();
-    }
-  }
-
-  private selectOption(option: Option, isInitialRender?: boolean) {
-    if (this._multiple) {
-      const isSelected = this._selectedOptions.find(({ value }) => value === option.value);
-      if (isSelected) {
-        const selectedIndex = this._selectedOptions.indexOf(isSelected);
-        this.values.splice(selectedIndex, 1);
-        this._selectedOptions.splice(selectedIndex, 1);
-        option.unselect();
-      } else {
-        this.values.push(option.value);
-        this._selectedOptions.push(option);
-        option.select();
-      }
-      this.requestUpdate();
-    } else {
-      this.selectedOption = option;
-      this.value = option.value;
-      option.select();
-    }
-    if (this.form && this.hiddenInput) {
-      this.hiddenInput.value = this._multiple ? this.values.join(",") : this.value;
-      const event = new Event("change", { bubbles: true });
-      this.hiddenInput.dispatchEvent(event);
-    }
-    if (isInitialRender) {
-      return;
-    }
-    this.afterSelect();
-  }
-
-  private afterSelect() {
-    this.dispatchEvent(new Event("change"));
-  }
-
-  private handleKeyPress(event: KeyboardEvent) {
-    if (event.key === KEYS.ENTER || event.key === KEYS.TAB) {
-      this.open();
-    }
-  }
-
-  private onCrossClick(event: Event, value: string) {
-    event.stopPropagation();
-    this.onSelect(value);
-  }
-
-  private renderNativeOptions() {
-    return this.options.map(({ value, label, hidden, disabled }) => {
-      let isSelected = this.selectedOption.value === value;
-      if (this._multiple) {
-        isSelected = Boolean(this._selectedOptions.find(option => option.value === value));
-      }
-      return html`
-        <option
-          value=${value}
-          ?selected=${isSelected}
-          ?hidden=${hidden}
-          ?disabled=${disabled}
-        >
-          ${label}
-        </option>
-      `;
-    });
-  }
-
-  private renderLabel() {
-    if (this._multiple && this._selectedOptions.length) {
-      return html`
-        <div class="multi-selected-wrapper">
-          ${this._selectedOptions.map(({ label, value }) => html`
-              <span class="multi-selected">
-                ${label}
-                <span class="cross" @click=${(event: Event) => this.onCrossClick(event, value)}></span>
-              </span>
-          `)}
-        </div>
-      `;
-    }
-
-    return this.selectedOption.label || this.defaultLabel;
   }
 
   render() {
@@ -376,33 +95,214 @@ export class SelectPure extends LitElement {
     if (this.visible) {
       labelClassNames.push("visible");
     }
+
     return html`
       <div class="select-wrapper">
         <select
           @change=${this.handleNativeSelectChange}
           ?disabled=${this.disabled}
-          ?multiple=${this._multiple}
+          ?multiple=${this.isMultipleSelect}
           name="${ifDefined(this.name || undefined)}"
           id=${ifDefined(this.id || undefined)}
           size="1"
         >
-          ${this.renderNativeOptions()}
+          ${this.getNativeOptionsHtml()}
         </select>
-
         <div class="select">
           <div
             class="${labelClassNames.join(" ")}"
             @click="${this.visible ? this.close : this.open}"
-            @keydown="${this.handleKeyPress}"
+            @keydown="${this.openDropdownIfProperKeyIsPressed}"
             tabindex="0"
           >
-            ${this.renderLabel()}
+            ${this.getDisplayedLabel()}
           </div>
           <div class="dropdown${this.visible ? " visible" : ""}">
-            <slot @slotchange=${this.processOptions}></slot>
+            <slot @slotchange=${this.initializeSelect}></slot>
           </div>
         </div>
       </div>
     `;
+  }
+
+  private handleNativeSelectChange() {
+    this.selectedIndex = this.nativeSelect?.selectedIndex;
+  }
+
+  private getNativeOptionsHtml() {
+    return this.options.map(this.getSingleNativeOptionHtml);
+  }
+
+  @boundMethod
+  private getSingleNativeOptionHtml({ value, label, hidden, disabled }: Option) {
+    return html`
+      <option
+        value=${value}
+        ?selected=${this.isOptionSelected(value)}
+        ?hidden=${hidden}
+        ?disabled=${disabled}
+      >
+        ${label}
+      </option>
+    `;
+  }
+
+  private isOptionSelected(value: String): boolean {
+    let isOptionSelected = this.selectedOption.value === value;
+    if (this.isMultipleSelect) {
+      isOptionSelected = Boolean(this._selectedOptions.find(option => option.value === value));
+    }
+    return isOptionSelected;
+  }
+
+  private openDropdownIfProperKeyIsPressed(event: KeyboardEvent) {
+    if (event.key === KEYS.ENTER || event.key === KEYS.TAB) {
+      this.open();
+    }
+  }
+
+  private getDisplayedLabel() {
+    if (this.isMultipleSelect && this._selectedOptions.length) {
+      return this.getMultiSelectLabelHtml();
+    }
+
+    return this.selectedOption.label || this.defaultLabel;
+  }
+
+  @boundMethod
+  private getMultiSelectLabelHtml() {
+    return html`
+      <div class="multi-selected-wrapper">
+        ${this._selectedOptions.map(this.getMultiSelectSelectedOptionHtml)}
+      </div>
+    `;
+  }
+
+  @boundMethod
+  private getMultiSelectSelectedOptionHtml({ label, value }: Option) {
+    return html`
+      <span class="multi-selected">
+        ${label}
+        <span
+          class="cross"
+          @click=${(event: Event) => this.fireOnSelectCallback(event, value)}
+        >
+        </span>
+      </span>
+    `;
+  }
+
+  private fireOnSelectCallback(event: Event, value: string) {
+    event.stopPropagation();
+    this.selectOptionByValue(value);
+  }
+
+  @boundMethod
+  private initializeSelect() {
+    this.processChildOptions();
+    this.selectDefaultOptionIfNoneSelected();
+    this.appendHiddenInputToClosestForm();
+  }
+
+  private processChildOptions() {
+    const options = this.querySelectorAll("option-pure");
+    this.totalRenderedChildOptions = options.length;
+    for (let i = 0; i < options.length; i++) {
+      this.initializeSingleOption(options[i] as OptionPureElement, i);
+    }
+  }
+
+  private selectDefaultOptionIfNoneSelected() {
+    const shouldSelectDefaultOption = !this.selectedOption.value && !this.isMultipleSelect && this.options.length;
+    if (shouldSelectDefaultOption) {
+      this.selectOptionByValue(this.options[0].value);
+    }
+  }
+
+  @boundMethod
+  private initializeSingleOption(optionElement: OptionPureElement, optionIndex: number) {
+    optionElement.setOnSelectCallback(this.selectOptionByValue);
+    this.options[optionIndex] = optionElement.getOption();
+    if (this.options[optionIndex].selected) {
+      this.selectOptionByValue(this.options[optionIndex].value);
+    }
+  }
+
+  @boundMethod
+  private removeEventListeners() {
+    document.body.removeEventListener("click", this.close);
+  }
+
+  @boundMethod
+  private appendHiddenInputToClosestForm() {
+    this.form = this.closest("form");
+    if (!this.form) {
+      return;
+    }
+    this.hiddenInput = document.createElement("input");
+    this.hiddenInput.setAttribute("type", "hidden");
+    this.hiddenInput.setAttribute("name", this.formName);
+    this.form.appendChild(this.hiddenInput);
+  }
+
+  private unselectAllOptions() {
+    for (let i = 0; i < this.options.length; i++) {
+      this.options[i].unselect();
+    }
+  }
+
+  @boundMethod
+  private selectOptionByValue(newOptionValue: string) {
+    const option = this.options.find(({ value }) => value === newOptionValue);
+    if (!option) {
+      return;
+    }
+    this.setSelectValue(option);
+  }
+
+  private setSelectValue(optionToBeSelected: Option) {
+    if (this.isMultipleSelect) {
+      this.setMultiSelectValue(optionToBeSelected);
+    } else {
+      this.setSingleSelectValue(optionToBeSelected);
+    }
+    this.updateHiddenInputInForm();
+    this.dispatchChangeEvent();
+  }
+
+  private dispatchChangeEvent() {
+    this.dispatchEvent(new Event("change"));
+  }
+
+  private setMultiSelectValue(optionToBeSelected: Option) {
+    const indexInSelectedOptions = this._selectedOptions.indexOf(optionToBeSelected);
+    const isAlreadySelected = indexInSelectedOptions !== -1;
+    if (isAlreadySelected) {
+      this.values.splice(indexInSelectedOptions, 1);
+      this._selectedOptions.splice(indexInSelectedOptions, 1);
+      optionToBeSelected.unselect();
+    } else {
+      this.values.push(optionToBeSelected.value);
+      this._selectedOptions.push(optionToBeSelected);
+      optionToBeSelected.select();
+    }
+    this.requestUpdate();
+  }
+
+  private setSingleSelectValue(optionToBeSelected: Option) {
+    this.unselectAllOptions();
+    this.close();
+    this.selectedOption = optionToBeSelected;
+    this.value = optionToBeSelected.value;
+    optionToBeSelected.select();
+  }
+
+  private updateHiddenInputInForm() {
+    if (!this.form || !this.hiddenInput) {
+      return;
+    }
+    this.hiddenInput.value = this.isMultipleSelect ? this.values.join(",") : this.value;
+    const event = new Event("change", { bubbles: true });
+    this.hiddenInput.dispatchEvent(event);
   }
 }

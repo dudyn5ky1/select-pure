@@ -1,5 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "ordered-imports"
+  ],
   "parserOptions": {
     "ecmaVersion": 9,
     "sourceType": "module",
@@ -12,6 +15,9 @@
     "browser": true,
     "node": true,
     "jest": true,
+  },
+  "globals": {
+    "NodeListOf": true
   },
   "rules": {
     "quotes": ["error", "double"],
@@ -148,7 +154,7 @@
       "position": "above",
     }],
     "linebreak-style": ["error", "unix"],
-    "lines-between-class-members": ["error", "always"],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "max-len": ["error", {
       "code": 120,
     }],
@@ -183,6 +189,26 @@
     "arrow-spacing": "error",
     "constructor-super": "error",
     "no-class-assign": "error",
-    "no-useless-constructor": "error"
+    "no-useless-constructor": "error",
+    "ordered-imports/ordered-imports": [
+      "error",
+      {
+        "symbols-first": true,
+        "specifier-ordering": "any",
+        "group-ordering": [
+          {
+            name: "Lit element",
+            match:
+              "^(lit|(?:\\w+-?)*$)",
+            order: 10,
+          },
+          {
+            name: "Local imports",
+            match: "^(\\.|\\.\\.)",
+            order: 20,
+          }
+        ]
+      }
+    ]
   }
 }
