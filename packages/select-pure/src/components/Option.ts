@@ -41,15 +41,15 @@ export class OptionPure extends LitElement {
     `;
   }
 
-  @property() _selected: boolean = false;
+  @property() isSelected: boolean = false;
 
-  @property() _disabled: boolean = false;
+  @property() isDisabled: boolean = false;
 
-  @property() _hidden: boolean = false;
+  @property() isHidden: boolean = false;
 
-  @property() _value: string = "";
+  @property() optionValue: string = "";
 
-  @property() _label: string = "";
+  @property() displayedLabel: string = "";
 
   @property() optionIndex: number = -1;
 
@@ -60,8 +60,7 @@ export class OptionPure extends LitElement {
   constructor() {
     super();
 
-    // bindings
-    this.onClick = this.onClick.bind(this);
+    this.fireOnSelectCallback = this.fireOnSelectCallback.bind(this);
     this.select = this.select.bind(this);
     this.unselect = this.unselect.bind(this);
     this.getOption = this.getOption.bind(this);
@@ -69,89 +68,95 @@ export class OptionPure extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // set properties
-    this._selected = this.getAttribute("selected") !== null;
-    this._disabled = this.getAttribute("disabled") !== null;
-    this._hidden = this.getAttribute("hidden") !== null;
-    this._value = this.getAttribute("value") || "";
-    this.processLabel();
-    if (this.onReady) {
-      this.onReady(this.getOption(), this.optionIndex);
-    }
+
+    this.isSelected = this.getAttribute("selected") !== null;
+    this.isDisabled = this.getAttribute("disabled") !== null;
+    this.isHidden = this.getAttribute("hidden") !== null;
+    this.optionValue = this.getAttribute("value") || "";
+    this.assignDisplayedLabel();
+
+    this.fireOnReadyCallback();
   }
 
   public getOption() {
     return {
-      label: this._label,
-      value: this._value,
+      label: this.displayedLabel,
+      value: this.optionValue,
       select: this.select,
       unselect: this.unselect,
-      selected: this._selected,
-      disabled: this._disabled,
-      hidden: this._hidden,
+      selected: this.isSelected,
+      disabled: this.isDisabled,
+      hidden: this.isHidden,
     };
   }
 
   public select() {
-    this._selected = true;
+    this.isSelected = true;
     this.setAttribute("selected", "");
   }
 
   public unselect() {
-    this._selected = false;
+    this.isSelected = false;
     this.removeAttribute("selected");
   }
 
-  public setOnReadyCallback(callback: Function, index: number) {
-    this.onReady = callback;
-    this.optionIndex = index;
+  public setOnReadyCallback(onReadyCallback: Function, optionIndex: number) {
+    this.onReady = onReadyCallback;
+    this.optionIndex = optionIndex;
   }
 
   public setOnSelectCallback(callback: Function) {
     this.onSelect = callback;
   }
 
-  private processLabel() {
+  private assignDisplayedLabel() {
     if (this.textContent) {
-      this._label = this.textContent;
+      this.displayedLabel = this.textContent;
       return;
     }
     if (this.getAttribute("label")) {
-      this._label = this.getAttribute("label") || "";
+      this.displayedLabel = this.getAttribute("label") || "";
     }
   }
 
-  private onClick(event: Event) {
-    event.stopPropagation();
-    if (!this.onSelect || this._disabled) {
+  private fireOnReadyCallback() {
+    if (!this.onReady) {
       return;
     }
-    this.onSelect(this._value);
+    this.onReady(this.getOption(), this.optionIndex);
   }
 
-  private handleKeyPress(event: KeyboardEvent) {
-    if (event.key === KEYS.ENTER) {
-      this.onClick(event);
+  private fireOnSelectCallback(optionClickEvent: Event) {
+    optionClickEvent.stopPropagation();
+    if (!this.onSelect || this.isDisabled) {
+      return;
+    }
+    this.onSelect(this.optionValue);
+  }
+
+  private fireOnSelectIfEnterPressed(keyboardKeydownEvent: KeyboardEvent) {
+    if (keyboardKeydownEvent.key === KEYS.ENTER) {
+      this.fireOnSelectCallback(keyboardKeydownEvent);
     }
   }
 
   render() {
-    const classNames = ["option"];
-    if (this._selected) {
-      classNames.push("selected");
+    const optionWrapperClassNames = ["option"];
+    if (this.isSelected) {
+      optionWrapperClassNames.push("selected");
     }
-    if (this._disabled) {
-      classNames.push("disabled");
+    if (this.isDisabled) {
+      optionWrapperClassNames.push("disabled");
     }
     return html`
       <div
-        class="${classNames.join(" ")}"
-        @click=${this.onClick}
-        @keydown="${this.handleKeyPress}"
-        tabindex="${ifDefined(this._disabled ? undefined : "0")}"
+        class="${optionWrapperClassNames.join(" ")}"
+        @click=${this.fireOnSelectCallback}
+        @keydown="${this.fireOnSelectIfEnterPressed}"
+        tabindex="${ifDefined(this.isDisabled ? undefined : "0")}"
       >
-        <slot hidden @slotchange=${this.processLabel}></slot>
-        ${this._label}
+        <slot hidden @slotchange=${this.assignDisplayedLabel}></slot>
+        ${this.displayedLabel}
       </div>
     `;
   }
