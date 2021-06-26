@@ -1,13 +1,15 @@
 import { boundMethod } from "autobind-decorator";
-import { LitElement, html } from "lit";
+import { LitElement, html, TemplateResult } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
 import { query } from "lit/decorators/query.js";
 
 import { KEYS, defaultOption } from "./../constants";
-import { Option, OptionPureElement } from "./../models";
+import { SingleChoiceSelectController, MultiChoiceSelectController } from "./../controllers";
+import { Option, OptionPureElement, SelectController } from "./../models";
 import { selectStyles } from "./../styles";
+import { isAttributePresent, getAttributeOrDefault } from "./../utils";
 
 @customElement("select-pure")
 export class SelectPure extends LitElement {
@@ -30,19 +32,30 @@ export class SelectPure extends LitElement {
   @property() totalRenderedChildOptions: number = -1;
   @query("select") nativeSelect!: HTMLSelectElement;
 
+  private selectController: SelectController;
   private form: HTMLFormElement | null = null;
   private hiddenInput: HTMLInputElement | null = null;
-
 
   connectedCallback() {
     super.connectedCallback();
 
-    this.disabled = this.getAttribute("disabled") !== null;
-    this.isMultipleSelect = this.getAttribute("multiple") !== null;
-    this.name = this.getAttribute("name") || "";
-    this._id = this.getAttribute("id") || "";
+    this.disabled = isAttributePresent(this, "disabled");
+    this.isMultipleSelect = isAttributePresent(this, "multiple");
+    this.name = getAttributeOrDefault(this, "name", "");
+    this._id = getAttributeOrDefault(this, "id", "");
     this.formName = this.name || this.id;
-    this.defaultLabel = this.getAttribute("default-label") || "";
+    this.defaultLabel = getAttributeOrDefault(this, "default-label", "");
+
+    this.initializeController();
+  }
+
+  private initializeController() {
+    // TODO extract to factory
+    if (this.isMultipleSelect) {
+      this.selectController = new MultiChoiceSelectController();
+      return;
+    }
+    this.selectController = new SingleChoiceSelectController();
   }
 
   public open() {
@@ -161,12 +174,12 @@ export class SelectPure extends LitElement {
     }
   }
 
-  private getDisplayedLabel() {
+  private getDisplayedLabel(): TemplateResult {
     if (this.isMultipleSelect && this._selectedOptions.length) {
       return this.getMultiSelectLabelHtml();
     }
 
-    return this.selectedOption.label || this.defaultLabel;
+    return html`${this.selectedOption.label || this.defaultLabel}`;
   }
 
   @boundMethod
@@ -261,6 +274,8 @@ export class SelectPure extends LitElement {
   }
 
   private setSelectValue(optionToBeSelected: Option) {
+    this.selectController.setSelectedOption(optionToBeSelected);
+    // to be moved to controller
     if (this.isMultipleSelect) {
       this.setMultiSelectValue(optionToBeSelected);
     } else {
@@ -268,6 +283,7 @@ export class SelectPure extends LitElement {
     }
     this.updateHiddenInputInForm();
     this.dispatchChangeEvent();
+    // end
   }
 
   private dispatchChangeEvent() {
