@@ -236,7 +236,7 @@ export class SelectPure extends LitElement {
   @boundMethod
   private appendHiddenInputToClosestForm() {
     this.form = this.closest("form");
-    if (!this.form) {
+    if (!this.form || this.hiddenInput) {
       return;
     }
     this.hiddenInput = document.createElement("input");
