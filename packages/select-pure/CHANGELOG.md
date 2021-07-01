@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1-alpha.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.1.0...select-pure@2.1.1-alpha.0) (2021-07-01)
+
+
+### Bug Fixes
+
+* **select-pure:** fix multiple renderred hidden inputs ([c0d995d](https://github.com/dudyn5ky1/select-pure/commit/c0d995d29cf5a2055e79c82f046c12b867bdefe9)), closes [#41](https://github.com/dudyn5ky1/select-pure/issues/41)
+
+
+
+
+
 # [2.1.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.0.1...select-pure@2.1.0) (2021-05-11)
 
 
