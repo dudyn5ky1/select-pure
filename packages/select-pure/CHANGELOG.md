@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1-alpha.1](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.1.1-alpha.0...select-pure@2.1.1-alpha.1) (2021-07-15)
+
+
+### Features
+
+* **dropdown:** make dropdown height configurable ([eeb244e](https://github.com/dudyn5ky1/select-pure/commit/eeb244ecb571c5f311b9bfc07bb710b3e04eb577)), closes [#43](https://github.com/dudyn5ky1/select-pure/issues/43)
+
+
+
+
+
 ## [2.1.1-alpha.0](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.1.0...select-pure@2.1.1-alpha.0) (2021-07-01)
 
 
