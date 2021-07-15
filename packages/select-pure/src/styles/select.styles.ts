@@ -76,7 +76,7 @@ export const selectStyles = css`
     flex-direction: column;
     gap: var(--border-width, 1px);
     justify-content: space-between;
-    max-height: calc(var(--select-height, 44px) * 4 + var(--border-width, 1px) * 3);
+    max-height: calc(var(--select-height, 44px) * var(--dropdown-items, 4) + var(--border-width, 1px) * calc(var(--dropdown-items, 4) - 1));
     overflow-y: scroll;
     position: absolute;
     top: calc(var(--select-height, 44px) + var(--dropdown-gap, 0px));

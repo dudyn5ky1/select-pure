@@ -139,6 +139,7 @@ select-pure {
   --font-family: inherit;
   --font-weight: 400;
   --select-outline: 2px solid #e3e3e3;
+  --dropdown-items: 4;
 }
 ```
 
@@ -199,7 +200,6 @@ If you place `<select-pure>` inside a `<form>` and specify a `name` or `id` attr
 - [ ] Make sure Select behaves correctly when attributes are changed or options are removed from the DOM (MutationObserver);
 - [ ] Sometimes one select scrolls dropdown in the others?
 - [ ] Support keyboard arrows;
-- [ ] Support keyboard navigation to the option;
 
 2.1
 - [ ] Option groups;

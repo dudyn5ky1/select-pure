@@ -143,6 +143,28 @@
           <option-pure value="GOOGL">Google</option-pure>
         </select-pure>
       </div>
+
+      <form>
+        <h2>Multiselect inside the form</h2>
+        <select-pure multiple default-label="- Please select an option -" name="company">
+          <option-pure value="FB">Facebook</option-pure>
+          <option-pure value="AMZN">Amazon</option-pure>
+          <option-pure value="APPL">Apple</option-pure>
+          <option-pure value="NFLX">Netflix</option-pure>
+          <option-pure value="GOOGL">Google</option-pure>
+        </select-pure>
+      </form>
+
+      <form>
+        <h2>Multiselect inside the form</h2>
+        <select multiple default-label="- Please select an option -" name="company">
+          <option value="FB">Facebook</option>
+          <option value="AMZN">Amazon</option>
+          <option value="APPL">Apple</option>
+          <option value="NFLX">Netflix</option>
+          <option value="GOOGL">Google</option>
+        </select>
+      </form>
     </div>
 
     <script>
@@ -237,6 +259,7 @@
         --selected-background-color: #404a55;
         --selected-color: #fff;
         --dropdown-gap: 2px;
+        --dropdown-items: 2;
       }
     </style>
   </body>
