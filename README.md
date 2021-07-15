@@ -139,6 +139,7 @@ select-pure {
   --font-family: inherit;
   --font-weight: 400;
   --select-outline: 2px solid #e3e3e3;
+  --dropdown-items: 4;
 }
 ```
 
