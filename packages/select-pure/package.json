@@ -1,6 +1,6 @@
 {
   "name": "select-pure",
-  "version": "2.1.1-alpha.1",
+  "version": "2.1.1",
   "description": "Custom JavaScript <select> component. Easy-to-use, accessible, mobile friendly and super efficient",
   "author": {
     "name": "Maksym Dudynskyi",
