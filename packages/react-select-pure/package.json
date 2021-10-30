@@ -1,18 +1,36 @@
 {
   "name": "react-select-pure",
-  "version": "0.0.2",
+  "version": "0.0.3-alpha.0",
   "description": "React wrapper for SelectPure component",
+  "main": "./lib/cjs/SelectPure.js",
+  "module": "./lib/esm/SelectPure.js",
+  "types": "./lib/esm/SelectPure.d.ts",
   "author": {
     "name": "Maksym Dudynskyi",
     "email": "hello@dudynskyi.com",
     "url": "https://github.com/dudyn5ky1"
   },
   "scripts": {
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/dudyn5ky1/select-pure.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "@types/react": "^17.0.33",
+    "react": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.33",
+    "react": "^16.8.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "select-pure": "^2.1.2-alpha.0"
+  }
 }
