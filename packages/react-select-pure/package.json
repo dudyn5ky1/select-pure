@@ -1,6 +1,6 @@
 {
   "name": "react-select-pure",
-  "version": "0.0.2",
+  "version": "0.0.3-alpha.0",
   "description": "React wrapper for SelectPure component",
   "main": "./lib/cjs/SelectPure.js",
   "module": "./lib/esm/SelectPure.js",
@@ -31,6 +31,6 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "select-pure": "^2.1.1"
+    "select-pure": "^2.1.2-alpha.0"
   }
 }
