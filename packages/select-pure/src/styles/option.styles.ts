@@ -11,8 +11,7 @@ export const optionStyles = css`
     font-family: var(--font-family, inherit);
     font-size: var(--font-size, 14px);
     font-weight: var(--font-weight, 400);
-    height: var(--select-height, 44px);
-    height: var(--select-height, 44px);
+    min-height: var(--select-height, 44px);
     justify-content: flex-start;
     padding: var(--padding, 0 10px);
     width: 100%;
