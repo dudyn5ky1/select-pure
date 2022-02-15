@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/dudyn5ky1/select-pure/compare/react-select-pure@0.0.3-alpha.0...react-select-pure@0.0.4) (2022-02-15)
+
+**Note:** Version bump only for package react-select-pure
+
+
+
+
+
+## [0.0.3](https://github.com/dudyn5ky1/select-pure/compare/react-select-pure@0.0.3-alpha.0...react-select-pure@0.0.3) (2022-02-15)
+
+**Note:** Version bump only for package react-select-pure
+
+
+
+
+
 ## [0.0.3-alpha.0](https://github.com/dudyn5ky1/select-pure/compare/react-select-pure@0.0.2...react-select-pure@0.0.3-alpha.0) (2021-10-30)
 
 
