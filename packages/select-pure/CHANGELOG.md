@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.1.2-alpha.0...select-pure@2.1.4) (2022-02-15)
+
+**Note:** Version bump only for package select-pure
+
+
+
+
+
 ## [2.1.3](https://github.com/dudyn5ky1/select-pure/compare/select-pure@2.1.2-alpha.0...select-pure@2.1.3) (2022-02-15)
 
 **Note:** Version bump only for package select-pure
